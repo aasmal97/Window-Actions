@@ -1,0 +1,8 @@
+config.bat
+dist
+node_modules
+virtual
+/app/executables/determineActiveWindows/
+/app/executables/determineActiveWindows.spec
+build
+*package-lock.json

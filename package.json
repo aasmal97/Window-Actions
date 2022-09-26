@@ -1,0 +1,30 @@
+{
+  "name": "window-actions",
+  "version": "1.0.0",
+  "description": "Minimize windows from command line",
+  "main": "./Sources/com.arkyasmal.windowActions.sdPlugin/app/index.js",
+  "scripts": {
+    "start": "node .\\Sources\\com.arkyasmal.windowActions.sdPlugin\\app\\index.js",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev:window": "node ./Sources/com.arkyasmal.windowActions.sdPlugin/app/index.js",
+    "dev:parse": "node ./Sources/com.arkyasmal.windowActions.sdPlugin/app/scripts/parseCSVToJSON.js",
+    "copy": ".\\Sources\\com.arkyasmal.windowActions.sdPlugin\\app\\batFiles\\copyDirectory.bat",
+    "build": ".\\Sources\\com.arkyasmal.windowActions.sdPlugin\\app\\batFiles\\build.bat",
+    "build:python": ".\\Sources\\com.arkyasmal.windowActions.sdPlugin\\app\\batFiles\\buildPython.bat",
+    "install": ".\\Sources\\com.arkyasmal.windowActions.sdPlugin\\app\\batFiles\\runPy.bat & .\\app\\batFiles\\buildPython"
+  },
+  "keywords": [
+    "window",
+    "actions"
+  ],
+  "bin": "./Sources/com.arkyasmal.windowActions.sdPlugin/app/index.js",
+  "author": "Arky Asmal",
+  "license": "ISC",
+  "devDependencies": {
+    "nexe": "^4.0.0-rc.1"
+  },
+  "dependencies": {
+    "commander": "=9.4.0",
+    "ws": "=8.9.0"
+  }
+}

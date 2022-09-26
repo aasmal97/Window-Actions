@@ -1,0 +1,3 @@
+pyinstaller
+pyautogui
+pywin32

@@ -1,0 +1,11 @@
+\exclusions.txt\
+\virtual\
+\requirements.txt\
+\build\
+\determineActiveWindows\
+\determineActiveWindows.spec\
+\windowsScripts\
+\batFiles\build.bat
+\batFiles\buildPython.bat
+\batFiles\copyDirectory.bat
+\batFiles\runPy.bat

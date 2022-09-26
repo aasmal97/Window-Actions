@@ -1,0 +1,61 @@
+{
+  "Actions": [
+    {
+      "UUID": "com.arkyasmal.windowActions.minimizeWindows",
+      "Icon": "images\\window-minimize-solid",
+      "Name": "Minimize Windows",
+      "States": [
+        {
+          "Image": "images\\window-minimize-solid"
+        }
+      ],
+      "SupportedInMultiActions": true
+    },
+    {
+      "UUID": "com.arkyasmal.windowActions.maximizeWindows",
+      "Icon": "images\\window-maximize-regular",
+      "Name": "Maximize Windows",
+      "States": [
+        {
+          "Image": "images\\window-maximize-regular"
+        }
+      ],
+      "SupportedInMultiActions": true
+    },
+    {
+      "UUID": "com.arkyasmal.windowActions.closeWindows",
+      "Icon": "images\\xmark-solid",
+      "Name": "Close Windows",
+      "States": [
+        {
+          "Image": "images\\xmark-solid"
+        }
+      ],
+      "SupportedInMultiActions": true
+    },
+    {
+      "UUID": "com.arkyasmal.windowActions.openWindowGui",
+      "Icon": "images\\up-right-from-square-solid",
+      "Name": "Open Active Window Gui",
+      "States": [
+        {
+          "Image": "images\\up-right-from-square-solid"
+        }
+      ],
+      "SupportedInMultiActions": true
+    }
+  ],
+  "Author": "Arky Asmal",
+  "Category": "Window Actions",
+  "CategoryIcon": "images\\window-restore-solid",
+  "CodePath": "run.exe",
+  "PropertyInspectorPath": "index.html",
+  "Name": "Window Actions [Arky Asmal]",
+  "URL": "https://www.arkyasmal.com/projects",
+  "Version": "1.0.0",
+  "SDKVersion": "2.0.0",
+  "OS": [{ "Platform": "windows", "MinimumVersion": "8" }],
+  "Software": {
+    "MinimumVersion": "5.0"
+  }
+}
