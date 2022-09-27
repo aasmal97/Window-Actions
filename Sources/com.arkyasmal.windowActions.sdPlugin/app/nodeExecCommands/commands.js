@@ -17,34 +17,35 @@ const getTypeCommand = (byType, name) => {
   return typeCommand;
 };
 const execDirectory = path.join(__dirname, "../executables");
-const execFileError = () => (err, stdout, sterr) => {
+const batFilesDirectory = path.join(__dirname, "../batFiles");
+const execFileError = (err, stdout, sterr) => {
   if (err) console.error(err, "error");
   if (stdout) console.log(stdout, "message");
   if (sterr) console.error(sterr, "sterr");
 };
 const minimizeWindow = (byType, name) => {
   const typeCommand = getTypeCommand(byType, name);
-  const command = `${execDirectory}\\nircmd.exe`;
+  const command = `"${execDirectory}"\\nircmd.exe`;
   execFile(command, ["win", "min", ...typeCommand], execFileError);
 };
 const maximizeWindow = (byType, name) => {
   const typeCommand = getTypeCommand(byType, name);
-  const command = `${execDirectory}\\nircmd.exe`;
+  const command = `"${execDirectory}"\\nircmd.exe`;
   execFile(command, ["win", "max", ...typeCommand], execFileError);
 };
 const closeWindow = (byType, name) => {
   const typeCommand = getTypeCommand(byType, name);
-  const command = `${execDirectory}\\nircmd.exe`;
+  const command = `"${execDirectory}"\\nircmd.exe`;
   execFile(command, ["win", "close", ...typeCommand], execFileError);
 };
 
 const determineActiveWindows = async (appDataDirectory) => {
-  const command = `${execDirectory}\\determineActiveWindows.exe`;
+  const command = `"${execDirectory}"\\determineActiveWindows.exe`;
   execFile(command, ["--appDataDirectory", appDataDirectory], execFileError);
   return await fetchWindowsJson(appDataDirectory);
 };
 const openGui = () => {
-  const command = `${path.join(__dirname, "..")}\\batFiles\\findWindow.bat`;
+  const command = `"${batFilesDirectory}"\\findWindow.bat`;
   exec(command, execFileError);
 };
 

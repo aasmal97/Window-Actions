@@ -27,12 +27,12 @@ const logEvent = (payload) => {
   socket.send(new_payload);
 };
 //elgato initialization
-const onActiveWindows = async () => {
+const onActiveWindows = async (action) => {
   const result = await determineActiveWindows(
     "Elgato\\StreamDeck\\Plugins\\com.arkyasmal.windowActions.sdPlugin"
   );
   const newEvent = {
-    action: "com.arkyasmal.windowActions.activeWindows",
+    action: action,
     event: "sendToPropertyInspector",
     context: uuid,
     payload: result,
@@ -41,10 +41,11 @@ const onActiveWindows = async () => {
 };
 const respondToEvents = (evt) => {
   const evtObj = JSON.parse(evt.data);
-  logEvent(evtObj);
-  let { action, payload } = evtObj;
+  let { payload } = evtObj;
   if (!payload) payload = {};
-  const { type, name } = payload;
+  let { action, settings } = payload;
+  if (!settings) settings = {};
+  const { type, name } = settings;
   switch (action) {
     case "com.arkyasmal.windowActions.minimizeWindows":
       minimizeWindow(type, name);
@@ -56,14 +57,14 @@ const respondToEvents = (evt) => {
       closeWindow(type, name);
       break;
     case "com.arkyasmal.windowActions.openWindowGui":
-      logEvent("openWindowGui");
       openGui();
       break;
     case "com.arkyasmal.windowActions.onActiveWindows":
-      onActiveWindows();
+      onActiveWindows(evtObj.action);
       break;
     default:
       logEvent("didn't match any conditions");
+      logEvent(evtObj);
       break;
   }
 };

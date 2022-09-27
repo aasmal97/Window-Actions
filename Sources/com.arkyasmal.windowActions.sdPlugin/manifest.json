@@ -49,7 +49,7 @@
   "Category": "Window Actions",
   "CategoryIcon": "images\\window-restore-solid",
   "CodePath": "run.exe",
-  "PropertyInspectorPath": "index.html",
+  "PropertyInspectorPath": ".\\propertyinspector\\index.html",
   "Name": "Window Actions [Arky Asmal]",
   "URL": "https://www.arkyasmal.com/projects",
   "Version": "1.0.0",

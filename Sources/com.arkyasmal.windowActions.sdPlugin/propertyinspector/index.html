@@ -1,53 +1,124 @@
 <!DOCTYPE html>
-    <html>
-    <head>
-        <meta charset="utf-8" />
-        <meta name=viewport content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no,minimal-ui,viewport-fit=cover">
-        <meta name=apple-mobile-web-app-capable content=yes>
-        <meta name=apple-mobile-web-app-status-bar-style content=black>
-        <title>com.elgato.template Property Inspector</title>
-        <link rel="stylesheet" href="css/sdpi.css">
-    </head>
-    <body>
-        <div class="sdpi-wrapper">
-
-          <!-- DROP HTML-STUFF BELOW -->
-
-          <!--
-            Here we just copied a couple of elements from the PISamples example, which contains
-            a huge collection pre-made HTML-elements for you to use.
-            Important here is (if you plan to communicate from the Property Inspector to the plugin without
-            further programming), that you add an 'id' to an element's control. 
-            This will get the 'key', which is sent to the plugin (or settings), along with the value of
-            the control.
-          -->
-
-            <div class="sdpi-item">
-                <div class="sdpi-item-label">Name</div>
-                <input id="mynameinput" class="sdpi-item-value" type="text" value="" />
-             </div>
-
-            <div type="textarea" class="sdpi-item">
-                <div class="sdpi-item-label up20" data-localize="Message">Message</div>
-                <div class="sdpi-item-value textarea">
-                  <textarea type="textarea" maxlength="50" id="mymessage" class="three-lines"></textarea>
-                  <label for="mymessage">0/50</label>
-                </div>
-              </div>
-
-              <div class="sdpi-item">
-                <div class="sdpi-item-label">Button</div>
-                <button class="sdpi-item-value" id="clickme" value="Click Me" data-localize="Click me">Click Me</button>
-              </div>
-
-
-              <!-- END OF SDPI-WRAPPER -->
-
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no,minimal-ui,viewport-fit=cover"
+    />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <title>Window Actions Property Inspector</title>
+    <link rel="stylesheet" href="css/sdpi.css" />
+  </head>
+  <body>
+    <div class="sdpi-wrapper">
+      <div class="sdpi-item" id="win_type">
+        <div class="sdpi-item-label">Identifer Type</div>
+        <select
+          class="sdpi-item-value select"
+          id="select_win_type"
+          required
+          onchange="selectedTypeChange(event)"
+        >
+          <option value="process" selected>Program Name (.exe file)</option>
+          <option value="hwnd">Unique Active Window Id (hwnd)</option>
+          <option value="class">Window Class Name</option>
+        </select>
+      </div>
+      <details class="message" style="display: none" id="win_type_message">
+        <summary></summary>
+      </details>
+      <div class="sdpi-item" id="win_id">
+        <div class="sdpi-item-label">Identifer</div>
+        <div style="display: flex; flex-direction: column; width: 100%">
+          <div class="sdpi-item-value" style="width: 100%">
+            <span class="sdpi-item-child">
+              <input
+                id="identifer_dropdown_type"
+                type="radio"
+                name="identifer_input_type"
+                value="on"
+                checked
+                onchange="onIdChange(event)"
+              />
+              <label for="identifer_dropdown_type" class="sdpi-item-label"
+                ><span></span>Dropdown</label
+              >
+            </span>
+            <span class="sdpi-item-child">
+              <input
+                id="identifer_text_type"
+                type="radio"
+                value="off"
+                name="identifer_input_type"
+                onchange="onIdChange(event)"
+              />
+              <label for="identifer_text_type" class="sdpi-item-label"
+                ><span></span>Custom</label
+              >
+            </span>
+          </div>
+          <div class="sdpi-item-value" style="width: 100%">
+            <select
+              style="
+                width: 100%;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+              "
+              id="identifer_dropdown"
+              class="sdpi-item-value select"
+              name="identifer_dropdown"
+              required
+            >
+              <option value="" disabled selected>--Select Identifer--</option>
+            </select>
+            <input
+              style="display: none"
+              class="sdpi-item-value"
+              name="identifer_custom"
+              id="identifer_text"
+              value=""
+              placeholder="Enter Window or Program Identifer/Name"
+              required
+            />
+          </div>
         </div>
+      </div>
 
-        <div class="sdpi-info-label hidden" style="top: -1000;" value=""></div>
-        <script src="js/common.js"></script>
-        <script src="js/common_pi.js"></script>
-        <script src="js/index_pi.js"></script>
-    </body>
-    </html>
+      <div class="sdpi-item">
+        <div class="sdpi-item-label">Active Windows</div>
+        <div class="sdpi-item-value">
+          <button
+            class="sdpi-item-value"
+            style="width: 100%"
+            onclick="openActiveWindowsGui(event)"
+          >
+            Open
+          </button>
+          <details>
+            <summary>More Info</summary>
+            <p>
+              This active window gui comes from a windows utility library called
+              <a href="https://www.nirsoft.net/utils/nircmd.html">nircmd</a>
+            </p>
+            <p>
+              It lists the class, process, and hwnd of all current windows. If
+              the identifer autofill is inaccurate or unreliable, please use
+              this to fill in the identifer field. To learn more about it's use,
+              visit
+              <a href="https://www.nirsoft.net/utils/gui_prop_view.html"
+                >nirsoft</a
+              >
+            </p>
+          </details>
+        </div>
+      </div>
+    </div>
+    <div class="sdpi-info-label hidden" style="top: -1000" value=""></div>
+    <script src="js/common.js"></script>
+    <script src="js/common_pi.js"></script>
+    <script src="js/index_pi.js"></script>
+  </body>
+</html>
