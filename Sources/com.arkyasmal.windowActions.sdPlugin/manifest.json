@@ -32,17 +32,6 @@
         }
       ],
       "SupportedInMultiActions": true
-    },
-    {
-      "UUID": "com.arkyasmal.windowActions.openWindowGui",
-      "Icon": "images\\up-right-from-square-solid",
-      "Name": "Open Active Window Gui",
-      "States": [
-        {
-          "Image": "images\\up-right-from-square-solid"
-        }
-      ],
-      "SupportedInMultiActions": true
     }
   ],
   "Author": "Arky Asmal",

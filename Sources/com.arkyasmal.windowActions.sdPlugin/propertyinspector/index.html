@@ -21,26 +21,30 @@
           required
           onchange="selectedTypeChange(event)"
         >
-          <option value="process" selected>Program Name (.exe file)</option>
-          <option value="hwnd">Unique Active Window Id (hwnd)</option>
-          <option value="class">Window Class Name</option>
+          <option value="program_name" selected>Program Name (.exe file)</option>
+          <option value="hWnd">Unique Active Window Id (hwnd)</option>
+          <option value="win_class">Window Class Name</option>
         </select>
       </div>
       <details class="message" style="display: none" id="win_type_message">
         <summary></summary>
       </details>
-      <div class="sdpi-item" id="win_id">
+      <div
+        class="sdpi-item"
+        id="win_id"
+        style="align-items: start; margin-top: 5px; margin-bottom: 12px"
+      >
         <div class="sdpi-item-label">Identifer</div>
         <div style="display: flex; flex-direction: column; width: 100%">
-          <div class="sdpi-item-value" style="width: 100%">
+          <div class="sdpi-item-value" style="width: 100%; margin-bottom: 10px">
             <span class="sdpi-item-child">
               <input
                 id="identifer_dropdown_type"
                 type="radio"
                 name="identifer_input_type"
-                value="on"
+                value="dropdown"
                 checked
-                onchange="onIdChange(event)"
+                onclick="onIdTypeChange(event)"
               />
               <label for="identifer_dropdown_type" class="sdpi-item-label"
                 ><span></span>Dropdown</label
@@ -50,26 +54,24 @@
               <input
                 id="identifer_text_type"
                 type="radio"
-                value="off"
+                value="text"
                 name="identifer_input_type"
-                onchange="onIdChange(event)"
+                onclick="onIdTypeChange(event)"
               />
               <label for="identifer_text_type" class="sdpi-item-label"
                 ><span></span>Custom</label
               >
             </span>
           </div>
-          <div class="sdpi-item-value" style="width: 100%">
+          <div
+            class="sdpi-item-value"
+            style="margin-left: 0px; width: 100%; margin-right: 0px"
+          >
             <select
-              style="
-                width: 100%;
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-              "
               id="identifer_dropdown"
               class="sdpi-item-value select"
               name="identifer_dropdown"
+              onchange="onIdChange(event.currentTarget.value)"
               required
             >
               <option value="" disabled selected>--Select Identifer--</option>
@@ -77,9 +79,9 @@
             <input
               style="display: none"
               class="sdpi-item-value"
-              name="identifer_custom"
+              name="identifer_text"
               id="identifer_text"
-              value=""
+              oninput="onIdChange(this.value)"
               placeholder="Enter Window or Program Identifer/Name"
               required
             />
@@ -87,12 +89,12 @@
         </div>
       </div>
 
-      <div class="sdpi-item">
+      <div class="sdpi-item" style="align-items: start">
         <div class="sdpi-item-label">Active Windows</div>
-        <div class="sdpi-item-value">
+        <div class="sdpi-item-value" style="padding: 0">
           <button
             class="sdpi-item-value"
-            style="width: 100%"
+            style="width: 100%; margin: 0"
             onclick="openActiveWindowsGui(event)"
           >
             Open

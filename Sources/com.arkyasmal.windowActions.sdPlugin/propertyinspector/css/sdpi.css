@@ -1570,3 +1570,8 @@ input[type="range"].colortemperature::-webkit-slider-thumb {
   opacity: 1;
   transition: opacity 0.25s ease-out;
 }
+#identifer_dropdown, #identifer_text{
+  width: calc(100% - 9px) !important; 
+  min-height: 26px !important;
+  margin: 0 !important
+}

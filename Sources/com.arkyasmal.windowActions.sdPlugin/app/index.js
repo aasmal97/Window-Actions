@@ -27,26 +27,59 @@ const logEvent = (payload) => {
   socket.send(new_payload);
 };
 //elgato initialization
-const onActiveWindows = async (action) => {
+const onActiveWindows = async (action, targetContext, customAction) => {
   const result = await determineActiveWindows(
     "Elgato\\StreamDeck\\Plugins\\com.arkyasmal.windowActions.sdPlugin"
   );
   const newEvent = {
     action: action,
     event: "sendToPropertyInspector",
-    context: uuid,
-    payload: result,
+    context: targetContext,
+    payload: {
+      action: customAction,
+      result: result,
+      targetContext: uuid,
+    },
   };
   socket.send(JSON.stringify(newEvent));
 };
-const respondToEvents = (evt) => {
+const parseEvent = (evt) => {
   const evtObj = JSON.parse(evt.data);
-  let { payload } = evtObj;
+  let { context: targetContext, payload } = evtObj;
   if (!payload) payload = {};
   let { action, settings } = payload;
   if (!settings) settings = {};
   const { type, name } = settings;
+  return {
+    targetContext,
+    payload,
+    action,
+    settings,
+    type,
+    name,
+  };
+};
+const respondToSubEvents = (evt) => {
+  const { action, evtObj, targetContext } = respondToEvents(evt);
   switch (action) {
+    case "com.arkyasmal.windowActions.openWindowGui":
+      openGui();
+      break;
+    case "com.arkyasmal.windowActions.onActiveWindows":
+      onActiveWindows(
+        evtObj.action,
+        targetContext,
+        "com.arkyasmal.windowActions.activeWindows"
+      );
+      break;
+    default:
+      logEvent("Sub event does not match");
+      break;
+  }
+};
+const respondToKeyEvents = (evt) => {
+  const { evtObj, type, name } = parseEvent(evt);
+  switch (evtObj.action) {
     case "com.arkyasmal.windowActions.minimizeWindows":
       minimizeWindow(type, name);
       break;
@@ -56,17 +89,16 @@ const respondToEvents = (evt) => {
     case "com.arkyasmal.windowActions.closeWindows":
       closeWindow(type, name);
       break;
-    case "com.arkyasmal.windowActions.openWindowGui":
-      openGui();
-      break;
-    case "com.arkyasmal.windowActions.onActiveWindows":
-      onActiveWindows(evtObj.action);
-      break;
     default:
-      logEvent("didn't match any conditions");
+      logEvent("Button press event does not match");
       logEvent(evtObj);
       break;
   }
+};
+const respondToEvents = (evt) => {
+  const { action, evtObj } = parseEvent(evt);
+  if (action) respondToSubEvents(evt);
+  else if (evtObj.event == "keyDown") respondToKeyEvents(evt);
 };
 const registerSocket = (inRegisterEvent) => {
   let event;
@@ -92,10 +124,9 @@ function connectElgatoStreamDeckSocket(
   uuid = inPluginUUID;
   socket.onopen = () => {
     registerSocket(inRegisterEvent);
-    logEvent("Successfully Connected");
   };
   socket.onmessage = (evt) => respondToEvents(evt);
-  socket.onclose = () => logEvent("Successfully disconnected");
+  socket.onclose = () => {};
 }
 //main function to be called in command line
 if (typeof require !== "undefined" && require.main === module) {

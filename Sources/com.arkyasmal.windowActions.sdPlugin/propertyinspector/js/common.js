@@ -1069,7 +1069,6 @@ const SDApi = {
             console.log('-------');
         }
         $SD.connection && $SD.connection.sendJSON(pl);
-
         /**
          * DEBUG-Utility to quickly show the current payload in the Property Inspector.
          */
