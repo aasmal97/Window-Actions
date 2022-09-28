@@ -4,12 +4,12 @@ This plugin allows a user to minimize, maximize or close any active window, with
 
 # Quickstart
 
-Download the following [setup file]()
+Download the following [setup file](https://drive.google.com/file/d/1mroVV7V2V3_2YWg8qMXGMe77FMA3N7Vk/view?usp=sharing)
 
 ### Pre-requisites
 
 - StreamDeck 4.1 + 
-- Windows 8+
+- Windows 10+
 
 # Description
 
