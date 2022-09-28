@@ -2,7 +2,7 @@
   "Description": "Nimm diese Vorlage für dein erstes Plugin", 
   "Name": "Stream Deck Template", 
   "Category": "Templates", 
-  "com.elgato.template.action": {
+  "com.arkyasmal.windowactions.action": {
     "Name": "Action", 
     "Tooltip": "Dies ist die einzige 'Action' in diesem Template"
   },
