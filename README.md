@@ -25,7 +25,7 @@ On a Window 8+ machine, a workaround to perform these window actions (minimize, 
 
 To amend these problems, this app/plugin was developed
 
-# How It Works
+# How This Plugin Works
 
 ### Initiating Window Action Commands
 
