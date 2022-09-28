@@ -21,7 +21,9 @@
           required
           onchange="selectedTypeChange(event)"
         >
-          <option value="program_name" selected>Program Name (.exe file)</option>
+          <option value="program_name" selected>
+            Program Name (.exe file)
+          </option>
           <option value="hWnd">Unique Active Window Id (hwnd)</option>
           <option value="win_class">Window Class Name</option>
         </select>
@@ -103,14 +105,22 @@
             <summary>More Info</summary>
             <p>
               This active window gui comes from a windows utility library called
-              <a href="https://www.nirsoft.net/utils/nircmd.html">nircmd</a>
+              <a
+                href="https://www.nirsoft.net/utils/nircmd.html"
+                target="_blank"
+                onclick="openInDefaultBrowser(event)"
+                >nircmd</a
+              >
             </p>
             <p>
               It lists the class, process, and hwnd of all current windows. If
               the identifer autofill is inaccurate or unreliable, please use
               this to fill in the identifer field. To learn more about it's use,
               visit
-              <a href="https://www.nirsoft.net/utils/gui_prop_view.html"
+              <a
+                href="https://www.nirsoft.net/utils/gui_prop_view.html"
+                target="_blank"
+                onclick="openInDefaultBrowser(event)"
                 >nirsoft</a
               >
             </p>

@@ -1,7 +1,7 @@
 {
   "Actions": [
     {
-      "UUID": "com.arkyasmal.windowActions.minimizeWindows",
+      "UUID": "com.arkyasmal.windowactions.minimizewindows",
       "Icon": "images\\window-minimize-solid",
       "Name": "Minimize Windows",
       "States": [
@@ -12,7 +12,7 @@
       "SupportedInMultiActions": true
     },
     {
-      "UUID": "com.arkyasmal.windowActions.maximizeWindows",
+      "UUID": "com.arkyasmal.windowactions.maximizewindows",
       "Icon": "images\\window-maximize-regular",
       "Name": "Maximize Windows",
       "States": [
@@ -23,7 +23,7 @@
       "SupportedInMultiActions": true
     },
     {
-      "UUID": "com.arkyasmal.windowActions.closeWindows",
+      "UUID": "com.arkyasmal.windowactions.closewindows",
       "Icon": "images\\xmark-solid",
       "Name": "Close Windows",
       "States": [

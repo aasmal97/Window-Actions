@@ -195,6 +195,18 @@ const respondToEvents = (evt) => {
       return;
   }
 };
+const openInDefaultBrowser = (event) => {
+  event.preventDefault();
+  const target = event.target;
+  const url = target.href;
+  const urlPayload = {
+    event: "openUrl",
+    payload: {
+      url: url,
+    },
+  };
+  $SD.connection.send(JSON.stringify(urlPayload));
+};
 const updateUI = (pl) => {
   console.log(pl);
   // console.log(pl)
@@ -256,15 +268,17 @@ const onConnection = (jsn) => {
     const identiferText = document.getElementById("identifer_text");
     const identiferDropdown = document.getElementById("identifer_dropdown");
     const identiferTextRadio = document.getElementById("identifer_text_type");
-    const identiferDropdownRadio = document.getElementById("identifer_dropdown_type");
+    const identiferDropdownRadio = document.getElementById(
+      "identifer_dropdown_type"
+    );
     winTypeInput.value = type;
     sendValueToPlugin("com.arkyasmal.windowActions.onActiveWindows", "action");
     if (!name) return;
     identiferText.value = name;
-    identiferDropdownRadio.checked = false
+    identiferDropdownRadio.checked = false;
     identiferTextRadio.checked = true;
-    identiferText.style = ""
-    identiferDropdown.style = "display: none;"
+    identiferText.style = "";
+    identiferDropdown.style = "display: none;";
     updateUI(settings);
   }
 };

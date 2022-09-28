@@ -51,16 +51,17 @@ const parseEvent = (evt) => {
   if (!settings) settings = {};
   const { type, name } = settings;
   return {
-    targetContext,
-    payload,
-    action,
-    settings,
-    type,
-    name,
+    targetContext: targetContext,
+    payload: payload,
+    action: action,
+    settings: settings,
+    type: type,
+    name: name,
+    evtObj: evtObj,
   };
 };
 const respondToSubEvents = (evt) => {
-  const { action, evtObj, targetContext } = respondToEvents(evt);
+  const { action, evtObj, targetContext } = parseEvent(evt);
   switch (action) {
     case "com.arkyasmal.windowActions.openWindowGui":
       openGui();
@@ -80,13 +81,13 @@ const respondToSubEvents = (evt) => {
 const respondToKeyEvents = (evt) => {
   const { evtObj, type, name } = parseEvent(evt);
   switch (evtObj.action) {
-    case "com.arkyasmal.windowActions.minimizeWindows":
+    case "com.arkyasmal.windowactions.minimizewindows":
       minimizeWindow(type, name);
       break;
-    case "com.arkyasmal.windowActions.maximizeWindows":
+    case "com.arkyasmal.windowactions.maximizewindows":
       maximizeWindow(type, name);
       break;
-    case "com.arkyasmal.windowActions.closeWindows":
+    case "com.arkyasmal.windowactions.closewindows":
       closeWindow(type, name);
       break;
     default:
@@ -98,7 +99,8 @@ const respondToKeyEvents = (evt) => {
 const respondToEvents = (evt) => {
   const { action, evtObj } = parseEvent(evt);
   if (action) respondToSubEvents(evt);
-  else if (evtObj.event == "keyDown") respondToKeyEvents(evt);
+  else if (evtObj.event === "keyDown") respondToKeyEvents(evt);
+  else return;
 };
 const registerSocket = (inRegisterEvent) => {
   let event;

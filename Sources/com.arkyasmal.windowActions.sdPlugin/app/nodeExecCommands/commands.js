@@ -4,15 +4,17 @@ const fetchWindowsJson = require("./fetchWindowsJson");
 const getTypeCommand = (byType, name) => {
   let typeCommand = [];
   switch (byType) {
-    case "hwnd":
+    case "hWnd":
       typeCommand = ["handle", name];
       break;
-    case "process":
+    case "program_name":
       typeCommand = ["process", name];
-    case "className":
+      break;
+    case "win_class":
       typeCommand = ["class", name];
+      break;
     default:
-      return;
+      break;
   }
   return typeCommand;
 };
