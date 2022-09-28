@@ -6,3 +6,4 @@ determineActiveWindows/
 *determineActiveWindows.spec
 build
 *package-lock.json
+*DistributionTool.exe

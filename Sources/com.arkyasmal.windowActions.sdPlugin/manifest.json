@@ -35,15 +35,17 @@
     }
   ],
   "Author": "Arky Asmal",
+  "Icon":"images\\window-restore-solid",
   "Category": "Window Actions",
   "CategoryIcon": "images\\window-restore-solid",
   "CodePath": "run.exe",
   "PropertyInspectorPath": ".\\propertyinspector\\index.html",
+  "Description": "Plugin that allows a user to minimize, maximize, and close windows according to their program name, window handler, or window class",
   "Name": "Window Actions [Arky Asmal]",
   "URL": "https://www.arkyasmal.com/projects",
   "Version": "1.0.0",
-  "SDKVersion": "2.0.0",
-  "OS": [{ "Platform": "windows", "MinimumVersion": "8" }],
+  "SDKVersion": 2,
+  "OS": [{ "Platform": "windows", "MinimumVersion": "10" }],
   "Software": {
     "MinimumVersion": "5.0"
   }

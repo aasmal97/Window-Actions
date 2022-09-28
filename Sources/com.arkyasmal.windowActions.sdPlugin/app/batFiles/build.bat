@@ -1,5 +1,5 @@
 cd %~dp0
-set pluginName=com.arkyasmal.windowActions.sdPlugin
+set pluginName=com.arkyasmal.windowactions.sdPlugin
 call npm run install
 cd %~dp0
 call npm run copy
@@ -20,3 +20,9 @@ Xcopy ".\\Sources\\%pluginName%" ".\\Build\\%pluginName%" /E /I /Y /EXCLUDE:.\So
 :: For testing on streamdeck
 set appPath=%appdata%\\Elgato\\StreamDeck\\Plugins\\%pluginName%
 call Xcopy /E /I /Y ".\\Build\\%pluginName%" "%appPath%"
+:: For distribution
+set buildPath="%cd%\Build\%pluginName%"
+set releasePath="%cd%\Release"
+cd "./Release"
+call DistributionTool.exe -b -i %buildPath% -o %releasePath%
+
