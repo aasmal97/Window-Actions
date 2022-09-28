@@ -26,7 +26,8 @@ On a Window 8+ machine, a workaround to perform these window actions (minimize, 
 To amend these problems, this app/plugin was developed
 
 # How This Plugin Works
-
+### General Architecture
+![alt Window actions General Architecture Layout](./window-actions-architecture.png)
 ### Initiating Window Action Commands
 
 Similar to our [workaround](#alternative-workaround), this app uses `nircmd` in the background, to initiate window actions. We can initiate these commands using a plugin built with `Node.js`, and re-packaging the nircmd.exe with the app. 
