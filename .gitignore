@@ -3,6 +3,6 @@ dist
 node_modules
 virtual
 determineActiveWindows/
-/app/executables/determineActiveWindows.spec
+determineActiveWindows.spec
 build
 *package-lock.json
