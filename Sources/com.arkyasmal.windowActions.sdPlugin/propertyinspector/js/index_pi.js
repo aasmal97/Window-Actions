@@ -271,7 +271,11 @@ const onConnection = (jsn) => {
     const identiferDropdownRadio = document.getElementById(
       "identifer_dropdown_type"
     );
-    winTypeInput.value = type;
+    if (type) winTypeInput.value = type;
+    else {
+      winTypeInput.value = "program_name"
+      saveSettings({ key: "type", value: winTypeInput.value })
+    }
     sendValueToPlugin("com.arkyasmal.windowActions.onActiveWindows", "action");
     if (!name) return;
     identiferText.value = name;
