@@ -17,7 +17,7 @@ The Elgato Stream Deck natively supports a [open system action](https://help.elg
 
 # Alternative Workaround
 
-On a Window 8+ machine, a workaround to perform these window actions (minimize, maximize, and close), would be to download [`nircmd`](https://www.nirsoft.net/utils/nircmd.html), and create a `.bat` file, that when opened, runs a series of commands to perform such actions. However, this comes with the following problems:
+On a Windows 10+ machine, a workaround to perform these window actions (minimize, maximize, and close), would be to download [`nircmd`](https://www.nirsoft.net/utils/nircmd.html), and create a `.bat` file, that when opened, runs a series of commands to perform such actions. However, this comes with the following problems:
 
 1. It's tedious to configure a different `.bat` file for every window action needed
 2. This requires learning the Windows OS CLI (Command Prompt or Powershell).
