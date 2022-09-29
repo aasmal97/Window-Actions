@@ -13,7 +13,9 @@ Download the following [setup file](https://drive.google.com/file/d/1mroVV7V2V3_
 
 # Description
 
-The Elgato Stream Deck natively supports a [open system action](https://help.elgato.com/hc/en-us/articles/360028234471-Elgato-Stream-Deck-System-Actions-Hotkey-Open-Website-Multimedia-#h_01G93K00TJB5BHV93JTTJ0YV80), which can be used to open any application you need. However, it lacks the ability to minimize, close, or maximize the windows that this action creates. When setting up a multi-action workflow, streaming, or recording, these actions almost essential to have, since multiple applications need to be hidden or focused in.
+The Elgato Stream Deck natively supports a [open system action](https://help.elgato.com/hc/en-us/articles/360028234471-Elgato-Stream-Deck-System-Actions-Hotkey-Open-Website-Multimedia-#h_01G93K00TJB5BHV93JTTJ0YV80), which can be used to open any application you need. However, it lacks the ability to minimize, close, or maximize the windows that this action creates. When setting up a multi-action workflow, streaming, or recording, these actions almost essential to have, since multiple applications need to be hidden or focused in. 
+
+This app allows users to use an Elgato Stream Deck to minimize, maximize, and close windows on a Windows 10+ machine. 
 
 # Alternative Workaround
 
