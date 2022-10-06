@@ -39,7 +39,7 @@ Similar to our [workaround](#alternative-workaround), this app uses `nircmd` in 
 We integrate our Node app with the [Elgato Stream Deck Architecture](https://developer.elgato.com/documentation/stream-deck/sdk/plugin-architecture/) by converting the Node app into a `.exe` file, using [`nexe`](https://github.com/nexe/nexe). This `.exe` file becomes the entry point/Code path that our `manifest.json` points to for the plugin.
 
 ### Configuring the Property Inspector
-This is where most of the magic happens. Using Elgato's Property Inspector, we can create a simple and initutive HTML form, that accepts the required [windowIdentifier](#window-identifiers), and passes it into our plugin, to execute. The quickest way to set this up, is by using pre-populated dropdowns, that can be selected. This prevents typo errors, and incorrect mappings,  which commonly occur when writing directly to `.bat` files.
+This is where most of the magic happens. Using Elgato's Property Inspector, we can create a simple and initutive HTML form, that accepts the required [windowIdentifier](#window-identifiers), and passes it into our plugin, to execute. The quickest way to set this up, is by using pre-populated dropdowns, that can be selected. This prevents typos, and incorrect mappings,  which commonly occur when writing directly to `.bat` files.
 
 As an added bonus, it also means users don't need to write any code to configure their actions.
 
@@ -47,11 +47,11 @@ As an added bonus, it also means users don't need to write any code to configure
 To automatically populate a dropdown list of active/opened windows, we use python's powerful [`win32gui`](https://pypi.org/project/win32gui/#description) package. This allows us to interface with the [Windows Win32 Api](https://learn.microsoft.com/en-us/windows/win32/api/)(written in C++), and attain all the necessary data in `JSON` file. This is then passed to the [property inspector](#configuring-the-property-inspector), for selection.
 
 ### Optional Manual Identifier Input
-If the automated dropdown list of active/opened windows is not enough, or a user want to define the identifier manually, they are allowed to do so, by simply toggling the custom option. [`Gui Prop View.exe`](https://www.nirsoft.net/utils/gui_prop_view.html) is re-packaged into the plugin as well, to aid in defining the identifier manually.
+If the automated dropdown list of active/opened windows is not enough, or a user wants to define the identifier manually, they are allowed to do so, by simply toggling the custom option. [`Gui Prop View.exe`](https://www.nirsoft.net/utils/gui_prop_view.html) is re-packaged into the plugin as well, to aid in defining the identifier manually.
 
 # Window Identifiers
 
-The following are the valid identifier types that can be configured an action.
+The following are the valid identifier types that can be configured.
 
 - program name/process (.exe file name)
 - window title
