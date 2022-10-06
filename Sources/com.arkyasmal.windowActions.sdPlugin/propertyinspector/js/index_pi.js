@@ -176,8 +176,9 @@ const modifyDropdownActiveWindowInputs = (payload) => {
   const activeWindows = payload;
   const defaultOption = createDefaultOption("--Select Identifer--");
   const options = activeWindows.map((window) => {
-    const text = `${window[typeInput]} (${window.title})`;
-    return createOption(window[typeInput], text);
+    const value = typeInput === "win_title" ? window.title : window[typeInput];
+    const text = `${value} (${window.title})`;
+    return createOption(value, text);
   });
   options.unshift(defaultOption);
   //replace children with new ones
@@ -273,8 +274,8 @@ const onConnection = (jsn) => {
     );
     if (type) winTypeInput.value = type;
     else {
-      winTypeInput.value = "program_name"
-      saveSettings({ key: "type", value: winTypeInput.value })
+      winTypeInput.value = "program_name";
+      saveSettings({ key: "type", value: winTypeInput.value });
     }
     sendValueToPlugin("com.arkyasmal.windowActions.onActiveWindows", "action");
     if (!name) return;

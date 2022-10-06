@@ -13,6 +13,9 @@ const getTypeCommand = (byType, name) => {
     case "win_class":
       typeCommand = ["class", name];
       break;
+    case "win_title":
+      typeCommand = ["title", name]
+      break;
     default:
       break;
   }
