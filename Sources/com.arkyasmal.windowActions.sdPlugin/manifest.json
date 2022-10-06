@@ -2,44 +2,44 @@
   "Actions": [
     {
       "UUID": "com.arkyasmal.windowactions.minimizewindows",
-      "Icon": "images\\window-minimize-solid",
+      "Icon": "images/window-minimize-solid",
       "Name": "Minimize Windows",
       "States": [
         {
-          "Image": "images\\window-minimize-solid"
+          "Image": "images/window-minimize-solid"
         }
       ],
       "SupportedInMultiActions": true
     },
     {
       "UUID": "com.arkyasmal.windowactions.maximizewindows",
-      "Icon": "images\\window-maximize-regular",
+      "Icon": "images/window-maximize-regular",
       "Name": "Maximize Windows",
       "States": [
         {
-          "Image": "images\\window-maximize-regular"
+          "Image": "images/window-maximize-regular"
         }
       ],
       "SupportedInMultiActions": true
     },
     {
       "UUID": "com.arkyasmal.windowactions.closewindows",
-      "Icon": "images\\xmark-solid",
+      "Icon": "images/xmark-solid",
       "Name": "Close Windows",
       "States": [
         {
-          "Image": "images\\xmark-solid"
+          "Image": "images/xmark-solid"
         }
       ],
       "SupportedInMultiActions": true
     }
   ],
   "Author": "Arky Asmal",
-  "Icon":"images\\window-restore-solid",
+  "Icon":"images/window-restore-solid",
   "Category": "Window Actions",
-  "CategoryIcon": "images\\window-restore-solid",
+  "CategoryIcon": "images/window-restore-solid",
   "CodePath": "run.exe",
-  "PropertyInspectorPath": ".\\propertyinspector\\index.html",
+  "PropertyInspectorPath": "./propertyinspector/index.html",
   "Description": "Plugin that allows a user to minimize, maximize, and close windows according to their program name, window handler, or window class",
   "Name": "Window Actions [Arky Asmal]",
   "URL": "https://www.arkyasmal.com/projects",
