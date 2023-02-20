@@ -10,7 +10,7 @@ cd ..
 cd ..
 cd ..
 cd  "Build/%pluginName%.%extension%"
-call nexe app/index.js -i app/index.js -t x64-14.15.3 -o run.exe
+call npx nexe app/index.js -i app/index.js -t x64-14.15.3 -o run.exe
 cd %~dp0
 cd ..
 cd ..
