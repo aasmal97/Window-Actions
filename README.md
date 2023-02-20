@@ -54,6 +54,6 @@ If the automated dropdown list of active/opened windows is not enough, or a user
 The following are the valid identifier types that can be configured.
 
 - program name/process (.exe file name)
-- window title
+- window title (partial or exact)
 - [window handle](https://learn.microsoft.com/en-us/windows/apps/develop/ui-input/retrieve-hwnd) (`hwnd`)
 - [window class name](https://learn.microsoft.com/en-us/windows/win32/winmsg/about-window-classes).
