@@ -16,6 +16,8 @@ const getTypeCommand = (byType, name) => {
     case "win_title":
       typeCommand = ["title", name]
       break;
+    case 'win_ititle':
+      typeCommand = ["ititle", name]
     default:
       break;
   }
