@@ -177,7 +177,7 @@ const modifyDropdownActiveWindowInputs = (payload) => {
   const defaultOption = createDefaultOption("--Select Identifer--");
   const options = activeWindows.map((window) => {
     const value =
-      typeInput === "win_title" || typeInput !== "win_ititle"
+      typeInput === "win_title" || typeInput === "win_ititle"
         ? window.title
         : window[typeInput];
     const text = `${value} (${window.title})`;
