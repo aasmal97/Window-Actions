@@ -43,7 +43,7 @@
   "Description": "Plugin that allows a user to minimize, maximize, and close windows according to their program name, window handler, or window class",
   "Name": "Window Actions [Arky Asmal]",
   "URL": "https://www.arkyasmal.com/projects",
-  "Version": "1.2.0",
+  "Version": "1.2.1",
   "SDKVersion": 2,
   "OS": [{ "Platform": "windows", "MinimumVersion": "10" }],
   "Software": {
