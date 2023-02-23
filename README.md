@@ -4,7 +4,7 @@ This plugin allows a user to minimize, maximize or close any active window, with
 
 # Quickstart
 
-Download the following [setup file](https://drive.google.com/file/d/1mroVV7V2V3_2YWg8qMXGMe77FMA3N7Vk/view?usp=sharing)
+Download the following [setup file](https://github.com/aasmal97/Window-Actions/releases/tag/v1.2.1)
 
 ### Pre-requisites
 
