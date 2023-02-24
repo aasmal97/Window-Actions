@@ -4,6 +4,7 @@
       "UUID": "com.arkyasmal.windowactions.minimizewindows",
       "Icon": "images/window-minimize-solid",
       "Name": "Minimize Windows",
+      "PropertyInspectorPath": "./propertyinspector/index.html",
       "States": [
         {
           "Image": "images/window-minimize-solid"
@@ -15,6 +16,7 @@
       "UUID": "com.arkyasmal.windowactions.maximizewindows",
       "Icon": "images/window-maximize-regular",
       "Name": "Maximize Windows",
+      "PropertyInspectorPath": "./propertyinspector/index.html",
       "States": [
         {
           "Image": "images/window-maximize-regular"
@@ -26,6 +28,19 @@
       "UUID": "com.arkyasmal.windowactions.closewindows",
       "Icon": "images/xmark-solid",
       "Name": "Close Windows",
+      "PropertyInspectorPath": "./propertyinspector/index.html",
+      "States": [
+        {
+          "Image": "images/xmark-solid"
+        }
+      ],
+      "SupportedInMultiActions": true
+    },
+    {
+      "UUID": "com.arkyasmal.windowactions.movewindows",
+      "Icon": "images/xmark-solid",
+      "Name": "Move Windows",
+      "PropertyInspectorPath": "./propertyinspector/index.html",
       "States": [
         {
           "Image": "images/xmark-solid"
@@ -35,14 +50,13 @@
     }
   ],
   "Author": "Arky Asmal",
-  "Icon":"images/window-restore-solid",
+  "Icon": "images/window-restore-solid",
   "Category": "Window Actions",
   "CategoryIcon": "images/window-restore-solid",
   "CodePath": "run.exe",
-  "PropertyInspectorPath": "./propertyinspector/index.html",
-  "Description": "Plugin that allows a user to minimize, maximize, and close windows according to their program name, window handler, or window class",
-  "Name": "Window Actions [Arky Asmal]",
-  "URL": "https://www.arkyasmal.com/projects",
+  "Description": "Minimize, maximize, close, or resize windows according to a window identifer (i.e title, etc), and move through virtual desktops",
+  "Name": "Window Actions",
+  "URL": "https://github.com/aasmal97/Window-Actions",
   "Version": "1.2.1",
   "SDKVersion": 2,
   "OS": [{ "Platform": "windows", "MinimumVersion": "10" }],

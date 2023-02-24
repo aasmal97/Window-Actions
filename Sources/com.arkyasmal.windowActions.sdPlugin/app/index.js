@@ -6,6 +6,7 @@ const {
   maximizeWindow,
   closeWindow,
   determineActiveWindows,
+  moveWindow, 
 } = require("./nodeExecCommands/commands.js");
 const path = require("path");
 const fs = require("fs");
@@ -79,17 +80,20 @@ const respondToSubEvents = (evt) => {
   }
 };
 const respondToKeyEvents = (evt) => {
-  const { evtObj, type, name } = parseEvent(evt);
+  const { evtObj, type, value, name } = parseEvent(evt);
+
   switch (evtObj.action) {
     case "com.arkyasmal.windowactions.minimizewindows":
-      minimizeWindow(type, name);
+      minimizeWindow(type, value ? value.name : name);
       break;
     case "com.arkyasmal.windowactions.maximizewindows":
-      maximizeWindow(type, name);
+      maximizeWindow(type, value ? value.name : name);
       break;
     case "com.arkyasmal.windowactions.closewindows":
-      closeWindow(type, name);
+      closeWindow(type, value ? value.name : name);
       break;
+    case "com.arkyasmal.windowactions.movewindows":
+      moveWindow(type, value.name, value.coordinates, value.size);
     default:
       logEvent("Button press event does not match");
       logEvent(evtObj);

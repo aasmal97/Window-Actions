@@ -45,7 +45,11 @@ const closeWindow = (byType, name) => {
   const command = `${execDirectory}\\nircmd.exe`;
   execFile(command, ["win", "close", ...typeCommand], execFileError);
 };
-
+const moveWindow = (byType, name, coordinates, size) => {
+  const typeCommand = getTypeCommand(byType, name);
+  const command = `${execDirectory}\\nircmd.exe`;
+  execFile(command, ["win", "move", ...typeCommand], execFileError);
+}
 const determineActiveWindows = async (appDataDirectory) => {
   const command = `${execDirectory}\\determineActiveWindows.exe`;
   execFile(command, ["--appDataDirectory", appDataDirectory], execFileError);
@@ -62,4 +66,5 @@ module.exports = {
   maximizeWindow,
   closeWindow,
   determineActiveWindows,
+  moveWindow
 };
