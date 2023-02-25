@@ -90,21 +90,20 @@ const respondToKeyEvents = (evt) => {
   const winId = value ? (value.name ? value.name : name) : name;
   switch (evtObj.action) {
     case "com.arkyasmal.windowactions.minimizewindows":
-      if (!winId) return;
+      if (!type || !winId) return;
       minimizeWindow(type, winId);
       break;
     case "com.arkyasmal.windowactions.maximizewindows":
-      if (!winId) return;
+      if (!type || !winId) return;
 
       maximizeWindow(type, winId);
       break;
     case "com.arkyasmal.windowactions.closewindows":
-      if (!winId) return;
-
+      if (!type || !winId) return;
       closeWindow(type, winId);
       break;
     case "com.arkyasmal.windowactions.resizewindows":
-      if (!winId) return;
+      if (!type || !winId || !value) return;
       resizeWindow(
         type,
         winId,
@@ -113,7 +112,7 @@ const respondToKeyEvents = (evt) => {
       );
       break;
     case "com.arkyasmal.windowactions.movewindowsvirtual":
-      if (!type || !value.newDesktop || !winId) return;
+      if ( !type || !value?.newDesktop || !winId) return;
       moveWindowsVirtualDesktops(type, winId, value.newDesktop);
       break;
     case "com.arkyasmal.windowactions.movevirtualdesktops":

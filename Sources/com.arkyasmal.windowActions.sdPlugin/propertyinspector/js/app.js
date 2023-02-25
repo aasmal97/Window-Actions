@@ -135,11 +135,11 @@ const changeIdDom = (value) => {
   const identiferDropdownRadio = document.getElementById(
     "identifer_dropdown_type"
   );
-  identiferText.value = value.name;
   identiferDropdownRadio.checked = false;
   identiferTextRadio.checked = true;
   identiferText.style = "";
   identiferDropdown.style = "display: none;";
+  identiferText.value = value.name;
 };
 const changeResizeInputsDom = (value) => {
   if (!value) return;
