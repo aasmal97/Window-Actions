@@ -232,7 +232,6 @@ const onConnection = (jsn) => {
   if (settings) {
     const { type, value, name } = settings;
     const winTypeInput = document.getElementById("select_win_type");
-
     if (type) winTypeInput.value = type;
     else {
       winTypeInput.value = "program_name";
@@ -242,12 +241,9 @@ const onConnection = (jsn) => {
     //here for backwards support
     if (!value && name && typeof name === "string") {
       changeIdDom({ name: name });
-      updateUI(settings);
-    }
+    } else changeIdDom(value);
     changeResizeInputsDom(value ? value : {});
     changeVirtualInputsDom(value);
-    if (!value || !value.name) return;
-    changeIdDom(value);
     updateUI(settings);
   }
 };
