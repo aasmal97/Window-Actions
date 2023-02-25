@@ -167,7 +167,7 @@ const onConnection = (jsn) => {
    * const foundObject = Utils.getProp(JSON-OBJECT, 'path.to.target', defaultValueIfNotFound)
    */
   //we need to input new input values
-  if (jsn.actionInfo.action === "com.arkyasmal.windowactions.movewindows") {
+  if (jsn.actionInfo.action === "com.arkyasmal.windowactions.resizewindows") {
     const moveWindowInputs = document.getElementById(
       "move_window_inputs_container"
     );

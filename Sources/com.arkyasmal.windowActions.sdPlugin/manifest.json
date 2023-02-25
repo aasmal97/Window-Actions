@@ -37,13 +37,13 @@
       "SupportedInMultiActions": true
     },
     {
-      "UUID": "com.arkyasmal.windowactions.movewindows",
-      "Icon": "images/xmark-solid",
-      "Name": "Move Windows",
+      "UUID": "com.arkyasmal.windowactions.resizewindows",
+      "Icon": "images/window-resize-regular",
+      "Name": "Resize Windows",
       "PropertyInspectorPath": "./propertyinspector/index.html",
       "States": [
         {
-          "Image": "images/xmark-solid"
+          "Image": "images/window-resize-regular"
         }
       ],
       "SupportedInMultiActions": true

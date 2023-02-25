@@ -92,7 +92,7 @@ const respondToKeyEvents = (evt) => {
     case "com.arkyasmal.windowactions.closewindows":
       closeWindow(type, value ? value.name : name);
       break;
-    case "com.arkyasmal.windowactions.movewindows":
+    case "com.arkyasmal.windowactions.resizewindows":
       moveWindow(
         type,
         value ? value.name : name,
