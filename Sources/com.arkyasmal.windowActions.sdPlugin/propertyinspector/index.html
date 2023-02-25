@@ -147,15 +147,18 @@
             class="sdpi-item-value"
             style="width: 100%; display: none"
           >
-            <label for="move_window_virtual_desktop_num"
-              >Virtual Desktop Number</label
-            >
-            <input
-              id="move_window_virtual_desktop_num"
-              type="number"
-              step="1"
-              onchange="onValueInputChange('newDesktop', this.value)"
-            />
+            <div style="display: flex; flex-direction: column">
+              <label for="move_window_virtual_desktop_num"
+                >Virtual Desktop Number:</label
+              >
+              <input
+                width="100%"
+                id="move_window_virtual_desktop_num"
+                type="number"
+                step="1"
+                onchange="onValueInputChange('newDesktop', this.value)"
+              />
+            </div>
           </div>
         </div>
       </div>
@@ -202,26 +205,36 @@
       class="sdpi-item-value"
       style="width: 100%; display: none"
     >
-      <label for="navigate_virtual_desktop_num">Virtual Desktop Number</label>
-      <input
-        id="navigate_virtual_desktop_num"
-        type="number"
-        step="1"
-        onchange="onValueInputChange('newDesktop', this.value)"
-      />
+      <div style="display: flex; flex-direction: column">
+        <label for="navigate_virtual_desktop_num"
+          >Virtual Desktop Number:</label
+        >
+        <input
+          id="navigate_virtual_desktop_num"
+          type="number"
+          style="width: 100%"
+          step="1"
+          onchange="onValueInputChange('newDesktop', this.value)"
+        />
+      </div>
     </div>
     <div
       id="create_virtual_desktop_inputs_container"
       class="sdpi-item-value"
       style="width: 100%; display: none"
     >
-      <label for="virtual_desktops_to_create">Virtual Desktops to Create</label>
-      <input
-        id="virtual_desktops_to_create"
-        type="number"
-        step="1"
-        onchange="onValueInputChange('numOfDesktopsToCreate', this.value)"
-      />
+      <div style="display: flex; flex-direction: column">
+        <label for="virtual_desktops_to_create"
+          >Number of Desktops To Create:</label
+        >
+        <input
+          id="virtual_desktops_to_create"
+          type="number"
+          step="1"
+          style="width: 100%"
+          onchange="onValueInputChange('numOfDesktopsToCreate', this.value)"
+        />
+      </div>
     </div>
     <div class="sdpi-info-label hidden" style="top: -1000" value=""></div>
     <script src="js/common.js"></script>

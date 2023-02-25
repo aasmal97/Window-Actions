@@ -53,7 +53,7 @@ const parseEvent = (evt) => {
   if (!payload) payload = {};
   let { action, settings } = payload;
   if (!settings) settings = {};
-  const { type, name, value, newDesktop, numOfDesktopsToCreate } = settings;
+  const { type, name, value } = settings;
   return {
     targetContext: targetContext,
     payload: payload,
@@ -62,8 +62,6 @@ const parseEvent = (evt) => {
     type: type,
     value: value,
     name: name,
-    newDesktop: newDesktop,
-    numOfDesktopsToCreate: numOfDesktopsToCreate,
     evtObj: evtObj,
   };
 };
@@ -115,15 +113,15 @@ const respondToKeyEvents = (evt) => {
       );
       break;
     case "com.arkyasmal.windowactions.movewindowsvirtual":
-      if (!type || !value.newDesktop || winId) return;
+      if (!type || !value.newDesktop || !winId) return;
       moveWindowsVirtualDesktops(type, winId, value.newDesktop);
       break;
     case "com.arkyasmal.windowactions.movevirtualdesktops":
-      if (value?.newDesktop) return;
+      if (!value?.newDesktop) return;
       moveVirtualDesktops(value.newDesktop);
       break;
     case "com.arkyasmal.windowactions.createvirtualdesktops":
-      if (value?.numOfDesktopsToCreate) return;
+      if (!value?.numOfDesktopsToCreate) return;
       createVirtualDesktops(value.numOfDesktopsToCreate);
       break;
     default:

@@ -148,10 +148,11 @@ const changeResizeInputsDom = (value) => {
   const sizeWidth = document.getElementById("window_size_width");
   const sizeHeight = document.getElementById("window_size_height");
   const coordinates = value.coordinates;
+  const size = value.size
   coordinatesX.value = coordinates ? (coordinates.x ? coordinates.x : 0) : 0;
   coordinatesY.value = coordinates ? (coordinates.y ? coordinates.y : 0) : 0;
-  sizeWidth.value = value.size.width;
-  sizeHeight.value = value.size.height;
+  sizeWidth.value = size ? (size.width ? size.width : ''): '';
+  sizeHeight.value = size ? (size.height ? size.height : "") : "";
 };
 const determineContainerStyles = (action) => {
   const wrapper = document.getElementById("window_specific_inputs");
@@ -181,6 +182,7 @@ const determineContainerStyles = (action) => {
         "move_windows_to_virtual_desktop"
       );
       moveWindowsToVirtualDesktopInputs.style = "width: 100%";
+      wrapper.style = "";
       break;
     default:
       wrapper.style = "";
