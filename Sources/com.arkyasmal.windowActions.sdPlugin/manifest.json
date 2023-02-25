@@ -4,6 +4,7 @@
       "UUID": "com.arkyasmal.windowactions.minimizewindows",
       "Icon": "images/window-minimize-solid",
       "Name": "Minimize Windows",
+      "PropertyInspectorPath": "./propertyinspector/index.html",
       "States": [
         {
           "Image": "images/window-minimize-solid"
@@ -15,6 +16,7 @@
       "UUID": "com.arkyasmal.windowactions.maximizewindows",
       "Icon": "images/window-maximize-regular",
       "Name": "Maximize Windows",
+      "PropertyInspectorPath": "./propertyinspector/index.html",
       "States": [
         {
           "Image": "images/window-maximize-regular"
@@ -26,24 +28,72 @@
       "UUID": "com.arkyasmal.windowactions.closewindows",
       "Icon": "images/xmark-solid",
       "Name": "Close Windows",
+      "PropertyInspectorPath": "./propertyinspector/index.html",
       "States": [
         {
           "Image": "images/xmark-solid"
         }
       ],
       "SupportedInMultiActions": true
+    },
+    {
+      "UUID": "com.arkyasmal.windowactions.resizewindows",
+      "Icon": "images/window-resize-regular",
+      "Name": "Resize Windows",
+      "PropertyInspectorPath": "./propertyinspector/index.html",
+      "States": [
+        {
+          "Image": "images/window-resize-regular"
+        }
+      ],
+      "SupportedInMultiActions": true
+    },
+    {
+      "UUID": "com.arkyasmal.windowactions.movewindowsvirtual",
+      "Icon": "images/windows-move-window-to-virtual",
+      "Name": "Move Window to Virtual Desktop",
+      "PropertyInspectorPath": "./propertyinspector/index.html",
+      "States": [
+        {
+          "Image": "images/windows-move-window-to-virtual"
+        }
+      ],
+      "SupportedInMultiActions": true
+    },
+    {
+      "UUID": "com.arkyasmal.windowactions.movevirtualdesktops",
+      "Icon": "images/window-navigate-virtual",
+      "Name": "Go To Virtual Desktop",
+      "PropertyInspectorPath": "./propertyinspector/index.html",
+      "States": [
+        {
+          "Image": "images/window-navigate-virtual"
+        }
+      ],
+      "SupportedInMultiActions": true
+    },
+    {
+      "UUID": "com.arkyasmal.windowactions.createvirtualdesktops",
+      "Icon": "images/window-create-virtual",
+      "Name": "Create Virtual Desktops",
+      "PropertyInspectorPath": "./propertyinspector/index.html",
+      "States": [
+        {
+          "Image": "images/window-create-virtual"
+        }
+      ],
+      "SupportedInMultiActions": true
     }
   ],
   "Author": "Arky Asmal",
-  "Icon":"images/window-restore-solid",
+  "Icon": "images/window-restore-solid",
   "Category": "Window Actions",
   "CategoryIcon": "images/window-restore-solid",
   "CodePath": "run.exe",
-  "PropertyInspectorPath": "./propertyinspector/index.html",
-  "Description": "Plugin that allows a user to minimize, maximize, and close windows according to their program name, window handler, or window class",
-  "Name": "Window Actions [Arky Asmal]",
-  "URL": "https://www.arkyasmal.com/projects",
-  "Version": "1.2.1",
+  "Description": "Minimize, maximize, close, or resize windows according to a window id (i.e title, etc), and move them through virtual desktops",
+  "Name": "Window Actions",
+  "URL": "https://github.com/aasmal97/Window-Actions",
+  "Version": "2.0.0",
   "SDKVersion": 2,
   "OS": [{ "Platform": "windows", "MinimumVersion": "10" }],
   "Software": {

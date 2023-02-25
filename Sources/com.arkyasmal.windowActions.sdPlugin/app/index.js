@@ -6,6 +6,10 @@ const {
   maximizeWindow,
   closeWindow,
   determineActiveWindows,
+  resizeWindow,
+  moveWindowsVirtualDesktops,
+  moveVirtualDesktops,
+  createVirtualDesktops,
 } = require("./nodeExecCommands/commands.js");
 const path = require("path");
 const fs = require("fs");
@@ -49,13 +53,14 @@ const parseEvent = (evt) => {
   if (!payload) payload = {};
   let { action, settings } = payload;
   if (!settings) settings = {};
-  const { type, name } = settings;
+  const { type, name, value } = settings;
   return {
     targetContext: targetContext,
     payload: payload,
     action: action,
     settings: settings,
     type: type,
+    value: value,
     name: name,
     evtObj: evtObj,
   };
@@ -79,16 +84,44 @@ const respondToSubEvents = (evt) => {
   }
 };
 const respondToKeyEvents = (evt) => {
-  const { evtObj, type, name } = parseEvent(evt);
+  const { evtObj, type, value, name } = parseEvent(evt);
+  //this conditional is here for backwards support for action configuired prior
+  //to this update
+  const winId = value ? (value.name ? value.name : name) : name;
   switch (evtObj.action) {
     case "com.arkyasmal.windowactions.minimizewindows":
-      minimizeWindow(type, name);
+      if (!type || !winId) return;
+      minimizeWindow(type, winId);
       break;
     case "com.arkyasmal.windowactions.maximizewindows":
-      maximizeWindow(type, name);
+      if (!type || !winId) return;
+
+      maximizeWindow(type, winId);
       break;
     case "com.arkyasmal.windowactions.closewindows":
-      closeWindow(type, name);
+      if (!type || !winId) return;
+      closeWindow(type, winId);
+      break;
+    case "com.arkyasmal.windowactions.resizewindows":
+      if (!type || !winId || !value) return;
+      resizeWindow(
+        type,
+        winId,
+        value.coordinates ? value.coordinates : {},
+        value.size ? value.size : {}
+      );
+      break;
+    case "com.arkyasmal.windowactions.movewindowsvirtual":
+      if ( !type || !value?.newDesktop || !winId) return;
+      moveWindowsVirtualDesktops(type, winId, value.newDesktop);
+      break;
+    case "com.arkyasmal.windowactions.movevirtualdesktops":
+      if (!value?.newDesktop) return;
+      moveVirtualDesktops(value.newDesktop);
+      break;
+    case "com.arkyasmal.windowactions.createvirtualdesktops":
+      if (!value?.numOfDesktopsToCreate) return;
+      createVirtualDesktops(value.numOfDesktopsToCreate);
       break;
     default:
       logEvent("Button press event does not match");

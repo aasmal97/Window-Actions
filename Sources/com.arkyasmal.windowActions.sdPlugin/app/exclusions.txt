@@ -4,6 +4,9 @@
 \build\
 \determineActiveWindows\
 \determineActiveWindows.spec\
+\moveVirtualDesktops.spec\
+\moveVirtualDesktops\
+
 \windowsScripts\
 \batFiles\build.bat
 \batFiles\buildPython.bat

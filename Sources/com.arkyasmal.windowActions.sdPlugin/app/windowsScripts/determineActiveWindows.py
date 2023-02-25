@@ -1,4 +1,5 @@
 import pyautogui
+#pywintypes import is required or else .exe won't build properly
 import pywintypes
 import win32gui
 import win32process
@@ -68,7 +69,8 @@ def get_active_windows(app_data_directory, filter_dup = False):
                 new_data[i]["program_name"] = process_map[str(p)]["Name"]
                 break
     new_data = get_window_class_names(new_data, filter_dup)
-    return create_json_file(new_data, app_data_directory)
+    create_json_file(new_data, app_data_directory)
+    return new_data
     
 if __name__ == "__main__":
     cmd_args = sys.argv

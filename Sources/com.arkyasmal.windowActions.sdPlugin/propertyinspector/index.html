@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="css/sdpi.css" />
   </head>
   <body>
-    <div class="sdpi-wrapper">
+    <div id="window_specific_inputs" class="sdpi-wrapper" style="display: none">
       <div class="sdpi-item" id="win_type">
         <div class="sdpi-item-label">Identifer Type</div>
         <select
@@ -39,8 +39,8 @@
         style="align-items: start; margin-top: 5px; margin-bottom: 12px"
       >
         <div class="sdpi-item-label">Identifer</div>
-        <div style="display: flex; flex-direction: column; width: 100%">
-          <div class="sdpi-item-value" style="width: 100%; margin-bottom: 10px">
+        <div style="display: flex; flex-direction: column">
+          <div class="sdpi-item-value" style="margin-bottom: 10px">
             <span class="sdpi-item-child">
               <input
                 id="identifer_dropdown_type"
@@ -90,6 +90,76 @@
               required
             />
           </div>
+          <div
+            id="resize_window_inputs_container"
+            class="sdpi-item-value"
+            style="width: 100%; display: none"
+          >
+            <div style="display: flex; flex-direction: column">
+              <span style="margin-top: 10px; margin-bottom: 10px"
+                >Coordinates (in pixels)</span
+              >
+              <div style="display: flex">
+                <label for="window_coord_x" class="sdpi-item-label">X</label>
+                <input
+                  style="width: 50%"
+                  id="window_coord_x"
+                  type="number"
+                  onchange="onResizeInputChange('coordinates', 'x', this.value)"
+                />
+                <label for="window_coord_y" class="sdpi-item-label">Y</label>
+                <input
+                  style="width: 50%"
+                  id="window_coord_y"
+                  type="number"
+                  onchange="onResizeInputChange('coordinates', 'y', this.value)"
+                />
+              </div>
+            </div>
+            <div style="display: flex; flex-direction: column">
+              <span style="margin-bottom: 10px; margin-top: 10px"
+                >Size (in pixels)</span
+              >
+              <div style="display: flex">
+                <label for="window_size_width" class="sdpi-item-label"
+                  >Width</label
+                >
+                <input
+                  style="width: 50%"
+                  id="window_size_width"
+                  type="number"
+                  onchange="onResizeInputChange('size', 'width', this.value)"
+                />
+                <label for="window_size_height" class="sdpi-item-label"
+                  >Height</label
+                >
+                <input
+                  style="width: 50%"
+                  id="window_size_height"
+                  type="number"
+                  onchange="onResizeInputChange('size', 'height', this.value)"
+                />
+              </div>
+            </div>
+          </div>
+          <div
+            id="move_windows_to_virtual_desktop"
+            class="sdpi-item-value"
+            style="width: 100%; display: none"
+          >
+            <div style="display: flex; flex-direction: column">
+              <label for="move_window_virtual_desktop_num"
+                >Virtual Desktop Number:</label
+              >
+              <input
+                width="100%"
+                id="move_window_virtual_desktop_num"
+                type="number"
+                step="1"
+                onchange="onValueInputChange('newDesktop', this.value)"
+              />
+            </div>
+          </div>
         </div>
       </div>
 
@@ -130,9 +200,46 @@
         </div>
       </div>
     </div>
+    <div
+      id="navigate_through_virtual_desktops_container"
+      class="sdpi-item-value"
+      style="width: 100%; display: none"
+    >
+      <div style="display: flex; flex-direction: column">
+        <label for="navigate_virtual_desktop_num"
+          >Virtual Desktop Number:</label
+        >
+        <input
+          id="navigate_virtual_desktop_num"
+          type="number"
+          style="width: 100%"
+          step="1"
+          onchange="onValueInputChange('newDesktop', this.value)"
+        />
+      </div>
+    </div>
+    <div
+      id="create_virtual_desktop_inputs_container"
+      class="sdpi-item-value"
+      style="width: 100%; display: none"
+    >
+      <div style="display: flex; flex-direction: column">
+        <label for="virtual_desktops_to_create"
+          >Number of Desktops To Create:</label
+        >
+        <input
+          id="virtual_desktops_to_create"
+          type="number"
+          step="1"
+          style="width: 100%"
+          onchange="onValueInputChange('numOfDesktopsToCreate', this.value)"
+        />
+      </div>
+    </div>
     <div class="sdpi-info-label hidden" style="top: -1000" value=""></div>
     <script src="js/common.js"></script>
     <script src="js/common_pi.js"></script>
+    <script src="js/app.js"></script>
     <script src="js/index_pi.js"></script>
   </body>
 </html>
