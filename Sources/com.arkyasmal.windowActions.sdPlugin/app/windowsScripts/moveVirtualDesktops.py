@@ -29,11 +29,11 @@ def move_windows_to_new_desktop(num, win_id_type, win_id):
     return result
 if __name__ == "__main__":
     cmd_args = sys.argv
-    desktop_num = cmd_args[cmd_args.index("--newDesktop") + 1]
-    win_id_type = cmd_args[cmd_args.index("--winId") + 1]
-    win_id = cmd_args[cmd_args.index("--winIdType") + 1]
     action = cmd_args[cmd_args.index("--action") + 1]
+    desktop_num = cmd_args[cmd_args.index("--newDesktop") + 1]
     if action == 'move_window': 
+        win_id_type = cmd_args[cmd_args.index("--winId") + 1]
+        win_id = cmd_args[cmd_args.index("--winIdType") + 1]
         move_windows_to_new_desktop(desktop_num, win_id_type, win_id)
     elif action == 'move_virtual_desktop': 
         move_virtual_desktop(desktop_num)
