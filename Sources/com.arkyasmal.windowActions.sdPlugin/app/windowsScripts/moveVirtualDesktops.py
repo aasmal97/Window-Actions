@@ -9,7 +9,7 @@ def move_virtual_desktop(num):
     return "Moved to this virtual desktop"
 def move_window(hwnd, num): 
     window: AppView
-    if isinstance(hwnd, str): 
+    if isinstance(hwnd, int) or isinstance(str): 
         window = AppView(hwnd)
     else: 
         window = AppView.current()
@@ -26,7 +26,8 @@ def move_windows_to_new_desktop(num, win_id_type, win_id):
     all_windows = get_active_windows(app_data_directory = file_path)
     matching_windows_itr = filter(lambda window: test_regex(win_id, window[id_type]) if is_partial_str else window[id_type] == win_id, all_windows)
     matching_windows = list(matching_windows_itr)
-    result =  [move_window(i.hWnd, num) for i in matching_windows]
+    print(matching_windows)
+    result = [move_window(i['hWnd'], num) for i in matching_windows]
     return result
 if __name__ == "__main__":
     cmd_args = sys.argv
