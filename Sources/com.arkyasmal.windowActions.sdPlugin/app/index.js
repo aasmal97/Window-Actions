@@ -85,6 +85,8 @@ const respondToSubEvents = (evt) => {
 };
 const respondToKeyEvents = (evt) => {
   const { evtObj, type, value, name } = parseEvent(evt);
+  //this conditional is here for backwards support for action configuired prior
+  //to this update
   const winId = value ? (value.name ? value.name : name) : name;
   switch (evtObj.action) {
     case "com.arkyasmal.windowactions.minimizewindows":
@@ -103,7 +105,6 @@ const respondToKeyEvents = (evt) => {
       break;
     case "com.arkyasmal.windowactions.resizewindows":
       if (!winId) return;
-
       resizeWindow(
         type,
         winId,

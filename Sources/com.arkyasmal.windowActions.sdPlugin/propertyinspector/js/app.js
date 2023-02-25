@@ -89,7 +89,7 @@ const openInDefaultBrowser = (event) => {
   $SD.connection.send(JSON.stringify(urlPayload));
 };
 
-const onMoveInputChange = (inputType, key, value) => {
+const onResizeInputChange = (inputType, key, value) => {
   if (!settings || !inputType || !key || (typeof value === "string" && !value))
     return;
   const prevValue = settings.value ? settings.value : {};
@@ -130,7 +130,7 @@ const changeIdDom = (value) => {
   identiferText.style = "";
   identiferDropdown.style = "display: none;";
 };
-const changeMoveInputsDom = (value) => {
+const changeResizeInputsDom = (value) => {
   const coordinatesX = document.getElementById("window_coord_x");
   const coordinatesY = document.getElementById("window_coord_y");
   const sizeWidth = document.getElementById("window_size_width");
@@ -168,10 +168,10 @@ const onConnection = (jsn) => {
    */
   //we need to input new input values
   if (jsn.actionInfo.action === "com.arkyasmal.windowactions.resizewindows") {
-    const moveWindowInputs = document.getElementById(
-      "move_window_inputs_container"
+    const resizeWindowInputs = document.getElementById(
+      "resize_window_inputs_container"
     );
-    moveWindowInputs.style = "width: 100%";
+    resizeWindowInputs.style = "width: 100%";
   }
   settings = Utils.getProp(jsn, "actionInfo.payload.settings", false);
   if (settings) {
@@ -189,7 +189,7 @@ const onConnection = (jsn) => {
       changeIdDom({ name: name });
       updateUI(settings);
     }
-    changeMoveInputsDom(value ? value : {});
+    changeResizeInputsDom(value ? value : {});
     if (!value || !value.name) return;
     changeIdDom(value);
     updateUI(settings);
