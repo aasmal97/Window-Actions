@@ -1,4 +1,6 @@
 import pyautogui
+#pywintypes import is required or else .exe won't build properly
+import pywintypes
 import win32gui
 import win32process
 import os
