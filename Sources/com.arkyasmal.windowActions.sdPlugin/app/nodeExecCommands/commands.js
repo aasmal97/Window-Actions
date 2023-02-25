@@ -46,7 +46,7 @@ const closeWindow = (byType, name) => {
   execFile(command, ["win", "close", ...typeCommand], execFileError);
 };
 
-const moveWindow = (byType, name, coordinates, size) => {
+const resizeWindow = (byType, name, coordinates, size) => {
   const typeCommand = getTypeCommand(byType, name);
   const command = `${execDirectory}\\nircmd.exe`;
   let coordinatesArr = [0, 0];
@@ -67,6 +67,29 @@ const determineActiveWindows = async (appDataDirectory) => {
   execFile(command, ["--appDataDirectory", appDataDirectory], execFileError);
   return await fetchWindowsJson(appDataDirectory);
 };
+const moveWindowsVirtualDesktops = async (byType, name, newDesktop) => {
+  const command = `${execDirectory}\\moveVirtualDesktops.exe`;
+  const params = [
+    "--winIdType",
+    byType,
+    "--winId",
+    name,
+    "--newDesktop",
+    newDesktop,
+  ];
+  execFile(command, ["--action", "move_window", ...params], execFileError);
+  return await fetchWindowsJson(appDataDirectory);
+};
+const moveVirtualDesktops = async (newDesktop) => {
+  const command = `${execDirectory}\\moveVirtualDesktops.exe`;
+  const params = ["--newDesktop", newDesktop];
+  execFile(
+    command,
+    ["--action", "move_virtual_desktop", ...params],
+    execFileError
+  );
+  return await fetchWindowsJson(appDataDirectory);
+};
 const openGui = () => {
   const command = `"${batFilesDirectory}"\\findWindow.bat`;
   exec(command, execFileError);
@@ -78,5 +101,7 @@ module.exports = {
   maximizeWindow,
   closeWindow,
   determineActiveWindows,
-  moveWindow,
+  resizeWindow,
+  moveWindowsVirtualDesktops,
+  moveVirtualDesktops
 };

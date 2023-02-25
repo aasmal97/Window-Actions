@@ -6,7 +6,9 @@ const {
   maximizeWindow,
   closeWindow,
   determineActiveWindows,
-  moveWindow,
+  resizeWindow,
+  moveWindowsVirtualDesktops,
+  moveVirtualDesktops,
 } = require("./nodeExecCommands/commands.js");
 const path = require("path");
 const fs = require("fs");
@@ -93,12 +95,22 @@ const respondToKeyEvents = (evt) => {
       closeWindow(type, value ? value.name : name);
       break;
     case "com.arkyasmal.windowactions.resizewindows":
-      moveWindow(
+      resizeWindow(
         type,
         value ? value.name : name,
         value.coordinates ? value.coordinates : {},
         value.size ? value.size : {}
       );
+      break;
+    case "com.arkyasmal.windowactions.movewindowsvirtual":
+      moveWindowsVirtualDesktops(
+        type,
+        value ? value.name : name,
+        value.newDesktop
+      );
+      break;
+    case "com.arkyasmal.windowactions.movevirtualdesktops":
+      moveVirtualDesktops(value.newDesktop);
       break;
     default:
       logEvent("Button press event does not match");
