@@ -342,7 +342,6 @@ table > caption {
 .sdpi-item-label {
   text-align: right;
   flex: none;
-  width: 94px;
   padding-right: 4px;
   font-weight: 600;
   -webkit-user-select: none;
@@ -367,7 +366,6 @@ table > caption {
   /* flex-grow: 1;
   flex-shrink: 0; */
   margin-right: 14px;
-  margin-left: 4px;
   justify-content: space-evenly;
 }
 
@@ -689,7 +687,6 @@ textarea {
   border: none;
   margin-top: 2px;
   margin-bottom: 2px;
-  min-width: 219px;
 }
 
 textarea + label {

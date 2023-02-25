@@ -14,10 +14,10 @@ const getTypeCommand = (byType, name) => {
       typeCommand = ["class", name];
       break;
     case "win_title":
-      typeCommand = ["title", name]
+      typeCommand = ["title", name];
       break;
-    case 'win_ititle':
-      typeCommand = ["ititle", name]
+    case "win_ititle":
+      typeCommand = ["ititle", name];
     default:
       break;
   }
@@ -45,11 +45,27 @@ const closeWindow = (byType, name) => {
   const command = `${execDirectory}\\nircmd.exe`;
   execFile(command, ["win", "close", ...typeCommand], execFileError);
 };
+
 const moveWindow = (byType, name, coordinates, size) => {
   const typeCommand = getTypeCommand(byType, name);
   const command = `${execDirectory}\\nircmd.exe`;
-  execFile(command, ["win", "move", ...typeCommand], execFileError);
-}
+  let coordinatesArr = []
+  if(coordinates) coordinatesArr = [coordinates.x, coordinates.y]
+  let sizeArr = []
+  if(size) sizeArr = [size.width, size.height]
+  const cliArgs = [
+    "win",
+    "move",
+    ...typeCommand,
+    ...coordinatesArr,
+    ...sizeArr
+  ];
+  execFile(
+    command,
+    cliArgs,
+    execFileError
+  );
+};
 const determineActiveWindows = async (appDataDirectory) => {
   const command = `${execDirectory}\\determineActiveWindows.exe`;
   execFile(command, ["--appDataDirectory", appDataDirectory], execFileError);
@@ -66,5 +82,5 @@ module.exports = {
   maximizeWindow,
   closeWindow,
   determineActiveWindows,
-  moveWindow
+  moveWindow,
 };

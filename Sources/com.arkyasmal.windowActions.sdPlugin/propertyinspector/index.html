@@ -39,8 +39,8 @@
         style="align-items: start; margin-top: 5px; margin-bottom: 12px"
       >
         <div class="sdpi-item-label">Identifer</div>
-        <div style="display: flex; flex-direction: column; width: 100%">
-          <div class="sdpi-item-value" style="width: 100%; margin-bottom: 10px">
+        <div style="display: flex; flex-direction: column">
+          <div class="sdpi-item-value" style="margin-bottom: 10px">
             <span class="sdpi-item-child">
               <input
                 id="identifer_dropdown_type"
@@ -89,6 +89,58 @@
               placeholder="Enter Window or Program Identifer/Name"
               required
             />
+          </div>
+          <div
+            id="move_window_inputs_container"
+            class="sdpi-item-value"
+            style="width: 100%; display: none"
+          >
+            <div style="display: flex; flex-direction: column">
+              <span style="margin-top: 10px; margin-bottom: 10px"
+                >Coordinates (in pixels)</span
+              >
+              <div style="display: flex">
+                <label for="window_coord_x" class="sdpi-item-label">X</label>
+                <input
+                  style="width: 50%"
+                  id="window_coord_x"
+                  type="number"
+                  onchange="onMoveInputChange('coordinates', 'x', this.value)"
+                />
+                <label for="window_coord_y" class="sdpi-item-label">Y</label>
+                <input
+                  style="width: 50%"
+                  id="window_coord_y"
+                  type="number"
+                  onchange="onMoveInputChange('coordinates', 'y', this.value)"
+                />
+              </div>
+            </div>
+            <div style="display: flex; flex-direction: column">
+              <span style="margin-bottom: 10px; margin-top: 10px"
+                >Size (in pixels)</span
+              >
+              <div style="display: flex">
+                <label for="window_size_width" class="sdpi-item-label"
+                  >Width</label
+                >
+                <input
+                  style="width: 50%"
+                  id="window_size_width"
+                  type="number"
+                  onchange="onMoveInputChange('size', 'width', this.value)"
+                />
+                <label for="window_size_height" class="sdpi-item-label"
+                  >Height</label
+                >
+                <input
+                  style="width: 50%"
+                  id="window_size_height"
+                  type="number"
+                  onchange="onMoveInputChange('size', 'height', this.value)"
+                />
+              </div>
+            </div>
           </div>
         </div>
       </div>

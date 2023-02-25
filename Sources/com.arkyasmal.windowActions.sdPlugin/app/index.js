@@ -81,7 +81,7 @@ const respondToSubEvents = (evt) => {
 };
 const respondToKeyEvents = (evt) => {
   const { evtObj, type, value, name } = parseEvent(evt);
-
+console.log(evt)
   switch (evtObj.action) {
     case "com.arkyasmal.windowactions.minimizewindows":
       minimizeWindow(type, value ? value.name : name);
@@ -93,7 +93,13 @@ const respondToKeyEvents = (evt) => {
       closeWindow(type, value ? value.name : name);
       break;
     case "com.arkyasmal.windowactions.movewindows":
-      moveWindow(type, value.name, value.coordinates, value.size);
+      moveWindow(
+        type,
+        value ? value.name : name,
+        value.coordinates,
+        value.size
+      );
+      break;
     default:
       logEvent("Button press event does not match");
       logEvent(evtObj);

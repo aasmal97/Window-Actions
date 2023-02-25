@@ -88,12 +88,58 @@ const openInDefaultBrowser = (event) => {
   };
   $SD.connection.send(JSON.stringify(urlPayload));
 };
+
+const onMoveInputChange = (inputType, key, value) => {
+  if (!settings || !inputType || !key || (typeof value === "string" && !value))
+    return;
+  const prevValue = settings.value ? settings.value : {};
+  const prevInputVal = prevValue
+    ? prevValue[inputType]
+      ? prevValue[inputType]
+      : {}
+    : {};
+  const currVal = {
+    ...prevValue,
+    [inputType]: {
+      ...prevInputVal,
+      [key]: parseFloat(value),
+    },
+  };
+  console.log(currVal);
+  saveSettings({
+    key: "value",
+    value: currVal,
+  });
+};
 /**
  * The 'connected' event is the first event sent to Property Inspector, after it's instance
  * is registered with Stream Deck software. It carries the current websocket, settings,
  * and other information about the current environmet in a JSON object.
  * You can use it to subscribe to events you want to use in your plugin.
  */
+const changeIdDom = (value) => {
+  const identiferText = document.getElementById("identifer_text");
+  const identiferDropdown = document.getElementById("identifer_dropdown");
+  const identiferTextRadio = document.getElementById("identifer_text_type");
+  const identiferDropdownRadio = document.getElementById(
+    "identifer_dropdown_type"
+  );
+  identiferText.value = value.name;
+  identiferDropdownRadio.checked = false;
+  identiferTextRadio.checked = true;
+  identiferText.style = "";
+  identiferDropdown.style = "display: none;";
+};
+const changeMoveInputsDom = (value) => {
+  const coordinatesX = document.getElementById("window_coord_x");
+  const coordinatesY = document.getElementById("window_coord_y");
+  const sizeWidth = document.getElementById("window_size_width");
+  const sizeHeight = document.getElementById("window_size_height");
+  coordinatesX.value = value.coordinates.x;
+  coordinatesY.value = value.coordinates.y;
+  sizeWidth.value = value.size.width;
+  sizeHeight.value = value.size.height;
+};
 const onConnection = (jsn) => {
   /**
    * The passed 'applicationInfo' object contains various information about your
@@ -105,7 +151,7 @@ const onConnection = (jsn) => {
 
   console.log("connected");
   addDynamicStyles($SD.applicationInfo.colors, "connectSocket");
-
+  console.log();
   /**
    * Current settings are passed in the JSON node
    * {actionInfo: {
@@ -119,24 +165,18 @@ const onConnection = (jsn) => {
    *
    * const foundObject = Utils.getProp(JSON-OBJECT, 'path.to.target', defaultValueIfNotFound)
    */
-
+  //we need to input new input values
+  if (jsn.actionInfo.action === "com.arkyasmal.windowactions.movewindows") {
+    const moveWindowInputs = document.getElementById(
+      "move_window_inputs_container"
+    );
+    moveWindowInputs.style = "width: 100%";
+  }
   settings = Utils.getProp(jsn, "actionInfo.payload.settings", false);
   if (settings) {
     const { type, value, name } = settings;
     const winTypeInput = document.getElementById("select_win_type");
-    const identiferText = document.getElementById("identifer_text");
-    const identiferDropdown = document.getElementById("identifer_dropdown");
-    const identiferTextRadio = document.getElementById("identifer_text_type");
-    const identiferDropdownRadio = document.getElementById(
-      "identifer_dropdown_type"
-    );
-    const changeDom = (value) => {
-      identiferText.value = value.name;
-      identiferDropdownRadio.checked = false;
-      identiferTextRadio.checked = true;
-      identiferText.style = "";
-      identiferDropdown.style = "display: none;";
-    };
+
     if (type) winTypeInput.value = type;
     else {
       winTypeInput.value = "program_name";
@@ -145,11 +185,12 @@ const onConnection = (jsn) => {
     sendValueToPlugin("com.arkyasmal.windowActions.onActiveWindows", "action");
     //here for backwards support
     if (!value && name && typeof name === "string") {
-      changeDom({ name: name });
+      changeIdDom({ name: name });
       updateUI(settings);
     }
+    changeMoveInputsDom(value ? value : {});
     if (!value || !value.name) return;
-    changeDom(value);
+    changeIdDom(value);
     updateUI(settings);
   }
 };
