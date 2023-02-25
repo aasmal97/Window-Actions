@@ -50,11 +50,11 @@ def move_windows_to_new_desktop(num, win_id_type, win_id):
 if __name__ == "__main__":
     cmd_args = sys.argv
     action = cmd_args[cmd_args.index("--action") + 1]
-    desktop_num = cmd_args[cmd_args.index("--newDesktop") + 1]
-    desktop_num = int(desktop_num)
     if action == 'create_desktop': 
         num_of_desktops= cmd_args[cmd_args.index("--numOfNewDesktops") + 1]
-        create_new_virtual_desktop(num_of_desktops)
+        create_new_virtual_desktop(int(num_of_desktops))
+    desktop_num = cmd_args[cmd_args.index("--newDesktop") + 1]
+    desktop_num = int(desktop_num)
     if action == 'move_window': 
         win_id = cmd_args[cmd_args.index("--winId") + 1]
         win_id_type = cmd_args[cmd_args.index("--winIdType") + 1]

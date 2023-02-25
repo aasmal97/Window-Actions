@@ -78,7 +78,6 @@ const moveWindowsVirtualDesktops = async (byType, name, newDesktop) => {
     newDesktop,
   ];
   execFile(command, ["--action", "move_window", ...params], execFileError);
-  return await fetchWindowsJson(appDataDirectory);
 };
 const moveVirtualDesktops = async (newDesktop) => {
   const command = `${execDirectory}\\moveVirtualDesktops.exe`;
@@ -88,7 +87,11 @@ const moveVirtualDesktops = async (newDesktop) => {
     ["--action", "move_virtual_desktop", ...params],
     execFileError
   );
-  return await fetchWindowsJson(appDataDirectory);
+};
+const createVirtualDesktops = async (numOfNewDesktops) => {
+  const command = `${execDirectory}\\moveVirtualDesktops.exe`;
+  const params = ["--numOfNewDesktops", numOfNewDesktops];
+  execFile(command, ["--action", "create_desktop", ...params], execFileError);
 };
 const openGui = () => {
   const command = `"${batFilesDirectory}"\\findWindow.bat`;
@@ -103,5 +106,6 @@ module.exports = {
   determineActiveWindows,
   resizeWindow,
   moveWindowsVirtualDesktops,
-  moveVirtualDesktops
+  moveVirtualDesktops,
+  createVirtualDesktops,
 };
