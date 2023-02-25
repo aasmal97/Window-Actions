@@ -154,6 +154,7 @@ const changeResizeInputsDom = (value) => {
   sizeHeight.value = value.size.height;
 };
 const determineContainerStyles = (action) => {
+  const wrapper = document.getElementById("window_specific_inputs");
   //we need to input new input values
   switch (action) {
     case "com.arkyasmal.windowactions.resizewindows":
@@ -161,6 +162,7 @@ const determineContainerStyles = (action) => {
         "resize_window_inputs_container"
       );
       resizeWindowInputs.style = "width: 100%";
+      wrapper.style = "";
       break;
     case "com.arkyasmal.windowactions.movevirtualdesktops":
       const navigateVirtualDesktopsInputs = document.getElementById(
@@ -181,6 +183,7 @@ const determineContainerStyles = (action) => {
       moveWindowsToVirtualDesktopInputs.style = "width: 100%";
       break;
     default:
+      wrapper.style = "";
       break;
   }
 };

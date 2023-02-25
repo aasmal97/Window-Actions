@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="css/sdpi.css" />
   </head>
   <body>
-    <div class="sdpi-wrapper">
+    <div id="window_specific_inputs" class="sdpi-wrapper" style="display: none">
       <div class="sdpi-item" id="win_type">
         <div class="sdpi-item-label">Identifer Type</div>
         <select
@@ -147,7 +147,9 @@
             class="sdpi-item-value"
             style="width: 100%; display: none"
           >
-            <label for="move_window_virtual_desktop_num">Virtual Desktop Number</label>
+            <label for="move_window_virtual_desktop_num"
+              >Virtual Desktop Number</label
+            >
             <input
               id="move_window_virtual_desktop_num"
               type="number"
