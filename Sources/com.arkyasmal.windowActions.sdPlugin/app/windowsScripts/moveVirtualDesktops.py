@@ -52,6 +52,9 @@ if __name__ == "__main__":
     action = cmd_args[cmd_args.index("--action") + 1]
     desktop_num = cmd_args[cmd_args.index("--newDesktop") + 1]
     desktop_num = int(desktop_num)
+    if action == 'create_desktop': 
+        num_of_desktops= cmd_args[cmd_args.index("--numOfNewDesktops") + 1]
+        create_new_virtual_desktop(num_of_desktops)
     if action == 'move_window': 
         win_id = cmd_args[cmd_args.index("--winId") + 1]
         win_id_type = cmd_args[cmd_args.index("--winIdType") + 1]
