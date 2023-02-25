@@ -135,8 +135,9 @@ const changeMoveInputsDom = (value) => {
   const coordinatesY = document.getElementById("window_coord_y");
   const sizeWidth = document.getElementById("window_size_width");
   const sizeHeight = document.getElementById("window_size_height");
-  coordinatesX.value = value.coordinates.x;
-  coordinatesY.value = value.coordinates.y;
+  const coordinates = value.coordinates;
+  coordinatesX.value = coordinates ? (coordinates.x ? coordinates.x : 0) : 0;
+  coordinatesY.value = coordinates ? (coordinates.y ? coordinates.y : 0) : 0;
   sizeWidth.value = value.size.width;
   sizeHeight.value = value.size.height;
 };

@@ -49,22 +49,18 @@ const closeWindow = (byType, name) => {
 const moveWindow = (byType, name, coordinates, size) => {
   const typeCommand = getTypeCommand(byType, name);
   const command = `${execDirectory}\\nircmd.exe`;
-  let coordinatesArr = []
-  if(coordinates) coordinatesArr = [coordinates.x, coordinates.y]
-  let sizeArr = []
-  if(size) sizeArr = [size.width, size.height]
+  let coordinatesArr = [0, 0];
+  if (coordinates) coordinatesArr = [coordinates.x, coordinates.y];
+  let sizeArr = [];
+  if (size) sizeArr = [size.width, size.height];
   const cliArgs = [
     "win",
     "setsize",
     ...typeCommand,
     ...coordinatesArr,
-    ...sizeArr
+    ...sizeArr,
   ];
-  execFile(
-    command,
-    cliArgs,
-    execFileError
-  );
+  execFile(command, cliArgs, execFileError);
 };
 const determineActiveWindows = async (appDataDirectory) => {
   const command = `${execDirectory}\\determineActiveWindows.exe`;

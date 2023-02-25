@@ -57,7 +57,7 @@
   "Description": "Minimize, maximize, close, or resize windows according to a window identifer (i.e title, etc), and move through virtual desktops",
   "Name": "Window Actions",
   "URL": "https://github.com/aasmal97/Window-Actions",
-  "Version": "1.3",
+  "Version": "1.3.0",
   "SDKVersion": 2,
   "OS": [{ "Platform": "windows", "MinimumVersion": "10" }],
   "Software": {
