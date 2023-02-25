@@ -55,7 +55,7 @@ const moveWindow = (byType, name, coordinates, size) => {
   if(size) sizeArr = [size.width, size.height]
   const cliArgs = [
     "win",
-    "move",
+    "setsize",
     ...typeCommand,
     ...coordinatesArr,
     ...sizeArr

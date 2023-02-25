@@ -6,7 +6,7 @@ const {
   maximizeWindow,
   closeWindow,
   determineActiveWindows,
-  moveWindow, 
+  moveWindow,
 } = require("./nodeExecCommands/commands.js");
 const path = require("path");
 const fs = require("fs");
@@ -50,13 +50,14 @@ const parseEvent = (evt) => {
   if (!payload) payload = {};
   let { action, settings } = payload;
   if (!settings) settings = {};
-  const { type, name } = settings;
+  const { type, name, value } = settings;
   return {
     targetContext: targetContext,
     payload: payload,
     action: action,
     settings: settings,
     type: type,
+    value: value,
     name: name,
     evtObj: evtObj,
   };
@@ -81,7 +82,6 @@ const respondToSubEvents = (evt) => {
 };
 const respondToKeyEvents = (evt) => {
   const { evtObj, type, value, name } = parseEvent(evt);
-console.log(evt)
   switch (evtObj.action) {
     case "com.arkyasmal.windowactions.minimizewindows":
       minimizeWindow(type, value ? value.name : name);
@@ -96,8 +96,8 @@ console.log(evt)
       moveWindow(
         type,
         value ? value.name : name,
-        value.coordinates,
-        value.size
+        value.coordinates ? value.coordinates : {},
+        value.size ? value.size : {}
       );
       break;
     default:
