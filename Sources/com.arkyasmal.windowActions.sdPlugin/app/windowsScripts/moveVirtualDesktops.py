@@ -1,13 +1,32 @@
-from pyvda import AppView, VirtualDesktop
+from pyvda import AppView, VirtualDesktop, get_virtual_desktops
 from determineActiveWindows import get_active_windows
 import sys
-import os
 import re
-def move_virtual_desktop(num):
+from pynput.keyboard import Key, Controller
+def create_new_desktop(): 
+    keyboard = Controller()
+    keyboard.press(Key.cmd)
+    keyboard.press(Key.ctrl)
+    keyboard.press("d")
+    keyboard.release("d")
+    keyboard.release(Key.ctrl)
+    keyboard.release(Key.cmd)
+def create_new_virtual_desktop(desktopsToCreate: int):
+    curr_desktop = VirtualDesktop.current().number
+    for x in range(desktopsToCreate):
+        create_new_desktop()
+    move_virtual_desktop(curr_desktop)
+def check_desktops(num: int):
+    desktop_available = len(get_virtual_desktops())
+    if num > desktop_available:
+        create_new_virtual_desktop(num - desktop_available)
+def move_virtual_desktop(num: int):
+    check_desktops(num)
     target_desktop = VirtualDesktop(num)
     target_desktop.go()
     return "Moved to this virtual desktop"
 def move_window(hwnd, num): 
+    check_desktops(num)
     window: AppView
     if isinstance(hwnd, int) or isinstance(str): 
         window = AppView(hwnd)
@@ -26,7 +45,6 @@ def move_windows_to_new_desktop(num, win_id_type, win_id):
     all_windows = get_active_windows(app_data_directory = file_path)
     matching_windows_itr = filter(lambda window: test_regex(win_id, window[id_type]) if is_partial_str else window[id_type] == win_id, all_windows)
     matching_windows = list(matching_windows_itr)
-    print(matching_windows)
     result = [move_window(i['hWnd'], num) for i in matching_windows]
     return result
 if __name__ == "__main__":

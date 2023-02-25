@@ -2,4 +2,4 @@ pyinstaller
 pyautogui
 pywin32
 pyvda
-
+pynput
