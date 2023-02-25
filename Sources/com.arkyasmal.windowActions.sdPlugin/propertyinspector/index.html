@@ -141,14 +141,20 @@
                 />
               </div>
             </div>
-            <div style=""></div>
           </div>
           <div
-            id="create_virtual_desktop_inputs_container"
+            id="move_windows_to_virtual_desktop"
             class="sdpi-item-value"
             style="width: 100%; display: none"
-          ></div>
-          <div id="navigate_through_virtual_desktops_container"></div>
+          >
+            <label for="move_window_virtual_desktop_num">Virtual Desktop Number</label>
+            <input
+              id="move_window_virtual_desktop_num"
+              type="number"
+              step="1"
+              onchange="onValueInputChange('newDesktop', this.value)"
+            />
+          </div>
         </div>
       </div>
 
@@ -188,6 +194,32 @@
           </details>
         </div>
       </div>
+    </div>
+    <div
+      id="navigate_through_virtual_desktops_container"
+      class="sdpi-item-value"
+      style="width: 100%; display: none"
+    >
+      <label for="navigate_virtual_desktop_num">Virtual Desktop Number</label>
+      <input
+        id="navigate_virtual_desktop_num"
+        type="number"
+        step="1"
+        onchange="onValueInputChange('newDesktop', this.value)"
+      />
+    </div>
+    <div
+      id="create_virtual_desktop_inputs_container"
+      class="sdpi-item-value"
+      style="width: 100%; display: none"
+    >
+      <label for="virtual_desktops_to_create">Virtual Desktops to Create</label>
+      <input
+        id="virtual_desktops_to_create"
+        type="number"
+        step="1"
+        onchange="onValueInputChange('numOfDesktopsToCreate', this.value)"
+      />
     </div>
     <div class="sdpi-info-label hidden" style="top: -1000" value=""></div>
     <script src="js/common.js"></script>

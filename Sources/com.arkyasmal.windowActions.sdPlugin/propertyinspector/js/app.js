@@ -105,7 +105,18 @@ const onResizeInputChange = (inputType, key, value) => {
       [key]: parseFloat(value),
     },
   };
-  console.log(currVal);
+  saveSettings({
+    key: "value",
+    value: currVal,
+  });
+};
+const onValueInputChange = (inputType, value) => {
+  if (!settings || !inputType || (typeof value === "string" && !value)) return;
+  const prevValue = settings.value ? settings.value : {};
+  const currVal = {
+    ...prevValue,
+    [inputType]: value,
+  };
   saveSettings({
     key: "value",
     value: currVal,
@@ -131,6 +142,7 @@ const changeIdDom = (value) => {
   identiferDropdown.style = "display: none;";
 };
 const changeResizeInputsDom = (value) => {
+  if (!value) return;
   const coordinatesX = document.getElementById("window_coord_x");
   const coordinatesY = document.getElementById("window_coord_y");
   const sizeWidth = document.getElementById("window_size_width");
@@ -140,6 +152,52 @@ const changeResizeInputsDom = (value) => {
   coordinatesY.value = coordinates ? (coordinates.y ? coordinates.y : 0) : 0;
   sizeWidth.value = value.size.width;
   sizeHeight.value = value.size.height;
+};
+const determineContainerStyles = (action) => {
+  //we need to input new input values
+  switch (action) {
+    case "com.arkyasmal.windowactions.resizewindows":
+      const resizeWindowInputs = document.getElementById(
+        "resize_window_inputs_container"
+      );
+      resizeWindowInputs.style = "width: 100%";
+      break;
+    case "com.arkyasmal.windowactions.movevirtualdesktops":
+      const navigateVirtualDesktopsInputs = document.getElementById(
+        "navigate_through_virtual_desktops_container"
+      );
+      navigateVirtualDesktopsInputs.style = "width: 100%";
+      break;
+    case "com.arkyasmal.windowactions.createvirtualdesktops":
+      const createVirtualDesktopsInputs = document.getElementById(
+        "create_virtual_desktop_inputs_container"
+      );
+      createVirtualDesktopsInputs.style = "width: 100%";
+      break;
+    case "com.arkyasmal.windowactions.movewindowsvirtual":
+      const moveWindowsToVirtualDesktopInputs = document.getElementById(
+        "move_windows_to_virtual_desktop"
+      );
+      moveWindowsToVirtualDesktopInputs.style = "width: 100%";
+      break;
+    default:
+      break;
+  }
+};
+const changeVirtualInputsDom = (value) => {
+  if (!value) return;
+  const moveWindowsVirtualDesktopNum = document.getElementById(
+    "move_window_virtual_desktop_num"
+  );
+  const navigateVirtualDesktopNum = document.getElementById(
+    "navigate_virtual_desktop_num"
+  );
+  const virtualDesktopsToCreate = document.getElementById(
+    "virtual_desktops_to_create"
+  );
+  moveWindowsVirtualDesktopNum.value = value.newDesktop;
+  navigateVirtualDesktopNum.value = value.newDesktop;
+  virtualDesktopsToCreate.value = value.numOfDesktopsToCreate;
 };
 const onConnection = (jsn) => {
   /**
@@ -166,13 +224,7 @@ const onConnection = (jsn) => {
    *
    * const foundObject = Utils.getProp(JSON-OBJECT, 'path.to.target', defaultValueIfNotFound)
    */
-  //we need to input new input values
-  if (jsn.actionInfo.action === "com.arkyasmal.windowactions.resizewindows") {
-    const resizeWindowInputs = document.getElementById(
-      "resize_window_inputs_container"
-    );
-    resizeWindowInputs.style = "width: 100%";
-  }
+  determineContainerStyles(jsn.actionInfo.action);
   settings = Utils.getProp(jsn, "actionInfo.payload.settings", false);
   if (settings) {
     const { type, value, name } = settings;
@@ -190,6 +242,7 @@ const onConnection = (jsn) => {
       updateUI(settings);
     }
     changeResizeInputsDom(value ? value : {});
+    changeVirtualInputsDom(value);
     if (!value || !value.name) return;
     changeIdDom(value);
     updateUI(settings);

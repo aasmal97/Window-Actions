@@ -53,7 +53,7 @@ const parseEvent = (evt) => {
   if (!payload) payload = {};
   let { action, settings } = payload;
   if (!settings) settings = {};
-  const { type, name, value } = settings;
+  const { type, name, value, newDesktop, numOfDesktopsToCreate } = settings;
   return {
     targetContext: targetContext,
     payload: payload,
@@ -62,6 +62,8 @@ const parseEvent = (evt) => {
     type: type,
     value: value,
     name: name,
+    newDesktop: newDesktop,
+    numOfDesktopsToCreate: numOfDesktopsToCreate,
     evtObj: evtObj,
   };
 };
