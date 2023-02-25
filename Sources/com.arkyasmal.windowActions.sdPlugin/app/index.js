@@ -9,6 +9,7 @@ const {
   resizeWindow,
   moveWindowsVirtualDesktops,
   moveVirtualDesktops,
+  createVirtualDesktops,
 } = require("./nodeExecCommands/commands.js");
 const path = require("path");
 const fs = require("fs");
@@ -84,33 +85,43 @@ const respondToSubEvents = (evt) => {
 };
 const respondToKeyEvents = (evt) => {
   const { evtObj, type, value, name } = parseEvent(evt);
+  const winId = value ? (value.name ? value.name : name) : name;
   switch (evtObj.action) {
     case "com.arkyasmal.windowactions.minimizewindows":
-      minimizeWindow(type, value ? value.name : name);
+      if (!winId) return;
+      minimizeWindow(type, winId);
       break;
     case "com.arkyasmal.windowactions.maximizewindows":
-      maximizeWindow(type, value ? value.name : name);
+      if (!winId) return;
+
+      maximizeWindow(type, winId);
       break;
     case "com.arkyasmal.windowactions.closewindows":
-      closeWindow(type, value ? value.name : name);
+      if (!winId) return;
+
+      closeWindow(type, winId);
       break;
     case "com.arkyasmal.windowactions.resizewindows":
+      if (!winId) return;
+
       resizeWindow(
         type,
-        value ? value.name : name,
+        winId,
         value.coordinates ? value.coordinates : {},
         value.size ? value.size : {}
       );
       break;
     case "com.arkyasmal.windowactions.movewindowsvirtual":
-      moveWindowsVirtualDesktops(
-        type,
-        value ? value.name : name,
-        value.newDesktop
-      );
+      if (!type || !value.newDesktop || winId) return;
+      moveWindowsVirtualDesktops(type, winId, value.newDesktop);
       break;
     case "com.arkyasmal.windowactions.movevirtualdesktops":
+      if (value?.newDesktop) return;
       moveVirtualDesktops(value.newDesktop);
+      break;
+    case "com.arkyasmal.windowactions.createvirtualdesktops":
+      if (value?.numOfDesktopsToCreate) return;
+      createVirtualDesktops(value.numOfDesktopsToCreate);
       break;
     default:
       logEvent("Button press event does not match");
