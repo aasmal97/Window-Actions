@@ -39,7 +39,7 @@
         <summary></summary>
       </details>
       <div class="sdpi-item" id="win_id">
-        <div class="sdpi-item-label" style="margin-top: 10px;">Identifer</div>
+        <div class="sdpi-item-label" style="margin-top: 10px">Identifer</div>
         <div style="display: flex; flex-direction: column; width: 100%">
           <div class="sdpi-item-value" style="margin-bottom: 10px">
             <span class="sdpi-item-child">
@@ -51,7 +51,10 @@
                 checked
                 onclick="onIdTypeChange(event)"
               />
-              <label for="identifer_dropdown_type" class="sdpi-item-label" style="font-size: 10px;"
+              <label
+                for="identifer_dropdown_type"
+                class="sdpi-item-label"
+                style="font-size: 10px"
                 ><span></span>Dropdown</label
               >
             </span>
@@ -63,7 +66,10 @@
                 name="identifer_input_type"
                 onclick="onIdTypeChange(event)"
               />
-              <label for="identifer_text_type" class="sdpi-item-label" style="font-size: 10px;"
+              <label
+                for="identifer_text_type"
+                class="sdpi-item-label"
+                style="font-size: 10px"
                 ><span></span>Custom</label
               >
             </span>
@@ -100,16 +106,20 @@
               class="sdpi-item"
               style="display: flex; flex-direction: column"
             >
-              <span
-                class="sdpi-item-label"
-                style="margin-top: 10px;"
+              <span class="sdpi-item-label" style="margin-top: 10px"
                 >Coordinates (in pixels)</span
               >
               <div style="display: flex; padding: 0; margin: 0; width: 100%">
                 <div style="display: flex; width: 50%; align-items: center">
                   <label for="window_coord_x">X:</label>
                   <input
-                    style="flex-grow: 1"
+                    style="
+                      flex-grow: 1;
+                      min-height: 26px;
+                      margin: 0;
+                      padding: 0;
+                      min-width: 0;
+                    "
                     id="window_coord_x"
                     type="number"
                     onchange="onResizeInputChange('coordinates', 'x', this.value)"
@@ -118,7 +128,13 @@
                 <div style="display: flex; width: 50%; align-items: center">
                   <label for="window_coord_y" class="">Y:</label>
                   <input
-                    style="flex-grow: 1"
+                    style="
+                      flex-grow: 1;
+                      min-height: 26px;
+                      margin: 0;
+                      padding: 0;
+                      min-width: 0;
+                    "
                     id="window_coord_y"
                     type="number"
                     onchange="onResizeInputChange('coordinates', 'y', this.value)"
@@ -136,7 +152,13 @@
                 <div style="display: flex; width: 50%; align-items: center">
                   <label for="window_size_width">Width:</label>
                   <input
-                    style="flex-grow: 1; width: auto; min-width: 0;"
+                    style="
+                      flex-grow: 1;
+                      min-height: 26px;
+                      margin: 0;
+                      padding: 0;
+                      min-width: 0;
+                    "
                     id="window_size_width"
                     type="number"
                     onchange="onResizeInputChange('size', 'width', this.value)"
@@ -145,7 +167,13 @@
                 <div style="display: flex; width: 50%; align-items: center">
                   <label for="window_size_height">Height:</label>
                   <input
-                    style="flex-grow: 1; width: auto; min-width: 0;"
+                    style="
+                      flex-grow: 1;
+                      min-height: 26px;
+                      margin: 0;
+                      padding: 0;
+                      min-width: 0;
+                    "
                     id="window_size_height"
                     type="number"
                     onchange="onResizeInputChange('size', 'height', this.value)"
@@ -159,12 +187,22 @@
             class="sdpi-item-value"
             style="width: 100%; display: none;"
           >
-            <div style="display: flex; flex-direction: column; margin-top: 10px;">
-              <label class='sdpi-item-label' for="move_window_virtual_desktop_num"
+            <div
+              style="display: flex; flex-direction: column; margin-top: 10px"
+            >
+              <label
+                class="sdpi-item-label"
+                for="move_window_virtual_desktop_num"
                 >Virtual Desktop Number</label
               >
               <input
-                width="100%"
+                style="
+                  flex-grow: 1;
+                  min-height: 26px;
+                  margin: 0;
+                  padding: 0;
+                  min-width: 0;
+                "
                 id="move_window_virtual_desktop_num"
                 type="number"
                 step="1"
@@ -175,9 +213,11 @@
         </div>
       </div>
 
-      <div class="sdpi-item" style="align-items: start; width: 100%;">
-        <div class="sdpi-item-label" style="margin-top: 10px;">Active Windows</div>
-        <div class="sdpi-item-value" style="padding: 0; width: 100%;">
+      <div class="sdpi-item" style="align-items: start; width: 100%">
+        <div class="sdpi-item-label" style="margin-top: 10px">
+          Active Windows
+        </div>
+        <div class="sdpi-item-value" style="padding: 0; width: 100%">
           <button
             class="sdpi-item-value"
             style="width: 100%; margin: 0"
@@ -217,14 +257,21 @@
       class="sdpi-item-value"
       style="width: 100%; display: none;"
     >
-      <div style="display: flex; flex-direction: column">
-        <label for="navigate_virtual_desktop_num"
+      <div style="display: flex; flex-direction: column; margin-top: 10px;  max-width: 344px;
+">
+        <label class="sdpi-item-label" for="navigate_virtual_desktop_num"
           >Virtual Desktop Number:</label
         >
         <input
           id="navigate_virtual_desktop_num"
           type="number"
-          style="width: 100%"
+          style="
+            flex-grow: 1;
+            min-height: 26px;
+            margin: 0;
+            padding: 0;
+            min-width: 0;
+          "
           step="1"
           onchange="onValueInputChange('newDesktop', this.value)"
         />
@@ -235,15 +282,22 @@
       class="sdpi-item-value"
       style="width: 100%; display: none;"
     >
-      <div style="display: flex; flex-direction: column">
-        <label for="virtual_desktops_to_create"
+      <div style="display: flex; flex-direction: column; margin-top: 10px;   max-width: 344px;
+">
+        <label class="sdpi-item-label" for="virtual_desktops_to_create"
           >Number of Desktops To Create:</label
         >
         <input
           id="virtual_desktops_to_create"
           type="number"
           step="1"
-          style="width: 100%"
+          style="
+            flex-grow: 1;
+            min-height: 26px;
+            margin: 0;
+            padding: 0;
+            min-width: 0;
+          "
           onchange="onValueInputChange('numOfDesktopsToCreate', this.value)"
         />
       </div>
