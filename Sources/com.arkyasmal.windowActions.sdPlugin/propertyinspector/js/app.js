@@ -38,7 +38,13 @@ const onIdTypeChange = (event) => {
   //clear all settings
   identiferDropdown.value = "";
   identiferText.value = "";
-  saveSettings({ key: "type", value: { name: "" } });
+  const prevName = settings.value
+    ? settings.value.name
+      ? settings.value.name
+      : settings.name
+    : settings.name;
+  const prevSettings = settings.value ? settings.value : {};
+  saveSettings({ key: "value", value: { ...prevSettings, name: prevName } });
 };
 const removeChildNodes = (el) => {
   while (el.hasChildNodes()) {
@@ -148,10 +154,10 @@ const changeResizeInputsDom = (value) => {
   const sizeWidth = document.getElementById("window_size_width");
   const sizeHeight = document.getElementById("window_size_height");
   const coordinates = value.coordinates;
-  const size = value.size
+  const size = value.size;
   coordinatesX.value = coordinates ? (coordinates.x ? coordinates.x : 0) : 0;
   coordinatesY.value = coordinates ? (coordinates.y ? coordinates.y : 0) : 0;
-  sizeWidth.value = size ? (size.width ? size.width : ''): '';
+  sizeWidth.value = size ? (size.width ? size.width : "") : "";
   sizeHeight.value = size ? (size.height ? size.height : "") : "";
 };
 const determineContainerStyles = (action) => {
@@ -234,11 +240,9 @@ const onConnection = (jsn) => {
   if (settings) {
     const { type, value, name } = settings;
     const winTypeInput = document.getElementById("select_win_type");
-    if (type) winTypeInput.value = type;
-    else {
-      winTypeInput.value = "program_name";
-      saveSettings({ key: "type", value: winTypeInput.value });
-    }
+    const newType = type ? type : "program_name";
+    winTypeInput.value = newType;
+    saveSettings({ key: "type", value: winTypeInput.value });
     sendValueToPlugin("com.arkyasmal.windowActions.onActiveWindows", "action");
     //here for backwards support
     if (!value && name && typeof name === "string") {
