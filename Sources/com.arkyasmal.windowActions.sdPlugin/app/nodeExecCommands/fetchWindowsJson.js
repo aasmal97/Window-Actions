@@ -1,11 +1,11 @@
 const path = require("path");
 const fs = require("fs/promises");
-const fetchWindowsJson = async (appDataDirectory) => {
+const fetchWindowsJson = async (appDataDirectory, fileName) => {
   const dataDirectory = process.env.APPDATA;
   const filePath = path.join(
     dataDirectory,
     appDataDirectory,
-    "activeWindows.json"
+    fileName
   );
   let promiseResolved;
   //grab json data

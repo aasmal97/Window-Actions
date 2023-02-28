@@ -10,7 +10,8 @@ const {
   moveWindowsVirtualDesktops,
   moveVirtualDesktops,
   createVirtualDesktops,
-  moveWindowToNewMonitor
+  moveWindowToNewMonitor,
+  getMonitorInfo,
 } = require("./nodeExecCommands/commands.js");
 const path = require("path");
 const fs = require("fs");
@@ -34,6 +35,22 @@ const logEvent = (payload) => {
 //elgato initialization
 const onActiveWindows = async (action, targetContext, customAction) => {
   const result = await determineActiveWindows(
+    "Elgato\\StreamDeck\\Plugins\\com.arkyasmal.windowActions.sdPlugin"
+  );
+  const newEvent = {
+    action: action,
+    event: "sendToPropertyInspector",
+    context: targetContext,
+    payload: {
+      action: customAction,
+      result: result,
+      targetContext: uuid,
+    },
+  };
+  socket.send(JSON.stringify(newEvent));
+};
+const onGetMonitorInfo = async (action, targetContext, customAction) => {
+  const result = await getMonitorInfo(
     "Elgato\\StreamDeck\\Plugins\\com.arkyasmal.windowActions.sdPlugin"
   );
   const newEvent = {
@@ -79,6 +96,12 @@ const respondToSubEvents = (evt) => {
         "com.arkyasmal.windowActions.activeWindows"
       );
       break;
+    case 'com.arkyasma.windowActions.onGetMonitorInfo': 
+      onGetMonitorInfo(
+        evtObj.action,
+        targetContext,
+        "com.arkyasmal.windowActions.getmonitorinfo"
+      );
     default:
       logEvent("Sub event does not match");
       break;
@@ -113,7 +136,7 @@ const respondToKeyEvents = (evt) => {
       );
       break;
     case "com.arkyasmal.windowactions.movewindowsvirtual":
-      if ( !type || !value?.newDesktop || !winId) return;
+      if (!type || !value?.newDesktop || !winId) return;
       moveWindowsVirtualDesktops(type, winId, value.newDesktop);
       break;
     case "com.arkyasmal.windowactions.movevirtualdesktops":
@@ -124,9 +147,10 @@ const respondToKeyEvents = (evt) => {
       if (!value?.numOfDesktopsToCreate) return;
       createVirtualDesktops(value.numOfDesktopsToCreate);
       break;
-    case 'com.arkyasmal.windowactions.movewindowsnewdesktop':
-      if (!value?.newMonitor) return 
-      moveWindowToNewMonitor(newMonitor)
+    case "com.arkyasmal.windowactions.movewindowsnewdesktop":
+      if (!value?.newMonitor) return;
+      moveWindowToNewMonitor(newMonitor);
+
     default:
       logEvent("Button press event does not match");
       logEvent(evtObj);

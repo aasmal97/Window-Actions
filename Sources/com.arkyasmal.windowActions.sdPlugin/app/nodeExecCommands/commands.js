@@ -65,7 +65,7 @@ const resizeWindow = (byType, name, coordinates, size) => {
 const determineActiveWindows = async (appDataDirectory) => {
   const command = `${execDirectory}\\determineActiveWindows.exe`;
   execFile(command, ["--appDataDirectory", appDataDirectory], execFileError);
-  return await fetchWindowsJson(appDataDirectory);
+  return await fetchWindowsJson(appDataDirectory, "activeWindows.json");
 };
 const moveWindowsVirtualDesktops = async (byType, name, newDesktop) => {
   const command = `${execDirectory}\\moveVirtualDesktops.exe`;
@@ -102,12 +102,24 @@ const moveWindowToNewMonitor = async(newMonitor) => {
     execFileError
   );
 };
+const getMonitorInfo = async (appDataDirectory) => {
+  const command = `${execDirectory}\\moveVirtualDesktops.exe`;
+  const params = ["--appDataDirectory", appDataDirectory];
+  execFile(
+    command,
+    ["--action", "get_monitor_info", ...params],
+    execFileError
+  );
+  return await fetchWindowsJson(appDataDirectory, "currentMonitors.json");
+
+};
 const openGui = () => {
   const command = `"${batFilesDirectory}"\\findWindow.bat`;
   exec(command, execFileError);
 };
 
 module.exports = {
+  getMonitorInfo,
   minimizeWindow,
   openGui,
   maximizeWindow,

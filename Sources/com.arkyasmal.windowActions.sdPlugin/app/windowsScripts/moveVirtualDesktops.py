@@ -140,6 +140,6 @@ if __name__ == "__main__":
         win_id = cmd_args[cmd_args.index("--winId") + 1]
         win_id_type = cmd_args[cmd_args.index("--winIdType") + 1]
         move_windows_to_new_monitor(monitor_num, win_id_type, win_id)
-    elif action == 'get_monitor_names': 
+    elif action == 'get_monitor_info': 
         app_data_directory = cmd_args[cmd_args.index("--appDataDirectory") + 1]
         get_monitor_names(app_data_directory)
