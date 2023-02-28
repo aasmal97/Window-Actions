@@ -86,12 +86,12 @@
     }, 
     {
       "UUID": "com.arkyasmal.windowactions.movewindowstomonitor",
-      "Icon": "images/window-create-virtual",
+      "Icon": "images/window-move-to-new-monitor",
       "Name": "Move Window To New Monitor/Screen",
       "PropertyInspectorPath": "./propertyinspector/index.html",
       "States": [
         {
-          "Image": "images/window-create-virtual"
+          "Image": "images/window-move-to-new-monitor"
         }
       ],
       "SupportedInMultiActions": true
@@ -105,7 +105,7 @@
   "Description": "Minimize, maximize, close, or resize windows according to a window id (i.e title, etc), and move them through virtual desktops",
   "Name": "Window Actions",
   "URL": "https://github.com/aasmal97/Window-Actions",
-  "Version": "2.0.0",
+  "Version": "2.1.0",
   "SDKVersion": 2,
   "OS": [{ "Platform": "windows", "MinimumVersion": "10" }],
   "Software": {
