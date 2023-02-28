@@ -10,6 +10,7 @@ const {
   moveWindowsVirtualDesktops,
   moveVirtualDesktops,
   createVirtualDesktops,
+  moveWindowToNewMonitor
 } = require("./nodeExecCommands/commands.js");
 const path = require("path");
 const fs = require("fs");
@@ -123,6 +124,9 @@ const respondToKeyEvents = (evt) => {
       if (!value?.numOfDesktopsToCreate) return;
       createVirtualDesktops(value.numOfDesktopsToCreate);
       break;
+    case 'com.arkyasmal.windowactions.movewindowsnewdesktop':
+      if (!value?.newMonitor) return 
+      moveWindowToNewMonitor(newMonitor)
     default:
       logEvent("Button press event does not match");
       logEvent(evtObj);

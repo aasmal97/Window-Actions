@@ -93,6 +93,15 @@ const createVirtualDesktops = async (numOfNewDesktops) => {
   const params = ["--numOfNewDesktops", numOfNewDesktops];
   execFile(command, ["--action", "create_desktop", ...params], execFileError);
 };
+const moveWindowToNewMonitor = async(newMonitor) => {
+  const command = `${execDirectory}\\moveVirtualDesktops.exe`;
+  const params = ["--newMonitor", newMonitor];
+  execFile(
+    command,
+    ["--action", "move_window_to_monitor", ...params],
+    execFileError
+  );
+};
 const openGui = () => {
   const command = `"${batFilesDirectory}"\\findWindow.bat`;
   exec(command, execFileError);
@@ -108,4 +117,5 @@ module.exports = {
   moveWindowsVirtualDesktops,
   moveVirtualDesktops,
   createVirtualDesktops,
+  moveWindowToNewMonitor
 };

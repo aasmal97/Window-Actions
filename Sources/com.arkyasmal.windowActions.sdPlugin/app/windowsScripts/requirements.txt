@@ -3,3 +3,4 @@ pyautogui
 pywin32
 pyvda
 pynput
+wmi
