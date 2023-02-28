@@ -83,6 +83,18 @@
         }
       ],
       "SupportedInMultiActions": true
+    }, 
+    {
+      "UUID": "com.arkyasmal.windowactions.movewindowstomonitor",
+      "Icon": "images/window-create-virtual",
+      "Name": "Move Window To New Monitor/Screen",
+      "PropertyInspectorPath": "./propertyinspector/index.html",
+      "States": [
+        {
+          "Image": "images/window-create-virtual"
+        }
+      ],
+      "SupportedInMultiActions": true
     }
   ],
   "Author": "Arky Asmal",

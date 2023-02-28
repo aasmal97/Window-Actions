@@ -71,6 +71,21 @@ const modifyDropdownActiveWindowInputs = (payload) => {
   removeChildNodes(identiferDropdown);
   identiferDropdown.append(...options);
 };
+const modifyMonitorInputs = (payload, currValue) => {
+  const monitors = payload;
+  const identiferDropdown = document.getElementById(
+    "move_windows_to_monitor_select"
+  );
+  const options = monitors.map((monitor) => {
+    const value = monitor.idx;
+    const text = `${monitor.name} (Desktop ${value})`;
+    return createOption(value, text);
+  });
+  identiferDropdown.append(...options);
+  const newValue = currValue ? currValue : monitors[0].idx
+  identiferDropdown.value =  newValue;
+  onValueInputChange('newMonitor', newValue)
+};
 const respondToEvents = (evt) => {
   const { payload } = evt;
   const { action, result } = payload;
@@ -78,6 +93,8 @@ const respondToEvents = (evt) => {
     case "com.arkyasmal.windowActions.activeWindows":
       modifyDropdownActiveWindowInputs(result);
       break;
+    case "com.arkyasmal.windowActions.getmonitorinfo":
+      modifyMonitorInputs(result, settings?.value?.newMonitor);
     default:
       return;
   }
@@ -190,6 +207,13 @@ const determineContainerStyles = (action) => {
       moveWindowsToVirtualDesktopInputs.style = "width: 100%";
       wrapper.style = "";
       break;
+    case "com.arkyasmal.windowactions.movewindowstomonitor":
+      const moveWindowsToMonitorInputs = document.getElementById(
+        "move_windows_to_monitor"
+      );
+      moveWindowsToMonitorInputs.style = "width: 100%";
+      wrapper.style = ""
+      break;
     default:
       wrapper.style = "";
       break;
@@ -243,7 +267,9 @@ const onConnection = (jsn) => {
     const newType = type ? type : "program_name";
     winTypeInput.value = newType;
     saveSettings({ key: "type", value: winTypeInput.value });
+    //send to plugin to populate active window list, and monitor list
     sendValueToPlugin("com.arkyasmal.windowActions.onActiveWindows", "action");
+    sendValueToPlugin("com.arkyasma.windowActions.onGetMonitorInfo", "action");
     //here for backwards support
     if (!value && name && typeof name === "string") {
       changeIdDom({ name: name });

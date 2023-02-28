@@ -93,9 +93,16 @@ const createVirtualDesktops = async (numOfNewDesktops) => {
   const params = ["--numOfNewDesktops", numOfNewDesktops];
   execFile(command, ["--action", "create_desktop", ...params], execFileError);
 };
-const moveWindowToNewMonitor = async(newMonitor) => {
+const moveWindowToNewMonitor = async(byType, name, newMonitor) => {
   const command = `${execDirectory}\\moveVirtualDesktops.exe`;
-  const params = ["--newMonitor", newMonitor];
+  const params = [
+    "--winIdType",
+    byType,
+    "--winId",
+    name,
+    "--newMonitor",
+    newMonitor,
+  ];
   execFile(
     command,
     ["--action", "move_window_to_monitor", ...params],

@@ -12,11 +12,7 @@
     <link rel="stylesheet" href="css/sdpi.css" />
   </head>
   <body>
-    <div
-      id="window_specific_inputs"
-      class="sdpi-wrapper"
-      style="display: none;"
-    >
+    <div id="window_specific_inputs" class="sdpi-wrapper" style="display: none">
       <div class="sdpi-item" id="win_type">
         <div class="sdpi-item-label">Identifer Type</div>
         <select
@@ -35,7 +31,7 @@
           <option value="win_class">Window Class Name</option>
         </select>
       </div>
-      <details class="message" style="display: none;" id="win_type_message">
+      <details class="message" style="display: none" id="win_type_message">
         <summary></summary>
       </details>
       <div class="sdpi-item" id="win_id">
@@ -88,7 +84,7 @@
               <option value="" disabled selected>--Select Identifer--</option>
             </select>
             <input
-              style="display: none;"
+              style="display: none"
               class="sdpi-item-value"
               name="identifer_text"
               id="identifer_text"
@@ -100,7 +96,7 @@
           <div
             id="resize_window_inputs_container"
             class="sdpi-item-value"
-            style="width: 100%; display: none;"
+            style="width: 100%; display: none"
           >
             <div
               class="sdpi-item"
@@ -183,9 +179,39 @@
             </div>
           </div>
           <div
+            id="move_windows_to_monitor"
+            class="sdpi-item-value"
+            style="width: 100%; display: none"
+          >
+            <div
+              style="display: flex; flex-direction: column; margin-top: 10px"
+            >
+              <label
+                class="sdpi-item-label"
+                for="move_windows_to_monitor_select"
+                >Screen/Monitor</label
+              >
+              <select
+                id="move_windows_to_monitor_select"
+                class="sdpi-item-value select"
+                name="monitor_value"
+                onchange="onValueInputChange('newMonitor',event.currentTarget.value)"
+                required
+                style="
+                  flex-grow: 1;
+                  min-height: 26px;
+                  margin: 0;
+                  padding: 0;
+                  min-width: 0;
+                  margin-top: 10px;
+                "
+              ></select>
+            </div>
+          </div>
+          <div
             id="move_windows_to_virtual_desktop"
             class="sdpi-item-value"
-            style="width: 100%; display: none;"
+            style="width: 100%; display: none"
           >
             <div
               style="display: flex; flex-direction: column; margin-top: 10px"
@@ -255,10 +281,16 @@
     <div
       id="navigate_through_virtual_desktops_container"
       class="sdpi-item-value"
-      style="width: 100%; display: none;"
+      style="width: 100%; display: none"
     >
-      <div style="display: flex; flex-direction: column; margin-top: 10px;  max-width: 344px;
-">
+      <div
+        style="
+          display: flex;
+          flex-direction: column;
+          margin-top: 10px;
+          max-width: 344px;
+        "
+      >
         <label class="sdpi-item-label" for="navigate_virtual_desktop_num"
           >Virtual Desktop Number:</label
         >
@@ -280,10 +312,16 @@
     <div
       id="create_virtual_desktop_inputs_container"
       class="sdpi-item-value"
-      style="width: 100%; display: none;"
+      style="width: 100%; display: none"
     >
-      <div style="display: flex; flex-direction: column; margin-top: 10px;   max-width: 344px;
-">
+      <div
+        style="
+          display: flex;
+          flex-direction: column;
+          margin-top: 10px;
+          max-width: 344px;
+        "
+      >
         <label class="sdpi-item-label" for="virtual_desktops_to_create"
           >Number of Desktops To Create:</label
         >

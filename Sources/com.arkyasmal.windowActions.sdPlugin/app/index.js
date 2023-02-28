@@ -96,12 +96,13 @@ const respondToSubEvents = (evt) => {
         "com.arkyasmal.windowActions.activeWindows"
       );
       break;
-    case 'com.arkyasma.windowActions.onGetMonitorInfo': 
+    case "com.arkyasma.windowActions.onGetMonitorInfo":
       onGetMonitorInfo(
         evtObj.action,
         targetContext,
         "com.arkyasmal.windowActions.getmonitorinfo"
       );
+      break;
     default:
       logEvent("Sub event does not match");
       break;
@@ -147,10 +148,10 @@ const respondToKeyEvents = (evt) => {
       if (!value?.numOfDesktopsToCreate) return;
       createVirtualDesktops(value.numOfDesktopsToCreate);
       break;
-    case "com.arkyasmal.windowactions.movewindowsnewdesktop":
-      if (!value?.newMonitor) return;
-      moveWindowToNewMonitor(newMonitor);
-
+    case "com.arkyasmal.windowactions.movewindowstomonitor":
+      if (!type || !value?.newMonitor || !winId) return;
+      moveWindowToNewMonitor(type, winId, value.newMonitor);
+      break;
     default:
       logEvent("Button press event does not match");
       logEvent(evtObj);
