@@ -96,6 +96,7 @@ hr2 {
   flex-direction: column !important;
   justify-content: start;
   width: 100%;
+  margin-left: 103px;
 }
 .sdpi-item-value,
 option,
@@ -255,8 +256,12 @@ option {
 /* SDPI */
 
 .sdpi-wrapper {
-  overflow-x: hidden;
-  height: 100%;
+  /* overflow-x: hidden;
+  overflow-y: auto; */
+  /* height: 100%; */
+  display: flex;
+  flex-direction: column;
+  /* align-items: end; */
 }
 
 .sdpi-item {
@@ -265,7 +270,8 @@ option {
   min-height: 32px;
   align-items: center;
   margin-top: 2px;
-  max-width: 344px;
+  max-width: 224px;
+  justify-self: end;
   -webkit-user-drag: none;
 }
 
@@ -279,12 +285,12 @@ option {
 
 .sdpi-item > *:not(.sdpi-item-label):not(meter):not(details):not(canvas) {
   min-height: 26px;
-  padding: 0px 4px 0px 4px;
+  /* padding: 0px 4px 0px 4px; */
 }
 
 .sdpi-item > *:not(.sdpi-item-label.empty):not(meter) {
   min-height: 26px;
-  padding: 0px 4px 0px 4px;
+  /* padding: 0px 4px 0px 4px; */
 }
 
 .sdpi-item-group {
@@ -356,6 +362,7 @@ table > caption {
   text-align: start;
   font-weight: 600;
   color: ghostwhite;
+  padding: 0 !important;
 }
 
 .win .sdpi-item-label,
@@ -1581,9 +1588,16 @@ input[type="range"].colortemperature::-webkit-slider-thumb {
 }
 #identifer_dropdown,
 #identifer_text {
- width: 100%;
+  width: 100%;
   min-height: 26px !important;
   margin: 0 !important;
   padding: 0 !important;
   border: 0 !important;
+}
+#navigate_through_virtual_desktops_container,
+#create_virtual_desktop_inputs_container {
+  display: flex;
+}
+#window_specific_inputs{
+  margin-top: 10px;
 }
