@@ -33,8 +33,8 @@ To amend these problems, this app/plugin was developed
 ### Initiating Window Action Commands
 Similar to our [workaround](#alternative-workaround), this app uses `nircmd` in the background, to initiate most window actions. We can initiate these commands using a plugin built with `Node.js`, and re-packaging the nircmd.exe with the app. 
 
-### Initiating Virtual Desktop Commands
-However, to initiate virtual desktop actions, like moving a window to another virtual desktop, we send commands to `moveVirtualDesktops.exe`. This execuatable is actually written in python as a cli tool, that handles all commands that are related to or require the use of virtual desktops. The source code is located [here](./Sources/com.arkyasmal.windowActions.sdPlugin/app/windowsScripts/moveVirtualDesktops.py).
+### Initiating Monitor/Virtual Desktop Commands
+However, to initiate virtual desktop and monitor actions, like moving a window to another virtual desktop or monitor, we send commands to `moveVirtualDesktops.exe`. This execuatable is actually written in python as a cli tool, that handles all commands that are related to, or require the use of virtual desktops or monitors. The source code is located [here](./Sources/com.arkyasmal.windowActions.sdPlugin/app/windowsScripts/moveVirtualDesktops.py).
 
 ### Integrating a Node App
 We integrate our Node app with the [Elgato Stream Deck Architecture](https://developer.elgato.com/documentation/stream-deck/sdk/plugin-architecture/) by converting the Node app into a `.exe` file, using [`nexe`](https://github.com/nexe/nexe). This `.exe` file becomes the entry point/Code path that our `manifest.json` points to for the plugin.
