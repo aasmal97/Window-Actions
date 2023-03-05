@@ -10,3 +10,4 @@ moveVirtualDesktops/
 build
 *package-lock.json
 *.pptx
+__pycache__
