@@ -212,7 +212,11 @@ const determineContainerStyles = (action) => {
         "move_windows_to_monitor"
       );
       moveWindowsToMonitorInputs.style = "width: 100%";
-      wrapper.style = ""
+      wrapper.style = "";
+      break;
+    case "com.arkyasmal.windowactions.movevirtualdesktopleft":
+      break;
+    case "com.arkyasmal.windowactions.movevirtualdesktopright":
       break;
     default:
       wrapper.style = "";
@@ -269,7 +273,7 @@ const onConnection = (jsn) => {
     saveSettings({ key: "type", value: winTypeInput.value });
     //send to plugin to populate active window list, and monitor list
     sendValueToPlugin("com.arkyasmal.windowActions.onActiveWindows", "action");
-    sendValueToPlugin("com.arkyasma.windowActions.onGetMonitorInfo", "action");
+    sendValueToPlugin("com.arkyasmal.windowActions.onGetMonitorInfo", "action");
     //here for backwards support
     if (!value && name && typeof name === "string") {
       changeIdDom({ name: name });

@@ -4,7 +4,8 @@ import sys
 import re
 import pywintypes
 from win32api import EnumDisplayMonitors, GetMonitorInfo, EnumDisplayDevices
-from win32gui import MoveWindow, GetWindowRect
+from win32gui import MoveWindow, GetWindowRect, GetWindowPlacement, ShowWindow
+import win32con
 from win32com.client import GetObject
 from pynput.keyboard import Key, Controller
 import functools
@@ -40,15 +41,17 @@ def create_new_desktop():
     keyboard.release("d")
     keyboard.release(Key.ctrl)
     keyboard.release(Key.cmd)
-def create_new_virtual_desktop(desktopsToCreate: int):
+def create_new_virtual_desktop(desktopsToCreate: int, move_to_original: bool = True):
     curr_desktop = VirtualDesktop.current().number
     for x in range(desktopsToCreate):
         create_new_desktop()
-    move_virtual_desktop(curr_desktop)
-def check_desktops(num: int):
+    if move_to_original: 
+        move_virtual_desktop(curr_desktop)
+def check_desktops(num: int, move_to_original: bool = True):
     desktop_available = len(get_virtual_desktops())
     if num > desktop_available:
-        create_new_virtual_desktop(num - desktop_available)
+        diff = num - desktop_available
+        create_new_virtual_desktop(diff, move_to_original)
 def move_virtual_desktop(num: int):
     check_desktops(num)
     target_desktop = VirtualDesktop(num)
@@ -88,6 +91,25 @@ def get_monitor_names(app_data_directory):
         instance.update({"idx": highest_match["idx"] + 1})
     create_json_file(instance_names, app_data_directory)
     return instance_names
+def toggle_through_virtual_desktops(curr: -1 or 1): 
+    curr_desktop_num = VirtualDesktop.current().number
+    if curr == -1 and curr_desktop_num <= 1:
+        return VirtualDesktop(1).go()
+    if curr == -1:
+        return VirtualDesktop(curr_desktop_num - 1).go()
+    else:  
+        check_desktops(curr_desktop_num + 1, False)
+        return VirtualDesktop(curr_desktop_num + 1).go()
+def determine_placement(hwnd: str):
+    placement = GetWindowPlacement(hwnd)
+    cmd_show = win32con.SW_NORMAL
+    if placement[1] == win32con.SW_SHOWMAXIMIZED:
+        cmd_show = win32con.SW_MAXIMIZE
+    elif placement[1] == win32con.SW_SHOWMINIMIZED:
+        cmd_show = win32con.SW_MAXIMIZE
+    elif placement[1] == win32con.SW_SHOWNORMAL:
+        cmd_show = win32con.SW_SHOWNORMAL
+    return cmd_show
 def move_window_to_monitor(hwnd: str, num: int):
     monitors = [GetMonitorInfo(x[0])['Monitor'] for x in EnumDisplayMonitors()]
     monitor_selected = monitors[num]
@@ -98,9 +120,14 @@ def move_window_to_monitor(hwnd: str, num: int):
     window_height = abs(window_to_move[1] - window_to_move[3])
     new_window_width = monitor_width if window_width > monitor_width else window_width
     new_window_height = monitor_height if window_height > monitor_height else window_height
+    #prevent moving window bugs, where window disappears 
+    #and becomes transparent
+    prev_placement = determine_placement(hwnd)
+    ShowWindow(hwnd, win32con.SW_NORMAL)
     MoveWindow(hwnd, monitor_selected[0], monitor_selected[1], new_window_width, new_window_height, True)
+    #after movement we restore the previous window state (min, max or normal)
+    ShowWindow(hwnd, prev_placement)
     return f'successfully moved to monitor {num}'
-
 def get_matching_windows_list(win_id_type, win_id):
     id_type = "title" if win_id_type == 'win_title' or win_id_type == 'win_ititle' else win_id_type
     is_partial_str = win_id_type == 'win_ititle'
@@ -143,3 +170,6 @@ if __name__ == "__main__":
     elif action == 'get_monitor_info': 
         app_data_directory = cmd_args[cmd_args.index("--appDataDirectory") + 1]
         get_monitor_names(app_data_directory)
+    elif action == 'move_by_one_virtual_desktop':
+        direction = cmd_args[cmd_args.index("--direction") + 1]
+        toggle_through_virtual_desktops(int(direction))

@@ -12,6 +12,7 @@ const {
   createVirtualDesktops,
   moveWindowToNewMonitor,
   getMonitorInfo,
+  toggleThroughVirtualMonitors
 } = require("./nodeExecCommands/commands.js");
 const path = require("path");
 const fs = require("fs");
@@ -96,7 +97,7 @@ const respondToSubEvents = (evt) => {
         "com.arkyasmal.windowActions.activeWindows"
       );
       break;
-    case "com.arkyasma.windowActions.onGetMonitorInfo":
+    case "com.arkyasmal.windowActions.onGetMonitorInfo":
       onGetMonitorInfo(
         evtObj.action,
         targetContext,
@@ -151,6 +152,12 @@ const respondToKeyEvents = (evt) => {
     case "com.arkyasmal.windowactions.movewindowstomonitor":
       if (!type || !value?.newMonitor || !winId) return;
       moveWindowToNewMonitor(type, winId, value.newMonitor);
+      break;
+    case "com.arkyasmal.windowactions.movevirtualdesktopright":
+      toggleThroughVirtualMonitors(1)
+      break;
+    case "com.arkyasmal.windowactions.movevirtualdesktopleft":
+      toggleThroughVirtualMonitors(-1)
       break;
     default:
       logEvent("Button press event does not match");

@@ -95,6 +95,30 @@
         }
       ],
       "SupportedInMultiActions": true
+    },
+    {
+      "UUID": "com.arkyasmal.windowactions.movevirtualdesktopright",
+      "Icon": "images/window-move-virtual-desktop-right",
+      "Name": "Move To Next Virtual Desktop",
+      "PropertyInspectorPath": "./propertyinspector/index.html",
+      "States": [
+        {
+          "Image": "images/window-move-virtual-desktop-right"
+        }
+      ],
+      "SupportedInMultiActions": true
+    },
+    {
+      "UUID": "com.arkyasmal.windowactions.movevirtualdesktopleft",
+      "Icon": "images/window-move-virtual-desktop-left",
+      "Name": "Move To Previous Virtual Desktop",
+      "PropertyInspectorPath": "./propertyinspector/index.html",
+      "States": [
+        {
+          "Image": "images/window-move-virtual-desktop-left"
+        }
+      ],
+      "SupportedInMultiActions": true
     }
   ],
   "Author": "Arky Asmal",
@@ -102,10 +126,10 @@
   "Category": "Window Actions",
   "CategoryIcon": "images/window-restore-solid",
   "CodePath": "run.exe",
-  "Description": "Minimize, maximize, close, or resize windows according to a window id (i.e title, etc), and move them through virtual desktops",
+  "Description": "Minimize, maximize, close, move, or resize windows according to a window id (i.e title, filename, class names, etc). These actions are supported on multiple monitors and through virtual desktops. \n In addition, navigate and create new virtual desktops, for added screen real estate.",
   "Name": "Window Actions",
   "URL": "https://github.com/aasmal97/Window-Actions",
-  "Version": "2.1.0",
+  "Version": "2.2.0",
   "SDKVersion": 2,
   "OS": [{ "Platform": "windows", "MinimumVersion": "10" }],
   "Software": {

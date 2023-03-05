@@ -120,6 +120,15 @@ const getMonitorInfo = async (appDataDirectory) => {
   return await fetchWindowsJson(appDataDirectory, "currentMonitors.json");
 
 };
+const toggleThroughVirtualMonitors = async(direction) => {
+  const command = `${execDirectory}\\moveVirtualDesktops.exe`;
+  const params = ["--direction", direction];
+  execFile(
+    command,
+    ["--action", "move_by_one_virtual_desktop", ...params],
+    execFileError
+  );
+}
 const openGui = () => {
   const command = `"${batFilesDirectory}"\\findWindow.bat`;
   exec(command, execFileError);
@@ -136,5 +145,6 @@ module.exports = {
   moveWindowsVirtualDesktops,
   moveVirtualDesktops,
   createVirtualDesktops,
-  moveWindowToNewMonitor
+  moveWindowToNewMonitor,
+  toggleThroughVirtualMonitors
 };
