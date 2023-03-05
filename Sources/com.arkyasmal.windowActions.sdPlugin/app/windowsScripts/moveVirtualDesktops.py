@@ -106,7 +106,7 @@ def determine_placement(hwnd: str):
     if placement[1] == win32con.SW_SHOWMAXIMIZED:
         cmd_show = win32con.SW_MAXIMIZE
     elif placement[1] == win32con.SW_SHOWMINIMIZED:
-        cmd_show = win32con.SW_MAXIMIZE
+        cmd_show = win32con.SW_MINIMIZE
     elif placement[1] == win32con.SW_SHOWNORMAL:
         cmd_show = win32con.SW_SHOWNORMAL
     return cmd_show
