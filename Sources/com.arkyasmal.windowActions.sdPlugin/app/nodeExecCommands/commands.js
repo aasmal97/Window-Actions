@@ -68,7 +68,7 @@ const determineActiveWindows = async (appDataDirectory) => {
   return await fetchWindowsJson(appDataDirectory, "activeWindows.json");
 };
 const moveWindowsVirtualDesktops = async (byType, name, newDesktop) => {
-  const command = `${execDirectory}\\moveVirtualDesktops.exe`;
+  const command = `${execDirectory}\\pluginActions.exe`;
   const params = [
     "--winIdType",
     byType,
@@ -80,7 +80,7 @@ const moveWindowsVirtualDesktops = async (byType, name, newDesktop) => {
   execFile(command, ["--action", "move_window", ...params], execFileError);
 };
 const moveVirtualDesktops = async (newDesktop) => {
-  const command = `${execDirectory}\\moveVirtualDesktops.exe`;
+  const command = `${execDirectory}\\pluginActions.exe`;
   const params = ["--newDesktop", newDesktop];
   execFile(
     command,
@@ -89,12 +89,12 @@ const moveVirtualDesktops = async (newDesktop) => {
   );
 };
 const createVirtualDesktops = async (numOfNewDesktops) => {
-  const command = `${execDirectory}\\moveVirtualDesktops.exe`;
+  const command = `${execDirectory}\\pluginActions.exe`;
   const params = ["--numOfNewDesktops", numOfNewDesktops];
   execFile(command, ["--action", "create_desktop", ...params], execFileError);
 };
-const moveWindowToNewMonitor = async(byType, name, newMonitor) => {
-  const command = `${execDirectory}\\moveVirtualDesktops.exe`;
+const moveWindowToNewMonitor = async (byType, name, newMonitor) => {
+  const command = `${execDirectory}\\pluginActions.exe`;
   const params = [
     "--winIdType",
     byType,
@@ -110,25 +110,20 @@ const moveWindowToNewMonitor = async(byType, name, newMonitor) => {
   );
 };
 const getMonitorInfo = async (appDataDirectory) => {
-  const command = `${execDirectory}\\moveVirtualDesktops.exe`;
+  const command = `${execDirectory}\\pluginActions.exe`;
   const params = ["--appDataDirectory", appDataDirectory];
-  execFile(
-    command,
-    ["--action", "get_monitor_info", ...params],
-    execFileError
-  );
+  execFile(command, ["--action", "get_monitor_info", ...params], execFileError);
   return await fetchWindowsJson(appDataDirectory, "currentMonitors.json");
-
 };
-const toggleThroughVirtualMonitors = async(direction) => {
-  const command = `${execDirectory}\\moveVirtualDesktops.exe`;
+const toggleThroughVirtualMonitors = async (direction) => {
+  const command = `${execDirectory}\\pluginActions.exe`;
   const params = ["--direction", direction];
   execFile(
     command,
     ["--action", "move_by_one_virtual_desktop", ...params],
     execFileError
   );
-}
+};
 const openGui = () => {
   const command = `"${batFilesDirectory}"\\findWindow.bat`;
   exec(command, execFileError);
@@ -146,5 +141,5 @@ module.exports = {
   moveVirtualDesktops,
   createVirtualDesktops,
   moveWindowToNewMonitor,
-  toggleThroughVirtualMonitors
+  toggleThroughVirtualMonitors,
 };

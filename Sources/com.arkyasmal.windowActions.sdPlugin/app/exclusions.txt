@@ -4,8 +4,8 @@
 \build\
 \determineActiveWindows\
 \determineActiveWindows.spec\
-\moveVirtualDesktops.spec\
-\moveVirtualDesktops\
+\pluginActions.spec\
+\pluginActions\
 
 \windowsScripts\
 \batFiles\build.bat
