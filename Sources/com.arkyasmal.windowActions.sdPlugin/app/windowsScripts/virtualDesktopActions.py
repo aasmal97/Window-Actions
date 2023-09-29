@@ -1,6 +1,12 @@
 from pynput.keyboard import Key, Controller
-from getMatchingWindowList import get_matching_windows_list
+from getMatchingWindowList import get_matching_windows_list, test_regex
+from virtualDesktopDLLFile import get_build_num, determine_ddl_file_used, start_app_instance
 def create_new_desktop(): 
+    [build,_] = get_build_num()
+    if(build>22000): 
+        file_used = determine_ddl_file_used()
+        app_instance = start_app_instance(file_used)
+        return app_instance.CreateDesktop()
     keyboard = Controller()
     keyboard.press(Key.cmd)
     keyboard.press(Key.ctrl)
@@ -41,7 +47,8 @@ def move_windows_to_new_desktop(num, win_id_type, win_id):
     matching_windows = get_matching_windows_list(win_id_type, win_id)
     result = [move_window(i['hWnd'], num) for i in matching_windows]
     return result
-def toggle_through_virtual_desktops(curr: -1 or 1): 
+def toggle_through_virtual_desktops(curr: -1 or 1):
+     
     curr_desktop_num = VirtualDesktop.current().number
     if curr == -1 and curr_desktop_num <= 1:
         return VirtualDesktop(1).go()

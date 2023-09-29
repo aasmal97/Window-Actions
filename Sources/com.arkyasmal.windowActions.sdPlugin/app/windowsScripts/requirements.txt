@@ -4,3 +4,5 @@ pywin32
 pyvda
 pynput
 wmi
+requests
+curlify
