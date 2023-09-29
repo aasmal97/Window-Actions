@@ -129,7 +129,7 @@
   "Description": "Minimize, maximize, close, move, or resize windows according to a window id (i.e title, filename, class names, etc). These actions are supported on multiple monitors and through virtual desktops. \n In addition, navigate and create new virtual desktops, for added screen real estate.",
   "Name": "Window Actions",
   "URL": "https://github.com/aasmal97/Window-Actions",
-  "Version": "2.2.0",
+  "Version": "3.0.0",
   "SDKVersion": 2,
   "OS": [{ "Platform": "windows", "MinimumVersion": "10" }],
   "Software": {
