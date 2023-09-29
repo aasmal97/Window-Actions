@@ -1,11 +1,12 @@
 from pynput.keyboard import Key, Controller
 from getMatchingWindowList import get_matching_windows_list, test_regex
-from virtualDesktopDLLFile import get_build_num, determine_ddl_file_used, start_app_instance
+from virtualDesktopDLLFile import get_build_num
+from virtualDesktopDLLFile import initialize_app_view
+from ctypes import WinDLL
+app_instance = initialize_app_view()
 def create_new_desktop(): 
     [build,_] = get_build_num()
     if(build>22000): 
-        file_used = determine_ddl_file_used()
-        app_instance = start_app_instance(file_used)
         return app_instance.CreateDesktop()
     keyboard = Controller()
     keyboard.press(Key.cmd)
@@ -14,46 +15,41 @@ def create_new_desktop():
     keyboard.release("d")
     keyboard.release(Key.ctrl)
     keyboard.release(Key.cmd)
-def move_window(hwnd, num): 
-    check_desktops(num)
-    window: AppView
-    if isinstance(hwnd, int) or isinstance(str): 
-        window = AppView(hwnd)
-    else: 
-        window = AppView.current()
-    target_desktop = VirtualDesktop(num)
-    window.move(target_desktop)
+# def move_window(hwnd, num): 
+#     check_desktops(num=num)
+#     app_instance.MoveWindowToDesktopNumber(hwnd, num)
+# def move_windows_to_new_desktop(num, win_id_type, win_id):
+#     matching_windows = get_matching_windows_list(win_id_type, win_id)
+#     result = [move_window(i['hWnd'], num) for i in matching_windows]
+#     return result
 def move_virtual_desktop(num: int):
     check_desktops(num)
-    target_desktop = VirtualDesktop(num)
-    target_desktop.go()
+    app_instance.GoToDesktopNumber(num)
     return "Moved to this virtual desktop"
 
 def create_new_virtual_desktop(desktopsToCreate: int, move_to_original: bool = True):
-    curr_desktop = VirtualDesktop.current().number
+    curr_desktop = app_instance.GetCurrentDesktopNumber() + 1
     for x in range(desktopsToCreate):
         create_new_desktop()
     if move_to_original: 
         move_virtual_desktop(curr_desktop)
 
 def check_desktops(num: int, move_to_original: bool = True):
-    desktop_available = len(get_virtual_desktops())
+    desktop_available = app_instance.GetDesktopCount()
+    print(desktop_available, num, move_to_original)
     if num > desktop_available:
         diff = num - desktop_available
         create_new_virtual_desktop(diff, move_to_original)
-
     return f'successfully moved to desktop {num}'
-def move_windows_to_new_desktop(num, win_id_type, win_id):
-    matching_windows = get_matching_windows_list(win_id_type, win_id)
-    result = [move_window(i['hWnd'], num) for i in matching_windows]
-    return result
+
 def toggle_through_virtual_desktops(curr: -1 or 1):
-     
-    curr_desktop_num = VirtualDesktop.current().number
+    curr_desktop_num = app_instance.GetCurrentDesktopNumber()
     if curr == -1 and curr_desktop_num <= 1:
-        return VirtualDesktop(1).go()
+        return app_instance.GoToDesktopNumber(0)
     if curr == -1:
-        return VirtualDesktop(curr_desktop_num - 1).go()
+        return app_instance.GoToDesktopNumber(curr_desktop_num - 1)
     else:  
-        check_desktops(curr_desktop_num + 1, False)
-        return VirtualDesktop(curr_desktop_num + 1).go()
+        check_desktops(curr_desktop_num + 2, False)
+        return app_instance.GoToDesktopNumber(curr_desktop_num + 1)
+
+toggle_through_virtual_desktops(1)
