@@ -2,7 +2,6 @@ from pynput.keyboard import Key, Controller
 from getMatchingWindowList import get_matching_windows_list, test_regex
 from virtualDesktopDLLFile import get_build_num
 from virtualDesktopDLLFile import initialize_app_view
-from ctypes import WinDLL
 app_instance = initialize_app_view()
 def create_new_desktop(): 
     [build,_] = get_build_num()
@@ -15,13 +14,13 @@ def create_new_desktop():
     keyboard.release("d")
     keyboard.release(Key.ctrl)
     keyboard.release(Key.cmd)
-# def move_window(hwnd, num): 
-#     check_desktops(num=num)
-#     app_instance.MoveWindowToDesktopNumber(hwnd, num)
-# def move_windows_to_new_desktop(num, win_id_type, win_id):
-#     matching_windows = get_matching_windows_list(win_id_type, win_id)
-#     result = [move_window(i['hWnd'], num) for i in matching_windows]
-#     return result
+def move_window(hwnd, num): 
+    check_desktops(num=num)
+    app_instance.MoveWindowToDesktopNumber(hwnd, num)
+def move_windows_to_new_desktop(num, win_id_type, win_id):
+    matching_windows = get_matching_windows_list(win_id_type, win_id)
+    result = [move_window(i['hWnd'], num) for i in matching_windows]
+    return result
 def move_virtual_desktop(num: int):
     check_desktops(num)
     app_instance.GoToDesktopNumber(num)
@@ -51,5 +50,3 @@ def toggle_through_virtual_desktops(curr: -1 or 1):
     else:  
         check_desktops(curr_desktop_num + 2, False)
         return app_instance.GoToDesktopNumber(curr_desktop_num + 1)
-
-toggle_through_virtual_desktops(1)
