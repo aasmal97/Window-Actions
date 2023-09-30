@@ -16,7 +16,8 @@ if __name__ == "__main__":
         move_windows_to_new_desktop(desktop_num, win_id_type, win_id)
     elif action == 'move_virtual_desktop': 
         desktop_num = cmd_args[cmd_args.index("--newDesktop") + 1]
-        desktop_num = int(desktop_num)
+        #we expect this input to be 1-indexed (so we correct for 0-index)
+        desktop_num = int(desktop_num) - 1
         move_virtual_desktop(desktop_num)
     elif action == 'move_window_to_monitor': 
         monitor_num = cmd_args[cmd_args.index("--newMonitor") + 1]
