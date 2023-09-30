@@ -5,3 +5,4 @@ pynput
 wmi
 requests
 curlify
+chardet

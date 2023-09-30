@@ -6,7 +6,8 @@ import platform
 from getMatchingWindowList import test_regex
 import ctypes
 import os
- 
+ctypes.windll.kernel32.SetDllDirectoryW(None)
+
 def start_app_instance(file_version): 
     current_directory = os.path.dirname(os.path.abspath(__file__))
     vda = ctypes.WinDLL(f"{current_directory}/{file_version}")
@@ -55,10 +56,13 @@ def download_release_file():
     response = requests.get(new_file_url)
     if response.status_code == 200:
         data = None
-        with open(f"{output_path}/dll/{file_path}", "wb") as f:
-            f.write(response.content)
-            data = response.content
-        print("File downloaded successfully.")
+        try: 
+            with open(f"{output_path}/dll/{file_path}", "wb") as f:
+                f.write(response.content)
+                data = response.content
+            print("File downloaded successfully.")
+        except: 
+            print("Could not write to dll file")
         return data
     else:
         print("Failed to download file.")
