@@ -108,7 +108,7 @@ const openInDefaultBrowser = (event) => {
   };
   $SD.connection.send(JSON.stringify(urlPayload));
 };
-
+  
 const onResizeInputChange = (inputType, key, value) => {
   if (!settings || !inputType || !key || (typeof value === "string" && !value))
     return;
@@ -160,6 +160,8 @@ const changeIdDom = (value) => {
   identiferText.style = "";
   identiferDropdown.style = "display: none;";
   identiferText.value = value.name;
+  const inputEvent = new Event("input");
+  identiferText.dispatchEvent(inputEvent);
 };
 const changeResizeInputsDom = (value) => {
   if (!value) return;
@@ -173,6 +175,11 @@ const changeResizeInputsDom = (value) => {
   coordinatesY.value = coordinates ? (coordinates.y ? coordinates.y : 0) : 0;
   sizeWidth.value = size ? (size.width ? size.width : "") : "";
   sizeHeight.value = size ? (size.height ? size.height : "") : "";
+  const inputEvent = new Event("input");
+  coordinatesX.dispatchEvent(inputEvent)
+  coordinatesY.dispatchEvent(inputEvent);
+  sizeWidth.dispatchEvent(inputEvent);
+  sizeHeight.dispatchEvent(inputEvent)
 };
 const determineContainerStyles = (action) => {
   const wrapper = document.getElementById("window_specific_inputs");
@@ -234,6 +241,10 @@ const changeVirtualInputsDom = (value) => {
   moveWindowsVirtualDesktopNum.value = value.newDesktop;
   navigateVirtualDesktopNum.value = value.newDesktop;
   virtualDesktopsToCreate.value = value.numOfDesktopsToCreate;
+  const inputEvent = new Event("input");
+  moveWindowsVirtualDesktopNum.dispatchEvent(inputEvent);
+  navigateVirtualDesktopNum.dispatchEvent(inputEvent);
+  virtualDesktopsToCreate.dispatchEvent(inputEvent);
 };
 const onConnection = (jsn) => {
   /**

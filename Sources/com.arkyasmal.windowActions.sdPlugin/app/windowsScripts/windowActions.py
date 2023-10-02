@@ -1,7 +1,7 @@
 import win32con
 import pywintypes
-from win32api import EnumDisplayMonitors, GetMonitorInfo, EnumDisplayDevices
-from win32gui import MoveWindow, GetWindowRect, GetWindowPlacement,SetWindowPos, ShowWindow
+from win32api import EnumDisplayMonitors, GetMonitorInfo
+from win32gui import MoveWindow, GetWindowRect, GetWindowPlacement,SetWindowPos, ShowWindow, PostMessage
 from getMatchingWindowList import get_matching_windows_list
 def determine_placement(hwnd: str):
     placement = GetWindowPlacement(hwnd)
@@ -48,9 +48,13 @@ def maximize_window(win_id_type, win_id):
     return result
 def close_window(win_id_type, win_id):
     matching_windows = get_matching_windows_list(win_id_type, win_id)
-    result = [ShowWindow(i['hWnd'], win32con.WM_CLOSE) for i in matching_windows]
+    result = [PostMessage(i['hWnd'], win32con.WM_CLOSE, 0, 0) for i in matching_windows]
     return result
-def resize_window(win_id_type, win_id, size: list, coordinates: [0,0]):
+def resize_window(win_id_type, win_id, size: list, coordinates: list):
     matching_windows = get_matching_windows_list(win_id_type, win_id)
-    result = [SetWindowPos(i['hWnd'],*coordinates,*size, win32con.SWP_NOMOVE) for i in matching_windows]
+    if len(coordinates) != 2:
+        coordinates = [0,0]
+    x,y = coordinates 
+    width, height = size
+    result = [SetWindowPos(i['hWnd'],win32con.HWND_TOP,int(x),int(y),int(width),int(height), win32con.SWP_NOMOVE) for i in matching_windows]
     return result

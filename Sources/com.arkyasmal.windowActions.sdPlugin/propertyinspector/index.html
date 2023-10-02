@@ -20,7 +20,7 @@
           style="width: 100%;margin:0;padding: 0;border: none;"
           id="select_win_type"
           required
-          onchange="selectedTypeChange(event)"
+          oninput="selectedTypeChange(event)"
         >
           <option value="program_name" selected>
             Program Name (.exe file)
@@ -78,7 +78,7 @@
               id="identifer_dropdown"
               class="sdpi-item-value select"
               name="identifer_dropdown"
-              onchange="onIdChange(event.currentTarget.value)"
+              oninput="onIdChange(event.currentTarget.value)"
               required
             >
               <option value="" disabled selected>--Select Identifer--</option>
@@ -117,7 +117,7 @@
                     "
                     id="window_coord_x"
                     type="number"
-                    onchange="onResizeInputChange('coordinates', 'x', this.value)"
+                    oninput="onResizeInputChange('coordinates', 'x', this.value)"
                   />
                 </div>
                 <div style="display: flex; width: 50%; align-items: center">
@@ -132,7 +132,7 @@
                     "
                     id="window_coord_y"
                     type="number"
-                    onchange="onResizeInputChange('coordinates', 'y', this.value)"
+                    oninput="onResizeInputChange('coordinates', 'y', this.value)"
                   />
                 </div>
               </div>
@@ -156,7 +156,7 @@
                     "
                     id="window_size_width"
                     type="number"
-                    onchange="onResizeInputChange('size', 'width', this.value)"
+                    oninput="onResizeInputChange('size', 'width', this.value)"
                   />
                 </div>
                 <div style="display: flex; width: 50%; align-items: center">
@@ -171,7 +171,7 @@
                     "
                     id="window_size_height"
                     type="number"
-                    onchange="onResizeInputChange('size', 'height', this.value)"
+                    oninput="onResizeInputChange('size', 'height', this.value)"
                   />
                 </div>
               </div>
@@ -194,7 +194,7 @@
                 id="move_windows_to_monitor_select"
                 class="sdpi-item-value select"
                 name="monitor_value"
-                onchange="onValueInputChange('newMonitor',event.currentTarget.value)"
+                oninput="onValueInputChange('newMonitor',event.currentTarget.value)"
                 required
                 style="
                   flex-grow: 1;
@@ -231,7 +231,7 @@
                 id="move_window_virtual_desktop_num"
                 type="number"
                 step="1"
-                onchange="onValueInputChange('newDesktop', this.value)"
+                oninput="onValueInputChange('newDesktop', this.value)"
               />
             </div>
           </div>
@@ -265,7 +265,7 @@
             width: 100%
           "
           step="1"
-          onchange="onValueInputChange('newDesktop', this.value)"
+          oninput="onValueInputChange('newDesktop', this.value)"
         />
       </div>
     </div>
@@ -296,7 +296,7 @@
             min-width: 0;
             width: 100%
           "
-          onchange="onValueInputChange('numOfDesktopsToCreate', this.value)"
+          oninput="onValueInputChange('numOfDesktopsToCreate', this.value)"
         />
       </div>
     </div>

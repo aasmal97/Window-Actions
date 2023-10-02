@@ -39,7 +39,7 @@
     {
       "UUID": "com.arkyasmal.windowactions.resizewindows",
       "Icon": "images/window-resize-regular",
-      "Name": "Resize/Move Windows",
+      "Name": "Resize Windows",
       "PropertyInspectorPath": "./propertyinspector/index.html",
       "States": [
         {

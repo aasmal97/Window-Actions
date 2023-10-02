@@ -49,8 +49,8 @@ if __name__ == "__main__":
         case 'resize_window':
             win_id = cmd_args[cmd_args.index("--winId") + 1]
             win_id_type = cmd_args[cmd_args.index("--winIdType") + 1]
-            size = cmd_args[cmd_args.index("--size") + 1].strip('][').split(', ')
-            coordinates = cmd_args[cmd_args.index("--coordinates") + 1].strip('][').split(', ')
+            size = cmd_args[cmd_args.index("--size") + 1].strip('][').split(',')
+            coordinates = cmd_args[cmd_args.index("--coordinates") + 1].strip('][').split(',')
             resize_window(win_id_type, win_id, size, coordinates)
         case 'get_active_windows':
             active_windows= []
@@ -59,4 +59,3 @@ if __name__ == "__main__":
                 active_windows = get_active_windows(app_data_directory, True) 
             else:
                 active_windows = get_active_windows(app_data_directory, False)
-            print(active_windows)
