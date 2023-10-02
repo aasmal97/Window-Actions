@@ -54,8 +54,12 @@ const resizeWindow = (byType, name, coordinates, size) => {
   execFile(command, cliArgs, execFileError);
 };
 const determineActiveWindows = async (appDataDirectory) => {
-  const command = `${execDirectory}\\determineActiveWindows.exe`;
-  execFile(command, ["--appDataDirectory", appDataDirectory], execFileError);
+  const command = `${execDirectory}\\pluginActions.exe`;
+  execFile(
+    command,
+    ["--action", "get_active_windows", "--appDataDirectory", appDataDirectory],
+    execFileError
+  );
   return await fetchWindowsJson(appDataDirectory, "activeWindows.json");
 };
 const moveWindowsVirtualDesktops = async (byType, name, newDesktop) => {

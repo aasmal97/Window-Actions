@@ -2,6 +2,7 @@ import sys
 from windowActions import move_windows_to_new_monitor, maximize_window, minimize_window, close_window, resize_window
 from virtualDesktopActions import create_new_virtual_desktop, move_windows_to_new_desktop, move_virtual_desktop, toggle_through_virtual_desktops
 from getMonitorNames import get_monitor_names
+from determineActiveWindows import get_active_windows
 if __name__ == "__main__":
     cmd_args = sys.argv
     action = cmd_args[cmd_args.index("--action") + 1]
@@ -51,3 +52,11 @@ if __name__ == "__main__":
             size = cmd_args[cmd_args.index("--size") + 1].strip('][').split(', ')
             coordinates = cmd_args[cmd_args.index("--coordinates") + 1].strip('][').split(', ')
             resize_window(win_id_type, win_id, size, coordinates)
+        case 'get_active_windows':
+            active_windows= []
+            app_data_directory = cmd_args[cmd_args.index("--appDataDirectory") + 1]
+            if "--filterDup" in cmd_args: 
+                active_windows = get_active_windows(app_data_directory, True) 
+            else:
+                active_windows = get_active_windows(app_data_directory, False)
+            print(active_windows)

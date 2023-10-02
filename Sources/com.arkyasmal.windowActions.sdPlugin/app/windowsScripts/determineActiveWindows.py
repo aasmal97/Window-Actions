@@ -71,13 +71,3 @@ def get_active_windows(app_data_directory, filter_dup = False):
     new_data = get_window_class_names(new_data, filter_dup)
     create_json_file(new_data, app_data_directory)
     return new_data
-    
-if __name__ == "__main__":
-    cmd_args = sys.argv
-    active_windows= []
-    app_data_directory = cmd_args[cmd_args.index("--appDataDirectory") + 1]
-    if "--filterDup" in cmd_args: 
-        active_windows = get_active_windows(app_data_directory, True) 
-    else:
-        active_windows = get_active_windows(app_data_directory, False)
-    print(active_windows)
