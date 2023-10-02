@@ -126,7 +126,7 @@
   "Category": "Window Actions",
   "CategoryIcon": "images/window-restore-solid",
   "CodePath": "run.exe",
-  "Description": "Minimize, maximize, close, move, or resize windows according to a window id (i.e title, filename, class names, etc). These actions are supported on multiple monitors and through virtual desktops. \n In addition, navigate and create new virtual desktops, for added screen real estate.",
+  "Description": "Minimize, maximize, close, move, or resize windows according to a window id (i.e title, filename, class names, etc). Supported on multiple monitors and through virtual desktops. \n Also, manage, navigate and create virtual desktops",
   "Name": "Window Actions",
   "URL": "https://github.com/aasmal97/Window-Actions",
   "Version": "3.0.0",

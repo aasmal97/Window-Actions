@@ -1,16 +1,7 @@
-# from pyvda import AppView, VirtualDesktop, get_virtual_desktops
-# import sys
-# import functools
-# import os
-# import json
 import win32con
 import pywintypes
 from win32api import EnumDisplayMonitors, GetMonitorInfo, EnumDisplayDevices
-from win32gui import MoveWindow, GetWindowRect, GetWindowPlacement, ShowWindow
-# from win32com.client import GetObject
-# from pynput.keyboard import Key, Controller
-# from difflib import SequenceMatcher
-# from pathlib import Path
+from win32gui import MoveWindow, GetWindowRect, GetWindowPlacement,SetWindowPos, ShowWindow
 from getMatchingWindowList import get_matching_windows_list
 def determine_placement(hwnd: str):
     placement = GetWindowPlacement(hwnd)
@@ -45,4 +36,21 @@ def move_window_to_monitor(hwnd: str, num: int):
 def move_windows_to_new_monitor(num, win_id_type, win_id):
     matching_windows = get_matching_windows_list(win_id_type, win_id)
     result = [move_window_to_monitor(i['hWnd'], num) for i in matching_windows]
+    return result
+
+def minimize_window(win_id_type, win_id):
+    matching_windows = get_matching_windows_list(win_id_type, win_id)
+    result = [ShowWindow(i['hWnd'], win32con.SW_MINIMIZE) for i in matching_windows]
+    return result
+def maximize_window(win_id_type, win_id):
+    matching_windows = get_matching_windows_list(win_id_type, win_id)
+    result = [ShowWindow(i['hWnd'], win32con.SW_MAXIMIZE) for i in matching_windows]
+    return result
+def close_window(win_id_type, win_id):
+    matching_windows = get_matching_windows_list(win_id_type, win_id)
+    result = [ShowWindow(i['hWnd'], win32con.WM_CLOSE) for i in matching_windows]
+    return result
+def resize_window(win_id_type, win_id, size: list, coordinates: [0,0]):
+    matching_windows = get_matching_windows_list(win_id_type, win_id)
+    result = [SetWindowPos(i['hWnd'],*coordinates,*size, win32con.SWP_NOMOVE) for i in matching_windows]
     return result

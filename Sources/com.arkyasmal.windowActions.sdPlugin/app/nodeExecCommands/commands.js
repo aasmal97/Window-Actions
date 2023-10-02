@@ -1,28 +1,6 @@
 const { exec, execFile } = require("child_process");
 const path = require("path");
 const fetchWindowsJson = require("./fetchWindowsJson");
-const getTypeCommand = (byType, name) => {
-  let typeCommand = [];
-  switch (byType) {
-    case "hWnd":
-      typeCommand = ["handle", name];
-      break;
-    case "program_name":
-      typeCommand = ["process", name];
-      break;
-    case "win_class":
-      typeCommand = ["class", name];
-      break;
-    case "win_title":
-      typeCommand = ["title", name];
-      break;
-    case "win_ititle":
-      typeCommand = ["ititle", name];
-    default:
-      break;
-  }
-  return typeCommand;
-};
 const execDirectory = path.join(__dirname, "../executables");
 const batFilesDirectory = path.join(__dirname, "../batFiles");
 const execFileError = (err, stdout, sterr) => {
@@ -31,34 +9,47 @@ const execFileError = (err, stdout, sterr) => {
   if (sterr) console.error(sterr, "sterr");
 };
 const minimizeWindow = (byType, name) => {
-  const typeCommand = getTypeCommand(byType, name);
-  const command = `${execDirectory}\\nircmd.exe`;
-  execFile(command, ["win", "min", ...typeCommand], execFileError);
+  const typeCommand = ["--winIdType", byType, "--winId", name];
+  const command = `${execDirectory}\\pluginActions.exe`;
+  execFile(
+    command,
+    ["--action", "minimize_window", ...typeCommand],
+    execFileError
+  );
 };
 const maximizeWindow = (byType, name) => {
-  const typeCommand = getTypeCommand(byType, name);
-  const command = `${execDirectory}\\nircmd.exe`;
-  execFile(command, ["win", "max", ...typeCommand], execFileError);
+  const typeCommand = ["--winIdType", byType, "--winId", name];
+  const command = `${execDirectory}\\pluginActions.exe`;
+  execFile(
+    command,
+    ["--action", "maximize_window", ...typeCommand],
+    execFileError
+  );
 };
 const closeWindow = (byType, name) => {
-  const typeCommand = getTypeCommand(byType, name);
-  const command = `${execDirectory}\\nircmd.exe`;
-  execFile(command, ["win", "close", ...typeCommand], execFileError);
+  const typeCommand = ["--winIdType", byType, "--winId", name];
+  const command = `${execDirectory}\\pluginActions.exe`;
+  execFile(
+    command,
+    ["--action", "close_window", ...typeCommand],
+    execFileError
+  );
 };
-
 const resizeWindow = (byType, name, coordinates, size) => {
-  const typeCommand = getTypeCommand(byType, name);
-  const command = `${execDirectory}\\nircmd.exe`;
+  const typeCommand = ["--winIdType", byType, "--winId", name];
+  const command = `${execDirectory}\\pluginActions.exe`;
   let coordinatesArr = [0, 0];
   if (coordinates) coordinatesArr = [coordinates.x, coordinates.y];
   let sizeArr = [];
   if (size) sizeArr = [size.width, size.height];
   const cliArgs = [
-    "win",
-    "setsize",
+    "--action",
+    "resize_window",
     ...typeCommand,
-    ...coordinatesArr,
-    ...sizeArr,
+    "--coordinates",
+    coordinatesArr.toString(),
+    "--size",
+    sizeArr.toString(),
   ];
   execFile(command, cliArgs, execFileError);
 };
@@ -124,15 +115,10 @@ const toggleThroughVirtualMonitors = async (direction) => {
     execFileError
   );
 };
-const openGui = () => {
-  const command = `"${batFilesDirectory}"\\findWindow.bat`;
-  exec(command, execFileError);
-};
 
 module.exports = {
   getMonitorInfo,
   minimizeWindow,
-  openGui,
   maximizeWindow,
   closeWindow,
   determineActiveWindows,

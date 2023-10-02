@@ -2,7 +2,6 @@ const WebSocket = require("ws");
 const { program } = require("commander");
 const {
   minimizeWindow,
-  openGui,
   maximizeWindow,
   closeWindow,
   determineActiveWindows,
@@ -87,9 +86,6 @@ const parseEvent = (evt) => {
 const respondToSubEvents = (evt) => {
   const { action, evtObj, targetContext } = parseEvent(evt);
   switch (action) {
-    case "com.arkyasmal.windowActions.openWindowGui":
-      openGui();
-      break;
     case "com.arkyasmal.windowActions.onActiveWindows":
       onActiveWindows(
         evtObj.action,

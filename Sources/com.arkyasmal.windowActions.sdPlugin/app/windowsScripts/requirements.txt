@@ -3,6 +3,3 @@ pyautogui
 pywin32
 pynput
 wmi
-requests
-curlify
-chardet

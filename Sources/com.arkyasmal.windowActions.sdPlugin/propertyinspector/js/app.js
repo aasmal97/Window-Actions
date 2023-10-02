@@ -16,9 +16,6 @@ const selectedTypeChange = (event) => {
   saveSettings({ key: "type", value: value });
   sendValueToPlugin("com.arkyasmal.windowActions.onActiveWindows", "action");
 };
-const openActiveWindowsGui = (event) => {
-  sendValueToPlugin("com.arkyasmal.windowActions.openWindowGui", "action");
-};
 const onIdChange = (value) => {
   saveSettings({ key: "value", value: { name: value } });
 };
