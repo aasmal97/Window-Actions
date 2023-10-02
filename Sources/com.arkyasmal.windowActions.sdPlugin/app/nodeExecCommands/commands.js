@@ -1,8 +1,7 @@
-const { exec, execFile } = require("child_process");
+const { execFile } = require("child_process");
 const path = require("path");
 const fetchWindowsJson = require("./fetchWindowsJson");
 const execDirectory = path.join(__dirname, "../executables");
-const batFilesDirectory = path.join(__dirname, "../batFiles");
 const execFileError = (err, stdout, sterr) => {
   if (err) console.error(err, "error");
   if (stdout) console.log(stdout, "message");
