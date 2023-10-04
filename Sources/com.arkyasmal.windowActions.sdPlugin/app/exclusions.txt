@@ -6,10 +6,7 @@
 \determineActiveWindows.spec\
 \pluginActions.spec\
 \windowsScripts\
-\batFiles\build.bat
-\batFiles\buildPython.bat
-\batFiles\copyDirectory.bat
-\batFiles\runPy.bat
+\batFiles\
 \pluginActions\
 .toc\
 .pyz\
