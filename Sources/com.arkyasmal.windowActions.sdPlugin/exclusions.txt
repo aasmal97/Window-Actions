@@ -1,2 +1,10 @@
 \exclusions.txt\
 \app\
+\run\
+.toc\
+.pyz\
+.txt\
+xref-run.html
+.zip\
+localpycs\
+.pkg\

@@ -8,6 +8,48 @@ import csv
 import json
 from pathlib import Path
 import sys
+import asyncio
+async def fetch_windows_json(app_data_directory, file_name):
+    data_directory = os.environ.get("APPDATA")
+    file_path = os.path.join(data_directory, app_data_directory, file_name)
+    promise_resolved = None
+
+    def resolve_promise(interval, resolve):
+        interval.cancel()
+        resolve(promise_resolved)
+        return promise_resolved
+
+    window_promise = asyncio.get_running_loop().create_future()
+
+    async def start_fetching():
+        await asyncio.sleep(1.2)
+        time_interval = 500
+        max_time_to_wait = time_interval * 10
+        elapsed_time = 0
+        interval = asyncio.get_running_loop().call_later(
+            time_interval / 1000, check_file)
+
+        def check_file():
+            nonlocal promise_resolved, elapsed_time
+            if promise_resolved:
+                return resolve_promise(interval, window_promise.set_result)
+            if elapsed_time > max_time_to_wait:
+                promise_resolved = []
+                return resolve_promise(interval, window_promise.set_result)
+            try:
+                with open(file_path) as file:
+                    data = file.read()
+                    promise_resolved = json.loads(data)
+                    return resolve_promise(interval, window_promise.set_result)
+            except Exception as e:
+                elapsed_time += time_interval
+                print(e)
+
+    asyncio.create_task(start_fetching())
+
+    result = await window_promise
+    return result
+
 def get_all_process(): 
     all_processes = os.popen("wmic process get name, processid /format:csv").read()
     all_processes_split = all_processes.split("\n")
