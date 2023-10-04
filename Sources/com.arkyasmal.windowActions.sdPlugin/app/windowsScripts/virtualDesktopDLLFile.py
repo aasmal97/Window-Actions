@@ -28,8 +28,8 @@ def get_build_num():
     build_num = kernel_version.build
     return [build_num, revision_num]
 #since this binary is changing, and we need to provide support
-#for win 10 and up, we need to write logic that handles the correct use of the file
-#as some binaries are not backwards compatiable
+#for win 10 and up, we need to write logic that handles the 
+#correct use of the file as some binaries are not backwards compatiable
 def determine_ddl_file_used():
     [major, revision] = get_build_num()
     if(major < 22000):
