@@ -3,12 +3,7 @@ from windowActions import move_windows_to_new_monitor, maximize_window, minimize
 from virtualDesktopActions import create_new_virtual_desktop, move_windows_to_new_desktop, move_virtual_desktop, toggle_through_virtual_desktops
 from getMonitorNames import get_monitor_names
 from determineActiveWindows import get_active_windows
-def one_indexed(num): 
-    return int(num) - 1
-def get_window_id(cmd_args): 
-    win_id = cmd_args[cmd_args.index("--winId") + 1]
-    win_id_type = cmd_args[cmd_args.index("--winIdType") + 1]
-    return (win_id, win_id_type)
+from utilities import one_indexed, get_window_id
 if __name__ == "__main__":
     cmd_args = sys.argv
     action = cmd_args[cmd_args.index("--action") + 1]
