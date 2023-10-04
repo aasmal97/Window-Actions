@@ -5,8 +5,6 @@
 \determineActiveWindows\
 \determineActiveWindows.spec\
 \pluginActions.spec\
-\pluginActions\
-
 \windowsScripts\
 \batFiles\build.bat
 \batFiles\buildPython.bat

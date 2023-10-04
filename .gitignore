@@ -1,10 +1,12 @@
+*
+!*/
+!/Sources/com.arkyasmal.windowActions.sdPlugin/app/pluginActions/pluginActions.exe
+localpycs
 config.bat
 dist
 node_modules
 virtual
 determineActiveWindows/
-pluginActions/
-
 *determineActiveWindows.spec
 *pluginActions.spec
 build

@@ -1,7 +1,6 @@
 from pynput.keyboard import Key, Controller
-from getMatchingWindowList import get_matching_windows_list, test_regex
-from virtualDesktopDLLFile import get_build_num
-from virtualDesktopDLLFile import initialize_app_view
+from getMatchingWindowList import get_matching_windows_list
+from virtualDesktopDLLFile import get_build_num, initialize_app_view
 app_instance = initialize_app_view()
 def create_new_desktop(): 
     [build,_] = get_build_num()
