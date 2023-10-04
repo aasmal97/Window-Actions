@@ -26,11 +26,9 @@ def connectElgatoStreamDeckSocket(inPort, inPluginUUID, inRegisterEvent, inInfo)
     def on_open(ws):
         register_socket(inRegisterEvent)
     def on_message(ws,message):
-        err_log("socket to respond to event")
         respond_to_events(message, ws, uuid)
-        err_log("socket responded to event")
     def on_error(ws, error):
-        err_log(str(error))
+        err_log("Error: " + f"{str(error)}")
     global socket
     global uuid
     uri = "ws://127.0.0.1:" + str(inPort)

@@ -7,6 +7,9 @@ from virtualDesktopActions import create_new_virtual_desktop, move_windows_to_ne
 from utilities import one_indexed
 dataDirectory = os.environ['APPDATA']
 filePath = os.path.join(dataDirectory, "Elgato\\StreamDeck\\logs\\com.arkyasmal.windowActions.txt")
+def err_log(message):
+    with open(filePath, "a+") as file:
+        file.write(message + "\n")
 def log_event(payload, socket, filePath):
     json_data = {
         "event": "logMessage",
@@ -50,14 +53,14 @@ def on_get_monitor_info(action, targetContext, customAction, socket, uuid):
     socket.send(json.dumps(newEvent))
 
 def parse_event(evt):
-    evtObj = json.loads(evt.get('data'))
-    targetContext = evtObj["context"]
-    payload = evtObj.get("payload", {})
-    action = payload.get("action")
+    evtObj = evt.get("data", evt)
+    targetContext = evtObj.get("context", {})
+    payload = evtObj.get("payload", {}) 
+    action = payload.get('action', '')
     settings = payload.get("settings", {})
-    type = settings.get("type")
-    name = settings.get("name")
-    value = settings.get("value")
+    type = settings.get("type", '')
+    name = settings.get("name", '')
+    value = settings.get("value", '')
     return {
         "targetContext": targetContext,
         "payload": payload,
@@ -85,8 +88,8 @@ def respond_to_key_events(evt, socket):
     evt_obj, type, value, name = evt_dict["evtObj"], evt_dict["type"], evt_dict["value"], evt_dict["name"]
     # this conditional is here for backwards support for action configured prior
     # to this update
-    win_id = value['name'] if value else name
-    match evt_obj["action"]:
+    win_id = value.get('name', '') if value else name
+    match evt_obj.get("action", ''):
         case "com.arkyasmal.windowactions.minimizewindows":
             if type and win_id:
                 minimize_window(type, win_id)
@@ -98,8 +101,8 @@ def respond_to_key_events(evt, socket):
                 close_window(type, win_id)
         case "com.arkyasmal.windowactions.resizewindows":
             if type and win_id and value:
-                coordinates = [value['coordinates']['x'], value['coordinates']['y']] if value['coordinates'] else [0,0] 
-                size = [value['size']['width'], value['size']['height']] if value['size'] else [0,0]
+                coordinates = [value['coordinates']['x'], value['coordinates']['y']] if value.get('coordinates', None) else [0,0] 
+                size = [value['size']['width'], value['size']['height']] if value.get('size', None) else [0,0]
                 resize_window(
                     type,
                     win_id,
@@ -107,19 +110,19 @@ def respond_to_key_events(evt, socket):
                     size
                 )
         case "com.arkyasmal.windowactions.movewindowsvirtual":
-            if type and value and win_id and value['newDesktop']:
-                desktop_num = one_indexed(value['newDesktop'])
+            if type and value and win_id and value.get('newDesktop', 0):
+                desktop_num = one_indexed(value.get('newDesktop', 0))
                 move_windows_to_new_desktop(type, win_id, desktop_num)
         case "com.arkyasmal.windowactions.movevirtualdesktops":
-            if value and value['newDesktop']:
-                desktop_num = one_indexed(value['newDesktop'])
+            if value and value.get('newDesktop', 0):
+                desktop_num = one_indexed(value.get('newDesktop', 0))
                 move_virtual_desktop(desktop_num)
         case "com.arkyasmal.windowactions.createvirtualdesktops":
-            if value and value['numOfDesktopsToCreate']:
-                create_new_virtual_desktop(int(value['numOfDesktopsToCreate']))
+            if value and value.get('numOfDesktopsToCreate', 0):
+                create_new_virtual_desktop(int(value.get('numOfDesktopsToCreate', 0)))
         case "com.arkyasmal.windowactions.movewindowstomonitor":
-            if type and value and win_id and value['newMonitor']:
-                move_windows_to_new_monitor(type, win_id, value['newMonitor'])
+            if type and value and win_id and value.get('newMonitor', 0):
+                move_windows_to_new_monitor(type, win_id, value.get('newMonitor', 0))
         case "com.arkyasmal.windowactions.movevirtualdesktopright":
             toggle_through_virtual_desktops(1)
         case "com.arkyasmal.windowactions.movevirtualdesktopleft":
@@ -129,10 +132,14 @@ def respond_to_key_events(evt, socket):
             log_event(evt_obj, socket, filePath)
 
 def respond_to_events(evt, socket, uuid):
-    evt = json.loads(evt)
-    action, evt_obj = parse_event(evt)
-    if action:
-        respond_to_sub_events(evt, socket, uuid)
-    elif evt_obj['event'] == "keyDown":
-        respond_to_key_events(evt, socket)
+    evt_dict = json.loads(evt)
+    try:
+        evt_obj = parse_event(evt_dict)
+        action, evt_obj = evt_obj["action"], evt_obj["evtObj"]
+        if action:
+            respond_to_sub_events(evt_dict, socket, uuid)
+        elif evt_obj.get('event', '') == "keyDown":
+            respond_to_key_events(evt_dict, socket)
+    except Exception as e:
+        err_log(str(e))
         
