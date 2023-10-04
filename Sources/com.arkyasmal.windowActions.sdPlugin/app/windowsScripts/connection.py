@@ -1,4 +1,3 @@
-import argparse
 from argparse import ArgumentParser
 import json
 import websocket
@@ -39,13 +38,13 @@ def connectElgatoStreamDeckSocket(inPort, inPluginUUID, inRegisterEvent, inInfo)
     rel.dispatch()
 # Main function to be called from the command line
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser()
-    parser.add_argument("-port", "--port", type=int, help="Port number")
+    parser = ArgumentParser()
+    parser.add_argument("-port", "--port", help="Port number")
     parser.add_argument("-pluginUUID", "--pluginUUID", help="plugin unique id")
     parser.add_argument("-registerEvent", "--registerEvent", help="event needed to register plugin")
     parser.add_argument("-info", "--info", help="StreamDeck device info")
     args = parser.parse_args()
-
+    
     connectElgatoStreamDeckSocket(
         args.port,
         args.pluginUUID,
