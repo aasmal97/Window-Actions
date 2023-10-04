@@ -10,3 +10,11 @@
 \batFiles\buildPython.bat
 \batFiles\copyDirectory.bat
 \batFiles\runPy.bat
+\pluginActions\
+.toc\
+.pyz\
+.txt\
+xref-pluginActions.html
+.zip\
+localpycs\
+.pkg\

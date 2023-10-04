@@ -1,4 +1,4 @@
-pyinstaller==5.7.0
+pyinstaller
 pyautogui
 pywin32
 pynput

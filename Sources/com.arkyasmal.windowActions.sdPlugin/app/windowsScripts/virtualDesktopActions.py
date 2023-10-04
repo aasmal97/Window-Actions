@@ -26,7 +26,7 @@ def move_virtual_desktop(num: int):
     return "Moved to this virtual desktop"
 
 def create_new_virtual_desktop(desktopsToCreate: int, move_to_original: bool = True):
-    curr_desktop = app_instance.GetCurrentDesktopNumber() + 1
+    curr_desktop = app_instance.GetCurrentDesktopNumber()
     for x in range(desktopsToCreate):
         create_new_desktop()
     if move_to_original: 

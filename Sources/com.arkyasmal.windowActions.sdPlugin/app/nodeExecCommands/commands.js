@@ -1,7 +1,7 @@
 const { execFile } = require("child_process");
 const path = require("path");
 const fetchWindowsJson = require("./fetchWindowsJson");
-const execDirectory = path.join(__dirname, "../pluginActions");
+const execDirectory = path.join(__dirname, "../");
 const execFileError = (err, stdout, sterr) => {
   if (err) console.error(err, "error");
   if (stdout) console.log(stdout, "message");
