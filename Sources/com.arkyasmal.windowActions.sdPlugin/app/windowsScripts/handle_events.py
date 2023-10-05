@@ -119,7 +119,8 @@ def respond_to_key_events(evt, socket):
                 create_new_virtual_desktop(int(value.get('numOfDesktopsToCreate', 0)))
         case "com.arkyasmal.windowactions.movewindowstomonitor":
             if type and value and win_id and value.get('newMonitor', 0):
-                move_windows_to_new_monitor(value.get('newMonitor', 0),type, win_id)
+                monitor_num = one_indexed(value.get('newMonitor', 1))
+                move_windows_to_new_monitor(monitor_num,type, win_id)
         case "com.arkyasmal.windowactions.movevirtualdesktopright":
             toggle_through_virtual_desktops(1)
         case "com.arkyasmal.windowactions.movevirtualdesktopleft":
