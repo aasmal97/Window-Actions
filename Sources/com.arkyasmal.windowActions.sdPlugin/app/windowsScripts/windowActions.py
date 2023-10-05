@@ -3,6 +3,12 @@ import pywintypes
 from win32api import EnumDisplayMonitors, GetMonitorInfo
 from win32gui import MoveWindow, GetWindowRect, GetWindowPlacement,SetWindowPos, ShowWindow, PostMessage
 from getMatchingWindowList import get_matching_windows_list
+import os
+dataDirectory = os.environ['APPDATA']
+filePath = os.path.join(dataDirectory, "Elgato\\StreamDeck\\logs\\com.arkyasmal.windowActions.txt")
+def err_log(message):
+    with open(filePath, "a+") as file:
+        file.write(message + "\n")
 def determine_placement(hwnd: str):
     placement = GetWindowPlacement(hwnd)
     cmd_show = win32con.SW_NORMAL
@@ -56,5 +62,5 @@ def resize_window(win_id_type, win_id, size: list, coordinates: list):
         coordinates = [0,0]
     x,y = coordinates 
     width, height = size
-    result = [SetWindowPos(i['hWnd'],win32con.HWND_TOP,int(x),int(y),int(width),int(height), win32con.SWP_NOMOVE) for i in matching_windows]
+    result = [SetWindowPos(i['hWnd'],win32con.HWND_TOP,int(x),int(y),int(width),int(height), win32con.SWP_SHOWWINDOW) for i in matching_windows]
     return result
