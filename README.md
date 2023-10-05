@@ -46,9 +46,9 @@ To initiate virtual desktop and monitor actions, like moving a window to another
 Documentation for these files can be [found here](https://github.com/Ciantic/VirtualDesktopAccessor)
 
 Ultimately, This allows us to interact with the Windows 10 and 11 unoffical Virtual Desktop API. We then package these dll files with the app.
-### Integrating a Node App
+### Integrating Our App
 
-We integrate our Node app with the [Elgato Stream Deck Architecture](https://developer.elgato.com/documentation/stream-deck/sdk/plugin-architecture/) by compiling our python app into an `.exe` file, using [pyinstaller](https://pyinstaller.org/en/stable/). This `.exe` file becomes the entry point/Code path that our `manifest.json` points to for the plugin.
+We integrate our app with the [Elgato Stream Deck Architecture](https://developer.elgato.com/documentation/stream-deck/sdk/plugin-architecture/) by compiling our python app into an `.exe` file, using [pyinstaller](https://pyinstaller.org/en/stable/). This `.exe` file becomes the entry point/Code path that our `manifest.json` points to for the plugin.
 
 ### Configuring the Property Inspector
 
