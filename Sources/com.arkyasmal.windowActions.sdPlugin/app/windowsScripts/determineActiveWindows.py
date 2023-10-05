@@ -7,7 +7,7 @@ import os
 import csv
 import json
 from pathlib import Path
-import sys
+
 def get_all_process(): 
     all_processes = os.popen("wmic process get name, processid /format:csv").read()
     all_processes_split = all_processes.split("\n")

@@ -11,3 +11,5 @@ build
 *package-lock.json
 *.pptx
 __pycache__
+run/
+*run.spec
