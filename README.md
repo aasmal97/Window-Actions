@@ -25,6 +25,8 @@ On a Windows 10+ machine, a workaround to perform these window actions (minimize
 2. This requires learning the Windows OS CLI (Command Prompt or Powershell).
 3. It's difficult to change the workflow in the future, as it requires manually updating a new [window identifier](#window-identifiers) in the `.bat` file directly. This may be necessary if an application updates itself and it's identifiers change, or if an action was configured for a one-time use case using `hwid`.
 4. `nircmd` does not support virtual desktops (moving or navigating through them)
+5. `nircmd` is over decade old, and is potentially outdated and includes secruity vulnerabilities
+
    To amend these problems, this app/plugin was developed
 
 # How This Plugin Works
@@ -35,15 +37,18 @@ On a Windows 10+ machine, a workaround to perform these window actions (minimize
 
 ### Initiating Window Action Commands
 
-Similar to our [workaround](#alternative-workaround), this app uses `nircmd` in the background, to initiate most window actions. We can initiate these commands using a plugin built with `Node.js`, and re-packaging the nircmd.exe with the app.
+ This app uses the [Win32 API](https://learn.microsoft.com/en-us/windows/win32/apiindex/windows-api-list) to initiate most window actions. We use python's [pywin32 library](https://pypi.org/project/pywin32/) to wrap around this API, and expose their actions to us. 
 
 ### Initiating Monitor/Virtual Desktop Commands
 
-However, to initiate virtual desktop and monitor actions, like moving a window to another virtual desktop or monitor, we send commands to `pluginActions.exe`. This execuatable is actually written in python as a cli tool, that handles all commands that are related to, or require the use of virtual desktops or monitors. The source code is located [here](./Sources/com.arkyasmal.windowActions.sdPlugin/app/windowsScripts/pluginActions.py).
+To initiate virtual desktop and monitor actions, like moving a window to another virtual desktop or monitor, we send commands to a specific version of `VirtualDesktopAccessor.dll`. The multiple dll versions are [stored here](./Sources/com.arkyasmal.windowActions.sdPlugin/app/dll). 
 
+Documentation for these files can be [found here](https://github.com/Ciantic/VirtualDesktopAccessor)
+
+Ultimately, This allows us to interact with the Windows 10 and 11 unoffical Virtual Desktop API. We then package these dll files with the app.
 ### Integrating a Node App
 
-We integrate our Node app with the [Elgato Stream Deck Architecture](https://developer.elgato.com/documentation/stream-deck/sdk/plugin-architecture/) by converting the Node app into a `.exe` file, using [`nexe`](https://github.com/nexe/nexe). This `.exe` file becomes the entry point/Code path that our `manifest.json` points to for the plugin.
+We integrate our Node app with the [Elgato Stream Deck Architecture](https://developer.elgato.com/documentation/stream-deck/sdk/plugin-architecture/) by compiling our python app into an `.exe` file, using [pyinstaller](https://pyinstaller.org/en/stable/). This `.exe` file becomes the entry point/Code path that our `manifest.json` points to for the plugin.
 
 ### Configuring the Property Inspector
 
@@ -53,11 +58,7 @@ As an added bonus, it also means users don't need to write any code to configure
 
 ### Populating Active Window Dropdown
 
-To automatically populate a dropdown list of active/opened windows, we use python's powerful [`win32gui`](https://pypi.org/project/win32gui/#description) package. This allows us to interface with the [Windows Win32 Api](https://learn.microsoft.com/en-us/windows/win32/api/)(written in C++), and attain all the necessary data in `JSON` file. This is then passed to the [property inspector](#configuring-the-property-inspector), for selection.
-
-### Optional Manual Identifier Input
-
-If the automated dropdown list of active/opened windows is not enough, or a user wants to define the identifier manually, they are allowed to do so, by simply toggling the custom option. [`Gui Prop View.exe`](https://www.nirsoft.net/utils/gui_prop_view.html) is re-packaged into the plugin as well, to aid in defining the identifier manually.
+To automatically populate a dropdown list of active/opened windows, we use python's powerful [`win32gui`](https://pypi.org/project/win32gui/#description) package. This allows us to attain all the necessary data in our `JSON` file. This is then passed to the [property inspector](#configuring-the-property-inspector), for user selection.
 
 # Window Identifiers
 
