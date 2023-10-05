@@ -68,6 +68,16 @@ const modifyDropdownActiveWindowInputs = (payload) => {
   removeChildNodes(identiferDropdown);
   identiferDropdown.append(...options);
 };
+const defaultMonitorInputs = (value) => {
+    const identiferDropdown = document.getElementById(
+      "move_windows_to_monitor_select"
+  );
+  const newValue = value.newMonitor ? value.newMonitor : 0
+  identiferDropdown.value = newValue;
+  const inputEvent = new Event("input");
+  identiferDropdown.dispatchEvent(inputEvent);
+  onValueInputChange("newMonitor", newValue);
+}
 const modifyMonitorInputs = (payload, currValue) => {
   const monitors = payload;
   const identiferDropdown = document.getElementById(
@@ -288,6 +298,8 @@ const onConnection = (jsn) => {
     } else changeIdDom(value);
     changeResizeInputsDom(value ? value : {});
     changeVirtualInputsDom(value);
+    //add default monitor value 
+    defaultMonitorInputs(value ? value : {})
     updateUI(settings);
   }
 };
