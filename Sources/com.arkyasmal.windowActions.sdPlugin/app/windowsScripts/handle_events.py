@@ -1,6 +1,6 @@
 import json
 import os
-from determineActiveWindows import get_active_windows, fetch_windows_json
+from determineActiveWindows import get_active_windows
 from getMonitorNames import get_monitor_names
 from windowActions import move_windows_to_new_monitor, maximize_window, minimize_window, close_window, resize_window
 from virtualDesktopActions import create_new_virtual_desktop, move_windows_to_new_desktop, move_virtual_desktop, toggle_through_virtual_desktops
@@ -21,8 +21,7 @@ def log_event(payload, socket, filePath):
     socket.send(new_payload)
 def on_active_windows(action, targetContext, customAction, socket, uuid):
     app_data_dir= "Elgato\\StreamDeck\\Plugins\\com.arkyasmal.windowActions.sdPlugin"
-    get_active_windows(app_data_dir)
-    result = fetch_windows_json(app_data_dir, "activeWindows.json")
+    result = get_active_windows(app_data_dir)
     newEvent = {
         "action": action,
         "event": "sendToPropertyInspector",
@@ -37,9 +36,7 @@ def on_active_windows(action, targetContext, customAction, socket, uuid):
 
 def on_get_monitor_info(action, targetContext, customAction, socket, uuid):
     app_data_dir= "Elgato\\StreamDeck\\Plugins\\com.arkyasmal.windowActions.sdPlugin"
-    get_monitor_names(app_data_dir)
-    result = fetch_windows_json(app_data_dir, "activeWindows.json")
-
+    result = get_monitor_names(app_data_dir)
     newEvent = {
         "action": action,
         "event": "sendToPropertyInspector",
@@ -76,9 +73,9 @@ def respond_to_sub_events(evt, socket, uuid):
     action = parsedEvent["action"]
     evtObj = parsedEvent["evtObj"]
     targetContext = parsedEvent["targetContext"]
-    if action == "com.arkyasmal.windowActions.on_active_windows":
+    if action == "com.arkyasmal.windowActions.onActiveWindows":
         on_active_windows(evtObj["action"], targetContext, "com.arkyasmal.windowActions.activeWindows", socket, uuid)
-    elif action == "com.arkyasmal.windowActions.on_get_monitor_info":
+    elif action == "com.arkyasmal.windowActions.onGetMonitorInfo":
         on_get_monitor_info(evtObj["action"], targetContext, "com.arkyasmal.windowActions.getmonitorinfo", socket, uuid)
     else:
         log_event("Sub event does not match", socket, filePath)
