@@ -103,13 +103,13 @@ def respond_to_key_events(evt, socket):
                 resize_window(
                     type,
                     win_id,
+                    size,
                     coordinates,
-                    size
                 )
         case "com.arkyasmal.windowactions.movewindowsvirtual":
             if type and value and win_id and value.get('newDesktop', 0):
                 desktop_num = one_indexed(value.get('newDesktop', 0))
-                move_windows_to_new_desktop(type, win_id, desktop_num)
+                move_windows_to_new_desktop(desktop_num,type, win_id)
         case "com.arkyasmal.windowactions.movevirtualdesktops":
             if value and value.get('newDesktop', 0):
                 desktop_num = one_indexed(value.get('newDesktop', 0))
@@ -119,7 +119,7 @@ def respond_to_key_events(evt, socket):
                 create_new_virtual_desktop(int(value.get('numOfDesktopsToCreate', 0)))
         case "com.arkyasmal.windowactions.movewindowstomonitor":
             if type and value and win_id and value.get('newMonitor', 0):
-                move_windows_to_new_monitor(type, win_id, value.get('newMonitor', 0))
+                move_windows_to_new_monitor(value.get('newMonitor', 0),type, win_id)
         case "com.arkyasmal.windowactions.movevirtualdesktopright":
             toggle_through_virtual_desktops(1)
         case "com.arkyasmal.windowactions.movevirtualdesktopleft":

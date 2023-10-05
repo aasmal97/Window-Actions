@@ -21,7 +21,7 @@ def move_windows_to_new_desktop(num, win_id_type, win_id):
     result = [move_window(i['hWnd'], num) for i in matching_windows]
     return result
 def move_virtual_desktop(num: int):
-    check_desktops(num)
+    check_desktops(num + 1, False)
     app_instance.GoToDesktopNumber(num)
     return "Moved to this virtual desktop"
 
