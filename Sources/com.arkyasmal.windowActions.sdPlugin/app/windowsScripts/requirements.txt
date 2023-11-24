@@ -1,5 +1,4 @@
 pyinstaller
-pyautogui
 pywin32
 pynput
 wmi

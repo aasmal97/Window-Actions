@@ -1,4 +1,3 @@
-import pyautogui
 #pywintypes import is required or else .exe won't build properly
 import pywintypes
 import win32gui
@@ -7,7 +6,11 @@ import os
 import csv
 import json
 from pathlib import Path
-
+def get_window_info(hwnd, window_list):
+    window_text = win32gui.GetWindowText(hwnd)
+    if window_text:
+        window_list.append({'_hWnd': hwnd, 'title': window_text})
+    return True
 def get_all_process(): 
     all_processes = os.popen("wmic process get name, processid /format:csv").read()
     all_processes_split = all_processes.split("\n")
@@ -53,7 +56,8 @@ def get_active_windows(app_data_directory, filter_dup = False):
         pid = x["ProcessId"]
         process_map[pid] = x
     # get all active windows
-    windows = pyautogui.getAllWindows()
+    windows = []
+    win32gui.EnumWindows(get_window_info, windows)
     windows_data=[
         {
             "hWnd": x._hWnd, "title": x.title, 
@@ -71,3 +75,6 @@ def get_active_windows(app_data_directory, filter_dup = False):
     new_data = get_window_class_names(new_data, filter_dup)
     create_json_file(new_data, app_data_directory)
     return new_data
+
+
+
