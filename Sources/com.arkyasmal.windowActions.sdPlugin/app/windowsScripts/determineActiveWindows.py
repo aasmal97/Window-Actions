@@ -60,8 +60,8 @@ def get_active_windows(app_data_directory, filter_dup = False):
     win32gui.EnumWindows(get_window_info, windows)
     windows_data=[
         {
-            "hWnd": x._hWnd, "title": x.title, 
-            "pid": win32process.GetWindowThreadProcessId(x._hWnd)
+            "hWnd": x["_hWnd"], "title": x['title'], 
+            "pid": win32process.GetWindowThreadProcessId(x["_hWnd"])
         } 
         for x in windows
     ]
@@ -75,6 +75,3 @@ def get_active_windows(app_data_directory, filter_dup = False):
     new_data = get_window_class_names(new_data, filter_dup)
     create_json_file(new_data, app_data_directory)
     return new_data
-
-
-

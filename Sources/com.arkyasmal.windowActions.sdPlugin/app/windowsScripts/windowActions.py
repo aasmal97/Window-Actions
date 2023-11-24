@@ -1,5 +1,5 @@
-import win32con
 import pywintypes
+import win32con
 from win32api import EnumDisplayMonitors, GetMonitorInfo
 from win32gui import MoveWindow, GetWindowRect, GetWindowPlacement,SetWindowPos, ShowWindow, PostMessage
 from getMatchingWindowList import get_matching_windows_list
