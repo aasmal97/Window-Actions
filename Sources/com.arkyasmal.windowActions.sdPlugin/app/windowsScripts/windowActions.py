@@ -2,15 +2,21 @@
 import pywintypes
 import win32con
 from win32process import GetWindowThreadProcessId, AttachThreadInput
-from win32api import EnumDisplayMonitors, GetMonitorInfo, GetCurrentThreadId
+from win32api import EnumDisplayMonitors, GetMonitorInfo, GetCurrentThreadId, GetWindowLong, SetWindowLong
 from win32gui import MoveWindow, GetWindowRect, GetWindowPlacement,SetWindowPos, ShowWindow, PostMessage, SetForegroundWindow, GetForegroundWindow, SetActiveWindow, SetFocus
 from getMatchingWindowList import get_matching_windows_list
 import os
 dataDirectory = os.environ['APPDATA']
 filePath = os.path.join(dataDirectory, "Elgato\\StreamDeck\\logs\\com.arkyasmal.windowActions.txt")
+def freeze_single_window_topmost(hwnd):
+    SetWindowPos(hwnd, win32con.HWND_TOPMOST, 0, 0, 0, 0, win32con.SWP_NOMOVE | win32con.SWP_NOSIZE)
+def unfreeze_single_window(hwnd):
+    existing_style = GetWindowLong(hwnd, win32con.GWL_EXSTYLE)
+    new_style = existing_style & ~win32con.WS_EX_TOPMOST
+    SetWindowLong(hwnd, win32con.GWL_EXSTYLE, new_style)
+    SetWindowPos(hwnd, win32con.HWND_NOTOPMOST, 0, 0, 0, 0, win32con.SWP_NOMOVE | win32con.SWP_NOSIZE)
 def focus_single_window(hwnd: str):    
     foregroundWindowHandle = GetForegroundWindow()
-    print(foregroundWindowHandle, hwnd)
     if foregroundWindowHandle == hwnd: 
         return
     currentThreadId = GetCurrentThreadId()
@@ -87,4 +93,12 @@ def resize_window(win_id_type, win_id, size: list, coordinates: list, show: bool
 def focus_window(win_id_type, win_id):
     matching_windows = get_matching_windows_list(win_id_type, win_id)
     result = [focus_single_window(i['hWnd']) for i in matching_windows]
+    return result
+def freeze_window_topmost(win_id_type, win_id):
+    matching_windows = get_matching_windows_list(win_id_type, win_id)
+    result = [freeze_single_window_topmost(i['hWnd']) for i in matching_windows]
+    return result
+def unfreeze_window_topmost(win_id_type, win_id):
+    matching_windows = get_matching_windows_list(win_id_type, win_id)
+    result = [unfreeze_single_window(i['hWnd']) for i in matching_windows]
     return result
