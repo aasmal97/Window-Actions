@@ -3,7 +3,7 @@ import pywintypes
 import win32con
 from win32process import GetWindowThreadProcessId, AttachThreadInput
 from win32api import EnumDisplayMonitors, GetMonitorInfo, GetCurrentThreadId, GetWindowLong, SetWindowLong
-from win32gui import MoveWindow, GetWindowRect, GetWindowPlacement,SetWindowPos, ShowWindow, PostMessage, SetForegroundWindow, GetForegroundWindow, SetActiveWindow, SetFocus
+from win32gui import MoveWindow, GetWindowRect, GetWindowPlacement,SetWindowPos, ShowWindow, PostMessage, SetForegroundWindow, GetForegroundWindow, SetActiveWindow
 from getMatchingWindowList import get_matching_windows_list
 import os
 dataDirectory = os.environ['APPDATA']
@@ -90,15 +90,15 @@ def resize_window(win_id_type, win_id, size: list, coordinates: list, show: bool
     width, height = size
     result = [resize_single_window(i['hWnd'], x, y, width, height, show) for i in matching_windows]
     return result
-def focus_window(win_id_type, win_id):
+def focus_windows(win_id_type, win_id):
     matching_windows = get_matching_windows_list(win_id_type, win_id)
     result = [focus_single_window(i['hWnd']) for i in matching_windows]
     return result
-def freeze_window_topmost(win_id_type, win_id):
+def freeze_windows_topmost(win_id_type, win_id):
     matching_windows = get_matching_windows_list(win_id_type, win_id)
     result = [freeze_single_window_topmost(i['hWnd']) for i in matching_windows]
     return result
-def unfreeze_window_topmost(win_id_type, win_id):
+def unfreeze_windows_topmost(win_id_type, win_id):
     matching_windows = get_matching_windows_list(win_id_type, win_id)
     result = [unfreeze_single_window(i['hWnd']) for i in matching_windows]
     return result

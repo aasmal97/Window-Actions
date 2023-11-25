@@ -2,7 +2,7 @@ import json
 import os
 from determineActiveWindows import get_active_windows
 from getMonitorNames import get_monitor_names
-from windowActions import move_windows_to_new_monitor, maximize_window, minimize_window, close_window, resize_window
+from windowActions import move_windows_to_new_monitor, maximize_window, minimize_window, close_window, resize_window, freeze_windows_topmost, unfreeze_windows_topmost, focus_windows
 from virtualDesktopActions import create_new_virtual_desktop, move_windows_to_new_desktop, move_virtual_desktop, toggle_through_virtual_desktops
 from utilities import one_indexed
 dataDirectory = os.environ['APPDATA']
@@ -106,6 +106,15 @@ def respond_to_key_events(evt, socket):
                     size,
                     coordinates,
                 )
+        case "com.arkyasmal.windowactions.focuswindow":
+            if type and win_id:
+                focus_windows(type, win_id)
+        case "com.arkyasmal.windowactions.lockwindowtopmost": 
+            if type and win_id:        
+                freeze_windows_topmost(type, win_id)
+        case "com.arkyasmal.windowactions.unlockwindowtopmost":
+            if type and win_id:
+                unfreeze_windows_topmost(type, win_id)
         case "com.arkyasmal.windowactions.movewindowsvirtual":
             if type and value and win_id and value.get('newDesktop', 0):
                 desktop_num = one_indexed(value.get('newDesktop', 0))

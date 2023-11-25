@@ -49,6 +49,42 @@
       "SupportedInMultiActions": true
     },
     {
+      "UUID": "com.arkyasmal.windowactions.focuswindow",
+      "Icon": "images/window-focuswindow-regular",
+      "Name": "Resize Windows",
+      "PropertyInspectorPath": "./propertyinspector/index.html",
+      "States": [
+        {
+          "Image": "images/window-focuswindow-regular"
+        }
+      ],
+      "SupportedInMultiActions": true
+    },
+    {
+      "UUID": "com.arkyasmal.windowactions.lockwindowtopmost",
+      "Icon": "images/window-lockwindowtopmost-regular",
+      "Name": "Lock Topmost Window(s)",
+      "PropertyInspectorPath": "./propertyinspector/index.html",
+      "States": [
+        {
+          "Image": "images/window-lockwindowtopmost-regular"
+        }
+      ],
+      "SupportedInMultiActions": true
+    },
+    {
+      "UUID": "com.arkyasmal.windowactions.unlockwindowtopmost",
+      "Icon": "images/window-unlockwindowtopmost-regular",
+      "Name": "Unlock/Unfreeze Topmost Window(s)",
+      "PropertyInspectorPath": "./propertyinspector/index.html",
+      "States": [
+        {
+          "Image": "images/window-unlockwindowtopmost-regular"
+        }
+      ],
+      "SupportedInMultiActions": true
+    },
+    {
       "UUID": "com.arkyasmal.windowactions.movewindowsvirtual",
       "Icon": "images/windows-move-window-to-virtual",
       "Name": "Move Window to Virtual Desktop",
@@ -83,7 +119,7 @@
         }
       ],
       "SupportedInMultiActions": true
-    }, 
+    },
     {
       "UUID": "com.arkyasmal.windowactions.movewindowstomonitor",
       "Icon": "images/window-move-to-new-monitor",
@@ -126,10 +162,10 @@
   "Category": "Window Actions",
   "CategoryIcon": "images/window-restore-solid",
   "CodePath": "run.exe",
-  "Description": "Minimize, maximize, close, move, or resize windows according to a window id (i.e title, filename, class names, etc). Supported on multiple monitors and through virtual desktops. \n Also, manage, navigate and create virtual desktops",
+  "Description": "Minimize, maximize, focus, close, move, resize, and force windows to stay on top, according to a window id (i.e title, filename, class names, etc). Supported on multiple monitors and through virtual desktops. \n For heavy users, you can also manage, navigate and create virtual desktops",
   "Name": "Window Actions",
   "URL": "https://github.com/aasmal97/Window-Actions",
-  "Version": "3.0.0",
+  "Version": "4.0.0",
   "SDKVersion": 2,
   "OS": [{ "Platform": "windows", "MinimumVersion": "10" }],
   "Software": {
