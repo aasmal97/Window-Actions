@@ -1,3 +1,4 @@
+#pywintypes import is required or else .exe won't build properly
 import functools
 import os
 import json
