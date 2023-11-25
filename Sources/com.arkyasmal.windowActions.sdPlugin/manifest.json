@@ -50,12 +50,12 @@
     },
     {
       "UUID": "com.arkyasmal.windowactions.focuswindow",
-      "Icon": "images/window-focuswindow-regular",
+      "Icon": "images/windows-focuswindow-regular",
       "Name": "Resize Windows",
       "PropertyInspectorPath": "./propertyinspector/index.html",
       "States": [
         {
-          "Image": "images/window-focuswindow-regular"
+          "Image": "images/windows-focuswindow-regular"
         }
       ],
       "SupportedInMultiActions": true
