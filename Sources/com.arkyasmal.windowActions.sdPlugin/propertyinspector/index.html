@@ -1,309 +1,191 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="utf-8" />
-    <meta
-      name="viewport"
-      content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no,minimal-ui,viewport-fit=cover"
-    />
-    <meta name="apple-mobile-web-app-capable" content="yes" />
-    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
-    <title>Window Actions Property Inspector</title>
-    <link rel="stylesheet" href="css/sdpi.css" />
-  </head>
-  <body>
-    <div id="window_specific_inputs" class="sdpi-wrapper" style="display: none">
-      <div class="sdpi-item" id="win_type">
-        <div class="sdpi-item-label">Identifer Type</div>
-        <select
-          class="sdpi-item-value select"
-          style="width: 100%;margin:0;padding: 0;border: none;"
-          id="select_win_type"
-          required
-          oninput="selectedTypeChange(event)"
-        >
-          <option value="program_name" selected>
-            Program Name (.exe file)
-          </option>
-          <option value="win_title">Exact Window Title</option>
-          <option value="win_ititle">Partial Window Title</option>
-          <option value="hWnd">Unique Active Window Id (hwnd)</option>
-          <option value="win_class">Window Class Name</option>
-        </select>
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport"
+    content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no,minimal-ui,viewport-fit=cover" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  <title>Window Actions Property Inspector</title>
+  <link rel="stylesheet" href="css/sdpi.css" />
+</head>
+
+<body>
+  <div id="window_specific_inputs" class="sdpi-wrapper" style="display: none;">
+    <div class="sdpi-item" id="win_type">
+      <div class="sdpi-item-label">Identifer Type</div>
+      <select class="sdpi-item-value select" style="width: 100%;margin:0;padding: 0;border: none;" id="select_win_type"
+        required oninput="selectedTypeChange(event)">
+        <option value="program_name" selected>
+          Program Name (.exe file)
+        </option>
+        <option value="win_title">Exact Window Title</option>
+        <option value="win_ititle">Partial Window Title</option>
+        <option value="hWnd">Unique Active Window Id (hwnd)</option>
+        <option value="win_class">Window Class Name</option>
+      </select>
+    </div>
+    <details class="message" style="display: none" id="win_type_message">
+      <summary></summary>
+    </details>
+    <div class="sdpi-item" id="win_id">
+      <div class="sdpi-item-label" style="margin-top: 10px">Identifer</div>
+      <div style="display: flex; flex-direction: column; width: 100%">
+        <div class="sdpi-item-value" style="margin-bottom: 10px">
+          <span class="sdpi-item-child">
+            <input id="identifer_dropdown_type" type="radio" name="identifer_input_type" value="dropdown" checked
+              onclick="onIdTypeChange(event)" />
+            <label for="identifer_dropdown_type" class="sdpi-item-label"
+              style="font-size: 10px"><span></span>Dropdown</label>
+          </span>
+          <span class="sdpi-item-child">
+            <input id="identifer_text_type" type="radio" value="text" name="identifer_input_type"
+              onclick="onIdTypeChange(event)" />
+            <label for="identifer_text_type" class="sdpi-item-label" style="font-size: 10px"><span></span>Custom</label>
+          </span>
+        </div>
+        <div class="sdpi-item-value" style="margin-left: 0px; width: 100%; margin-right: 0px">
+          <select id="identifer_dropdown" class="sdpi-item-value select" name="identifer_dropdown"
+            oninput="onIdChange(event.currentTarget.value)" required>
+            <option value="" disabled selected>--Select Identifer--</option>
+          </select>
+          <input style="display: none" class="sdpi-item-value" name="identifer_text" id="identifer_text"
+            oninput="onIdChange(this.value)" placeholder="Enter Window or Program Identifer/Name" required />
+        </div>
+        <div id="resize_window_inputs_container" class="sdpi-item-value" style="width: 100%; display: none;">
+          <div style="display: flex; flex-direction: column">
+            <span class="sdpi-item-label" style="margin-top: 10px">Coordinates (in pixels)</span>
+            <div style="display: flex; padding: 0; margin: 0; width: 100%">
+              <div style="display: flex; width: 50%; align-items: center">
+                <label for="window_coord_x">X:</label>
+                <input style="
+                      flex-grow: 1;
+                      min-height: 26px;
+                      margin: 0;
+                      padding: 0;
+                      min-width: 0;
+                    " id="window_coord_x" type="number"
+                  oninput="onResizeInputChange('coordinates', 'x', this.value)" />
+              </div>
+              <div style="display: flex; width: 50%; align-items: center">
+                <label for="window_coord_y" class="">Y:</label>
+                <input style="
+                      flex-grow: 1;
+                      min-height: 26px;
+                      margin: 0;
+                      padding: 0;
+                      min-width: 0;
+                    " id="window_coord_y" type="number"
+                  oninput="onResizeInputChange('coordinates', 'y', this.value)" />
+              </div>
+            </div>
+          </div>
+          <div style="display: flex; flex-direction: column">
+            <span style="margin-bottom: 10px; margin-top: 10px" class="sdpi-item-label">Size (in pixels)</span>
+            <div style="display: flex; width: 100%">
+              <div style="display: flex; width: 50%; align-items: center">
+                <label for="window_size_width">Width:</label>
+                <input style="
+                      flex-grow: 1;
+                      min-height: 26px;
+                      margin: 0;
+                      padding: 0;
+                      min-width: 0;
+                    " id="window_size_width" type="number"
+                  oninput="onResizeInputChange('size', 'width', this.value)" />
+              </div>
+              <div style="display: flex; width: 50%; align-items: center">
+                <label for="window_size_height">Height:</label>
+                <input style="
+                      flex-grow: 1;
+                      min-height: 26px;
+                      margin: 0;
+                      padding: 0;
+                      min-width: 0;
+                    " id="window_size_height" type="number"
+                  oninput="onResizeInputChange('size', 'height', this.value)" />
+              </div>
+            </div>
+          </div>
+          <div style="display: flex; flex-direction: column">
+            <span style="margin-top: 10px" class="sdpi-item-label">Auto-focus</span>
+            <span class="sdpi-item-child">
+              <input id="window_auto_focus" type="checkbox" name="identifer_input_type" oninput="onAutoFocusChange(this.checked)">
+              <label for="window_auto_focus" class="sdpi-item-label" ><span></span>Bring Window(s) To Top</label>
+            </span>
+          </div>
+        </div>
       </div>
-      <details class="message" style="display: none" id="win_type_message">
-        <summary></summary>
-      </details>
-      <div class="sdpi-item" id="win_id">
-        <div class="sdpi-item-label" style="margin-top: 10px">Identifer</div>
-        <div style="display: flex; flex-direction: column; width: 100%">
-          <div class="sdpi-item-value" style="margin-bottom: 10px">
-            <span class="sdpi-item-child">
-              <input
-                id="identifer_dropdown_type"
-                type="radio"
-                name="identifer_input_type"
-                value="dropdown"
-                checked
-                onclick="onIdTypeChange(event)"
-              />
-              <label
-                for="identifer_dropdown_type"
-                class="sdpi-item-label"
-                style="font-size: 10px"
-                ><span></span>Dropdown</label
-              >
-            </span>
-            <span class="sdpi-item-child">
-              <input
-                id="identifer_text_type"
-                type="radio"
-                value="text"
-                name="identifer_input_type"
-                onclick="onIdTypeChange(event)"
-              />
-              <label
-                for="identifer_text_type"
-                class="sdpi-item-label"
-                style="font-size: 10px"
-                ><span></span>Custom</label
-              >
-            </span>
-          </div>
-          <div
-            class="sdpi-item-value"
-            style="margin-left: 0px; width: 100%; margin-right: 0px"
-          >
-            <select
-              id="identifer_dropdown"
-              class="sdpi-item-value select"
-              name="identifer_dropdown"
-              oninput="onIdChange(event.currentTarget.value)"
-              required
-            >
-              <option value="" disabled selected>--Select Identifer--</option>
-            </select>
-            <input
-              style="display: none"
-              class="sdpi-item-value"
-              name="identifer_text"
-              id="identifer_text"
-              oninput="onIdChange(this.value)"
-              placeholder="Enter Window or Program Identifer/Name"
-              required
-            />
-          </div>
-          <div
-            id="resize_window_inputs_container"
-            class="sdpi-item-value"
-            style="width: 100%; display: none"
-          >
-            <div
-              style="display: flex; flex-direction: column"
-            >
-              <span class="sdpi-item-label" style="margin-top: 10px"
-                >Coordinates (in pixels)</span
-              >
-              <div style="display: flex; padding: 0; margin: 0; width: 100%">
-                <div style="display: flex; width: 50%; align-items: center">
-                  <label for="window_coord_x">X:</label>
-                  <input
-                    style="
-                      flex-grow: 1;
-                      min-height: 26px;
-                      margin: 0;
-                      padding: 0;
-                      min-width: 0;
-                    "
-                    id="window_coord_x"
-                    type="number"
-                    oninput="onResizeInputChange('coordinates', 'x', this.value)"
-                  />
-                </div>
-                <div style="display: flex; width: 50%; align-items: center">
-                  <label for="window_coord_y" class="">Y:</label>
-                  <input
-                    style="
-                      flex-grow: 1;
-                      min-height: 26px;
-                      margin: 0;
-                      padding: 0;
-                      min-width: 0;
-                    "
-                    id="window_coord_y"
-                    type="number"
-                    oninput="onResizeInputChange('coordinates', 'y', this.value)"
-                  />
-                </div>
-              </div>
-            </div>
-            <div style="display: flex; flex-direction: column">
-              <span
-                style="margin-bottom: 10px; margin-top: 10px"
-                class="sdpi-item-label"
-                >Size (in pixels)</span
-              >
-              <div style="display: flex; width: 100%">
-                <div style="display: flex; width: 50%; align-items: center">
-                  <label for="window_size_width">Width:</label>
-                  <input
-                    style="
-                      flex-grow: 1;
-                      min-height: 26px;
-                      margin: 0;
-                      padding: 0;
-                      min-width: 0;
-                    "
-                    id="window_size_width"
-                    type="number"
-                    oninput="onResizeInputChange('size', 'width', this.value)"
-                  />
-                </div>
-                <div style="display: flex; width: 50%; align-items: center">
-                  <label for="window_size_height">Height:</label>
-                  <input
-                    style="
-                      flex-grow: 1;
-                      min-height: 26px;
-                      margin: 0;
-                      padding: 0;
-                      min-width: 0;
-                    "
-                    id="window_size_height"
-                    type="number"
-                    oninput="onResizeInputChange('size', 'height', this.value)"
-                  />
-                </div>
-              </div>
-            </div>
-          </div>
-          <div
-            id="move_windows_to_monitor"
-            class="sdpi-item-value"
-            style="width: 100%; display: none"
-          >
-            <div
-              style="display: flex; flex-direction: column; margin-top: 10px"
-            >
-              <label
-                class="sdpi-item-label"
-                for="move_windows_to_monitor_select"
-                >Screen/Monitor</label
-              >
-              <select
-                id="move_windows_to_monitor_select"
-                class="sdpi-item-value select"
-                name="monitor_value"
-                oninput="onValueInputChange('newMonitor',event.currentTarget.value)"
-                required
-                style="
+      <div id="move_windows_to_monitor" class="sdpi-item-value" style="width: 100%; display: none">
+        <div style="display: flex; flex-direction: column; margin-top: 10px">
+          <label class="sdpi-item-label" for="move_windows_to_monitor_select">Screen/Monitor</label>
+          <select id="move_windows_to_monitor_select" class="sdpi-item-value select" name="monitor_value"
+            oninput="onValueInputChange('newMonitor',event.currentTarget.value)" required style="
                   flex-grow: 1;
                   min-height: 26px;
                   margin: 0;
                   padding: 0;
                   min-width: 0;
                   margin-top: 10px;
-                "
-              ></select>
-            </div>
-          </div>
-          <div
-            id="move_windows_to_virtual_desktop"
-            class="sdpi-item-value"
-            style="width: 100%; display: none"
-          >
-            <div
-              style="display: flex; flex-direction: column; margin-top: 10px"
-            >
-              <label
-                class="sdpi-item-label"
-                for="move_window_virtual_desktop_num"
-                >Virtual Desktop Number</label
-              >
-              <input
-                style="
+                "></select>
+        </div>
+      </div>
+      <div id="move_windows_to_virtual_desktop" class="sdpi-item-value" style="width: 100%; display: none">
+        <div style="display: flex; flex-direction: column; margin-top: 10px">
+          <label class="sdpi-item-label" for="move_window_virtual_desktop_num">Virtual Desktop Number</label>
+          <input style="
                   flex-grow: 1;
                   min-height: 26px;
                   margin: 0;
                   padding: 0;
                   min-width: 0;
-                "
-                id="move_window_virtual_desktop_num"
-                type="number"
-                step="1"
-                oninput="onValueInputChange('newDesktop', this.value)"
-              />
-            </div>
-          </div>
+                " id="move_window_virtual_desktop_num" type="number" step="1"
+            oninput="onValueInputChange('newDesktop', this.value)" />
         </div>
       </div>
     </div>
-    <div
-      id="navigate_through_virtual_desktops_container"
-      style="width: 100%; display: none"
-    >
-      <div
-            class="sdpi-item"
-        style="
+  </div>
+  </div>
+  <div id="navigate_through_virtual_desktops_container" style="width: 100%; display: none">
+    <div class="sdpi-item" style="
           display: flex;
           flex-direction: column;
           margin-top: 10px;
-        "
-      >
-        <label class="sdpi-item-label" for="navigate_virtual_desktop_num"
-          >Virtual Desktop Number</label
-        >
-        <input
-          id="navigate_virtual_desktop_num"
-          type="number"
-          style="
+        ">
+      <label class="sdpi-item-label" for="navigate_virtual_desktop_num">Virtual Desktop Number</label>
+      <input id="navigate_virtual_desktop_num" type="number" style="
             flex-grow: 1;
             min-height: 26px;
             margin: 0;
             padding: 0;
             min-width: 0;
             width: 100%
-          "
-          step="1"
-          oninput="onValueInputChange('newDesktop', this.value)"
-        />
-      </div>
+          " step="1" oninput="onValueInputChange('newDesktop', this.value)" />
     </div>
-    <div
-      id="create_virtual_desktop_inputs_container"
-      style="width: 100%; display: none"
-    >
-      <div
-        class="sdpi-item"
-        style="
+  </div>
+  <div id="create_virtual_desktop_inputs_container" style="width: 100%; display: none">
+    <div class="sdpi-item" style="
           display: flex;
           flex-direction: column;
           margin-top: 10px;
-        "
-      >
-        <label class="sdpi-item-label" for="virtual_desktops_to_create"
-          >Number of Desktops To Create</label
-        >
-        <input
-          id="virtual_desktops_to_create"
-          type="number"
-          step="1"
-          style="
+        ">
+      <label class="sdpi-item-label" for="virtual_desktops_to_create">Number of Desktops To Create</label>
+      <input id="virtual_desktops_to_create" type="number" step="1" style="
             flex-grow: 1;
             min-height: 26px;
             margin: 0;
             padding: 0;
             min-width: 0;
             width: 100%
-          "
-          oninput="onValueInputChange('numOfDesktopsToCreate', this.value)"
-        />
-      </div>
+          " oninput="onValueInputChange('numOfDesktopsToCreate', this.value)" />
     </div>
-    <div class="sdpi-info-label hidden" style="top: -1000" value=""></div>
-    <script src="js/common.js"></script>
-    <script src="js/common_pi.js"></script>
-    <script src="js/app.js"></script>
-    <script src="js/index_pi.js"></script>
-  </body>
+  </div>
+  <div class="sdpi-info-label hidden" style="top: -1000" value=""></div>
+  <script src="js/common.js"></script>
+  <script src="js/common_pi.js"></script>
+  <script src="js/app.js"></script>
+  <script src="js/index_pi.js"></script>
+</body>
+
 </html>

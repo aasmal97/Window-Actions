@@ -69,15 +69,15 @@ const modifyDropdownActiveWindowInputs = (payload) => {
   identiferDropdown.append(...options);
 };
 const defaultMonitorInputs = (value) => {
-    const identiferDropdown = document.getElementById(
-      "move_windows_to_monitor_select"
+  const identiferDropdown = document.getElementById(
+    "move_windows_to_monitor_select"
   );
-  const newValue = value.newMonitor ? value.newMonitor : 0
+  const newValue = value.newMonitor ? value.newMonitor : 0;
   identiferDropdown.value = newValue;
   const inputEvent = new Event("input");
   identiferDropdown.dispatchEvent(inputEvent);
   onValueInputChange("newMonitor", newValue);
-}
+};
 const modifyMonitorInputs = (payload, currValue) => {
   const monitors = payload;
   const identiferDropdown = document.getElementById(
@@ -89,9 +89,9 @@ const modifyMonitorInputs = (payload, currValue) => {
     return createOption(value, text);
   });
   identiferDropdown.append(...options);
-  const newValue = currValue ? currValue : monitors[0].idx
-  identiferDropdown.value =  newValue;
-  onValueInputChange('newMonitor', newValue)
+  const newValue = currValue ? currValue : monitors[0].idx;
+  identiferDropdown.value = newValue;
+  onValueInputChange("newMonitor", newValue);
 };
 const respondToEvents = (evt) => {
   const { payload } = evt;
@@ -118,7 +118,17 @@ const openInDefaultBrowser = (event) => {
   };
   $SD.connection.send(JSON.stringify(urlPayload));
 };
-  
+const onAutoFocusChange = (checked) => {
+  const settingsValue = settings.value || {};
+  const currVal = {
+    ...settingsValue,
+    autoFocus: checked,
+  };
+  saveSettings({
+    key: "value",
+    value: currVal,
+  });
+};
 const onResizeInputChange = (inputType, key, value) => {
   if (!settings || !inputType || !key || (typeof value === "string" && !value))
     return;
@@ -179,17 +189,21 @@ const changeResizeInputsDom = (value) => {
   const coordinatesY = document.getElementById("window_coord_y");
   const sizeWidth = document.getElementById("window_size_width");
   const sizeHeight = document.getElementById("window_size_height");
+  const autoFocus = document.getElementById("window_auto_focus");
   const coordinates = value.coordinates;
   const size = value.size;
   coordinatesX.value = coordinates ? (coordinates.x ? coordinates.x : 0) : 0;
   coordinatesY.value = coordinates ? (coordinates.y ? coordinates.y : 0) : 0;
   sizeWidth.value = size ? (size.width ? size.width : "") : "";
   sizeHeight.value = size ? (size.height ? size.height : "") : "";
+  //default is true, but when explicity false, we don't check this
+  autoFocus.checked = value.autoFocus === false ? value.autoFocus : true;
   const inputEvent = new Event("input");
-  coordinatesX.dispatchEvent(inputEvent)
+  autoFocus.dispatchEvent(inputEvent);
+  coordinatesX.dispatchEvent(inputEvent);
   coordinatesY.dispatchEvent(inputEvent);
   sizeWidth.dispatchEvent(inputEvent);
-  sizeHeight.dispatchEvent(inputEvent)
+  sizeHeight.dispatchEvent(inputEvent);
 };
 const determineContainerStyles = (action) => {
   const wrapper = document.getElementById("window_specific_inputs");
@@ -298,8 +312,8 @@ const onConnection = (jsn) => {
     } else changeIdDom(value);
     changeResizeInputsDom(value ? value : {});
     changeVirtualInputsDom(value);
-    //add default monitor value 
-    defaultMonitorInputs(value ? value : {})
+    //add default monitor value
+    defaultMonitorInputs(value ? value : {});
     updateUI(settings);
   }
 };
