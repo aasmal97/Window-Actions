@@ -98,16 +98,16 @@ def respond_to_key_events(evt, socket):
                 close_window(type, win_id)
         case "com.arkyasmal.windowactions.resizewindows":
             if type and win_id and value:
-                autofocus = value.get('autofocus', None) if value.get('autofocus', None) else True
-                coordinates = [value['coordinates']['x'], value['coordinates']['y']] if value.get('coordinates', None) else [0,0] 
-                size = [value['size']['width'], value['size']['height']] if value.get('size', None) else [0,0]
-                resize_window(
-                    type,
-                    win_id,
-                    size,
-                    coordinates,
-                    autofocus
-                )
+                    autofocus = value.get('autoFocus', None) if value.get('autoFocus', None) == False else True
+                    coordinates = [value['coordinates']['x'], value['coordinates']['y']] if value.get('coordinates', None) else [0,0] 
+                    size = [value['size']['width'], value['size']['height']] if value.get('size', None) else [0,0]
+                    resize_window(
+                        type,
+                        win_id,
+                        size,
+                        coordinates,
+                        autofocus
+                    )
         case "com.arkyasmal.windowactions.focuswindow":
             if type and win_id:
                 focus_windows(type, win_id)
@@ -151,4 +151,3 @@ def respond_to_events(evt, socket, uuid):
             respond_to_key_events(evt_dict, socket)
     except Exception as e:
         err_log(str(e))
-        

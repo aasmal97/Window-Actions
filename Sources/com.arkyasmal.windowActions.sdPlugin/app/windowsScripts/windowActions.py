@@ -33,11 +33,13 @@ def focus_single_window(hwnd: str):
     AttachThreadInput(currentThreadId, foregroundThreadId, False)
     ShowWindow(hwnd, win32con.SW_RESTORE)
 def resize_single_window(hwnd: str, x, y, width, height, focus: bool):
-    focus_param = win32con.SWP_NOZORDER
+    focus_param = win32con.SWP_NOACTIVATE
     if focus: 
         focus_param = win32con.SWP_SHOWWINDOW
         focus_single_window(hwnd)
-    SetWindowPos(hwnd,win32con.HWND_TOP,int(x),int(y),int(width),int(height), focus_param)
+        SetWindowPos(hwnd,win32con.HWND_TOP,int(x),int(y),int(width),int(height), focus_param)
+    else: 
+        SetWindowPos(hwnd,win32con.HWND_NOTOPMOST,int(x),int(y),int(width),int(height), focus_param)
 
 def err_log(message):
     with open(filePath, "a+") as file:
