@@ -5,12 +5,28 @@ import win32process
 import os
 import csv
 import json
+import ctypes
 from pathlib import Path
-def get_window_info(hwnd, window_list):
+enumWindows = ctypes.windll.user32.EnumWindows
+enumWindowsProc = ctypes.WINFUNCTYPE(ctypes.c_bool, ctypes.c_int, ctypes.POINTER(ctypes.c_int))
+isWindowVisible = ctypes.windll.user32.IsWindowVisible
+def get_window_info(hwnd):
     window_text = win32gui.GetWindowText(hwnd)
     if window_text:
-        window_list.append({'_hWnd': hwnd, 'title': window_text})
-    return True
+        return {'_hWnd': hwnd, 'title': window_text}
+    else:
+        return None
+def get_all_windows(): 
+    """Returns a list of Window objects for all visible windows.
+    """
+    windowObjs = []
+    def foreach_window(hWnd, lParam):
+        if isWindowVisible(hWnd) != 0:
+            windowInfo = get_window_info(hWnd)
+            if windowInfo != None:
+                windowObjs.append(windowInfo)
+    enumWindows(enumWindowsProc(foreach_window), 0)
+    return windowObjs
 def get_all_process(): 
     all_processes = os.popen("wmic process get name, processid /format:csv").read()
     all_processes_split = all_processes.split("\n")
@@ -56,8 +72,7 @@ def get_active_windows(app_data_directory, filter_dup = False):
         pid = x["ProcessId"]
         process_map[pid] = x
     # get all active windows
-    windows = []
-    win32gui.EnumWindows(get_window_info, windows)
+    windows = get_all_windows()
     windows_data=[
         {
             "hWnd": x["_hWnd"], "title": x['title'], 
