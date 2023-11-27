@@ -179,7 +179,7 @@ const changeIdDom = (value) => {
   identiferTextRadio.checked = true;
   identiferText.style = "";
   identiferDropdown.style = "display: none;";
-  identiferText.value = value.name;
+  identiferText.value = value?.name || "";
   const inputEvent = new Event("input");
   identiferText.dispatchEvent(inputEvent);
 };
