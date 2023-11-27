@@ -14,7 +14,11 @@ def unfreeze_single_window(hwnd):
     existing_style = GetWindowLong(hwnd, win32con.GWL_EXSTYLE)
     new_style = existing_style & ~win32con.WS_EX_TOPMOST
     SetWindowLong(hwnd, win32con.GWL_EXSTYLE, new_style)
+    #unfreeze
     SetWindowPos(hwnd, win32con.HWND_NOTOPMOST, 0, 0, 0, 0, win32con.SWP_NOMOVE | win32con.SWP_NOSIZE)
+    #send to bottom layer
+    SetWindowPos(hwnd, win32con.HWND_BOTTOM, 0, 0, 0, 0, win32con.SWP_NOMOVE | win32con.SWP_NOSIZE | win32con.SWP_NOACTIVATE)
+
 def focus_single_window(hwnd: str):    
     foregroundWindowHandle = GetForegroundWindow()
     if foregroundWindowHandle == hwnd: 
