@@ -8,20 +8,16 @@ uuid = None
 def err_log(message):
     with open(filePath, "a+") as file:
         file.write(message + "\n")
-
 def register_socket(inRegisterEvent):
     try:
         event = json.loads(inRegisterEvent)
     except:
         event = inRegisterEvent
-        
     registerData = {
         "event": event,
         "uuid": uuid
     }
-    
     socket.send(json.dumps(registerData))
-
 def connectElgatoStreamDeckSocket(inPort, inPluginUUID, inRegisterEvent, inInfo):
     def on_open(ws):
         register_socket(inRegisterEvent)
@@ -37,8 +33,6 @@ def connectElgatoStreamDeckSocket(inPort, inPluginUUID, inRegisterEvent, inInfo)
     socket.run_forever(dispatcher=rel, reconnect=2)
     rel.signal(2, rel.abort)
     rel.dispatch()
-
-
 # Main function to be called from the command line
 if __name__ == "__main__":
     parser = ArgumentParser()

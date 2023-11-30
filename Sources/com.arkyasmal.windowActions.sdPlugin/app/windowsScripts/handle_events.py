@@ -33,7 +33,6 @@ def on_active_windows(action, targetContext, customAction, socket, uuid):
         }
     }
     socket.send(json.dumps(newEvent))
-
 def on_get_monitor_info(action, targetContext, customAction, socket, uuid):
     app_data_dir= "Elgato\\StreamDeck\\Plugins\\com.arkyasmal.windowActions.sdPlugin"
     result = get_monitor_names(app_data_dir)
@@ -48,7 +47,6 @@ def on_get_monitor_info(action, targetContext, customAction, socket, uuid):
         }
     }
     socket.send(json.dumps(newEvent))
-
 def parse_event(evt):
     evtObj = evt.get("data", evt)
     targetContext = evtObj.get("context", {})
@@ -79,7 +77,6 @@ def respond_to_sub_events(evt, socket, uuid):
         on_get_monitor_info(evtObj["action"], targetContext, "com.arkyasmal.windowActions.getmonitorinfo", socket, uuid)
     else:
         log_event("Sub event does not match", socket, filePath)
-
 def respond_to_key_events(evt, socket):
     evt_dict = parse_event(evt)
     evt_obj, type, value, name = evt_dict["evtObj"], evt_dict["type"], evt_dict["value"], evt_dict["name"]
@@ -139,7 +136,6 @@ def respond_to_key_events(evt, socket):
         case _:
             log_event("Button press event does not match", socket, filePath)
             log_event(evt_obj, socket, filePath)
-
 def respond_to_events(evt, socket, uuid):
     evt_dict = json.loads(evt)
     try:
