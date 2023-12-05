@@ -3,7 +3,6 @@ import subprocess
 import platform
 from getMatchingWindowList import test_regex
 import ctypes
-import os
 ctypes.windll.kernel32.SetDllDirectoryW(None)
 def start_app_instance(file_version): 
     current_directory = os.path.dirname(os.path.abspath(__file__))
