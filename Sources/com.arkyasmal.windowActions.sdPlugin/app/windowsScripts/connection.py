@@ -2,7 +2,7 @@ from argparse import ArgumentParser
 import json
 import websocket
 import rel
-from handle_events import respond_to_events, filePath
+from handleEvents import respond_to_events, filePath
 socket = None
 uuid = None
 def err_log(message):

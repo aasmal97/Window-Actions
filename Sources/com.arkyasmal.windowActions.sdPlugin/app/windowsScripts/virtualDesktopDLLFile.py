@@ -33,12 +33,12 @@ def get_build_num():
 def determine_ddl_file_used():
     [major, revision] = get_build_num()
     if(major < 22000):
-        return f'dll/VirtualDesktopAccessor-Win10.dll'
+        return f'VirtualDesktopAccessor-Win10.dll'
     elif(revision < 2215):
-        return f'dll/VirtualDesktopAccessor-Win11v1.dll'
+        return f'VirtualDesktopAccessor-Win11v1.dll'
     else:
-        win11v2 = f'dll/VirtualDesktopAccessor-Win11v2.dll'
-        win11Latest = f'dll/VirtualDesktopAccessor.dll'
+        win11v2 = f'VirtualDesktopAccessor-Win11v2.dll'
+        win11Latest = f'VirtualDesktopAccessor.dll'
         try:
             start_app_instance(win11v2)
             return win11v2
