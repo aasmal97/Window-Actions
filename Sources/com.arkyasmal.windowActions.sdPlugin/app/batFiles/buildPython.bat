@@ -1,5 +1,6 @@
 cd %~dp0
 cd ../windowsScripts
+pip install --force --no-cache --pre --extra-index-url https://marcelotduarte.github.io/packages/ cx_Freeze
 pip install -r requirements.txt
 @REM pyinstaller pluginActions.py -F -n pluginActions --distpath ../executables --workpath ../executables --specpath ../executables --add-data ../dll:.
 @REM pyinstaller connection.py -F -n run --distpath ../../ --workpath ../../ --specpath ../../ --add-data ./app/dll:.
