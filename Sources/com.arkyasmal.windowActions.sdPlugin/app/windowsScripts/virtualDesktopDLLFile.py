@@ -3,10 +3,14 @@ import subprocess
 import platform
 from getMatchingWindowList import test_regex
 import ctypes
+import pathlib
 ctypes.windll.kernel32.SetDllDirectoryW(None)
 def start_app_instance(file_version): 
-    current_directory = os.path.dirname(os.path.abspath(__file__))
-    vda = ctypes.WinDLL(f"{current_directory}/{file_version}")
+    curr_dir = os.path.dirname(os.path.abspath(__file__))
+    file = fr"..\..\{file_version}"
+    file_path = os.path.normpath(os.path.abspath(os.path.join(curr_dir, file)))
+    command = pathlib.Path(file_path).as_posix()
+    vda = ctypes.WinDLL(command)
     curr_desktop = vda.GetCurrentDesktopNumber()
     print(f'Virtual Desktop App Instance started on {curr_desktop}')
     return vda
