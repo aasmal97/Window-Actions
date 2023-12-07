@@ -3,7 +3,6 @@ set pluginName=com.arkyasmal.windowactions
 set extension=sdPlugin
 call npm run install
 cd %~dp0
-call npm run copy
 cd %~dp0
 cd ..
 cd ..

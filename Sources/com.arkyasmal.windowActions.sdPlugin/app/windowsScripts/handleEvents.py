@@ -6,7 +6,7 @@ from windowActions import move_windows_to_new_monitor, maximize_window, minimize
 from virtualDesktopActions import create_new_virtual_desktop, move_windows_to_new_desktop, move_virtual_desktop, toggle_through_virtual_desktops
 from utilities import one_indexed
 dataDirectory = os.environ['APPDATA']
-filePath = os.path.join(dataDirectory, "Elgato\\StreamDeck\\logs\\com.arkyasmal.windowActions.txt")
+filePath = os.path.join(dataDirectory, r"Elgato\StreamDeck\logs\com.arkyasmal.windowActions\error.txt")
 def err_log(message):
     with open(filePath, "a+") as file:
         file.write(message + "\n")
@@ -20,8 +20,9 @@ def log_event(payload, socket, filePath):
         file.write(new_payload)
     socket.send(new_payload)
 def on_active_windows(action, targetContext, customAction, socket, uuid):
-    app_data_dir= "Elgato\\StreamDeck\\Plugins\\com.arkyasmal.windowActions.sdPlugin"
-    result = get_active_windows(app_data_dir)
+    # app_data_dir= r"Elgato\StreamDeck\Plugins\com.arkyasmal.windowActions.sdPlugin"
+    # result = get_active_windows(app_data_dir)
+    result = get_active_windows()
     newEvent = {
         "action": action,
         "event": "sendToPropertyInspector",
@@ -34,8 +35,9 @@ def on_active_windows(action, targetContext, customAction, socket, uuid):
     }
     socket.send(json.dumps(newEvent))
 def on_get_monitor_info(action, targetContext, customAction, socket, uuid):
-    app_data_dir= "Elgato\\StreamDeck\\Plugins\\com.arkyasmal.windowActions.sdPlugin"
-    result = get_monitor_names(app_data_dir)
+    # app_data_dir= r"Elgato\StreamDeck\Plugins\com.arkyasmal.windowActions.sdPlugin"
+    # result = get_monitor_names(app_data_dir)
+    result = get_monitor_names()
     newEvent = {
         "action": action,
         "event": "sendToPropertyInspector",

@@ -1,5 +1,9 @@
 \exclusions.txt\
+\dll\
 \app\
+app\dll
+\app\dll\
+
 \run\
 .toc\
 .pyz\
