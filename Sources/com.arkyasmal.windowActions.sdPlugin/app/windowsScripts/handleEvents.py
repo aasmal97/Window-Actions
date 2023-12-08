@@ -5,6 +5,7 @@ from getMonitorNames import get_monitor_names
 from windowActions import move_windows_to_new_monitor, maximize_window, minimize_window, close_window, resize_window, freeze_windows_topmost, unfreeze_windows_topmost, focus_windows
 from virtualDesktopActions import create_new_virtual_desktop, move_windows_to_new_desktop, move_virtual_desktop, toggle_through_virtual_desktops
 from utilities import one_indexed
+import websocket
 dataDirectory = os.environ['APPDATA']
 filePath = os.path.join(dataDirectory, r"Elgato\StreamDeck\logs\com.arkyasmal.windowActions\error.txt")
 def err_log(message):
@@ -19,7 +20,7 @@ def log_event(payload, socket, filePath):
     with open(filePath, "a+") as file:
         file.write(new_payload)
     socket.send(new_payload)
-def on_active_windows(action, targetContext, customAction, socket, uuid):
+def on_active_windows(action, targetContext, customAction, socket: websocket.WebSocket, uuid):
     result = get_active_windows()
     newEvent = {
         "action": action,
@@ -33,7 +34,7 @@ def on_active_windows(action, targetContext, customAction, socket, uuid):
     }
     print(newEvent, 'active windows')
     socket.send(json.dumps(newEvent))
-def on_get_monitor_info(action, targetContext, customAction, socket, uuid):
+def on_get_monitor_info(action, targetContext, customAction, socket: websocket.WebSocket, uuid):
     result = get_monitor_names()
     newEvent = {
         "action": action,
@@ -66,7 +67,7 @@ def parse_event(evt):
         "name": name,
         "evtObj": evtObj
     }
-def respond_to_sub_events(evt, socket, uuid):
+def respond_to_sub_events(evt, socket: websocket.WebSocket, uuid):
     parsedEvent = parse_event(evt)
     action = parsedEvent["action"]
     evtObj = parsedEvent["evtObj"]
@@ -77,7 +78,7 @@ def respond_to_sub_events(evt, socket, uuid):
         on_get_monitor_info(evtObj["action"], targetContext, "com.arkyasmal.windowActions.getmonitorinfo", socket, uuid)
     else:
         log_event("Sub event does not match", socket, filePath)
-def respond_to_key_events(evt, socket):
+def respond_to_key_events(evt, socket: websocket.WebSocket):
     evt_dict = parse_event(evt)
     evt_obj, type, value, name = evt_dict["evtObj"], evt_dict["type"], evt_dict["value"], evt_dict["name"]
     # this conditional is here for backwards support for action configured prior
@@ -136,7 +137,7 @@ def respond_to_key_events(evt, socket):
         case _:
             log_event("Button press event does not match", socket, filePath)
             log_event(evt_obj, socket, filePath)
-def respond_to_events(evt, socket, uuid):
+def respond_to_events(evt, socket:websocket.WebSocket, uuid):
     evt_dict = json.loads(evt)
     try:
         evt_obj = parse_event(evt_dict)

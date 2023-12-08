@@ -19,14 +19,13 @@ def connectElgatoStreamDeckSocket(inPort, inPluginUUID, inRegisterEvent, inInfo)
     try: 
         def on_open(ws):
             register_socket(inRegisterEvent)
-        def on_message(ws,message):
+        def on_message(ws: websocket.WebSocket,message):
             respond_to_events(message, ws, uuid)
-        def on_error(ws, error):
+        def on_error(ws:websocket.WebSocket, error):
             err_log("Error: " + f"{str(error)}")
         global socket
         global uuid
         uri = "ws://127.0.0.1:" + str(inPort)
-        # uri = "ws://localhost:" + str(inPort)
         uuid = inPluginUUID
         socket = websocket.WebSocketApp(uri, on_open=on_open, on_message=on_message, on_error=on_error)
         socket.run_forever(dispatcher=rel, reconnect=2)
