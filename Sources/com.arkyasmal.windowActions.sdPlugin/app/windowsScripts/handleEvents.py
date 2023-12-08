@@ -20,8 +20,6 @@ def log_event(payload, socket, filePath):
         file.write(new_payload)
     socket.send(new_payload)
 def on_active_windows(action, targetContext, customAction, socket, uuid):
-    # app_data_dir= r"Elgato\StreamDeck\Plugins\com.arkyasmal.windowActions.sdPlugin"
-    # result = get_active_windows(app_data_dir)
     result = get_active_windows()
     newEvent = {
         "action": action,
@@ -33,10 +31,9 @@ def on_active_windows(action, targetContext, customAction, socket, uuid):
             "targetContext": uuid
         }
     }
+    print(newEvent, 'active windows')
     socket.send(json.dumps(newEvent))
 def on_get_monitor_info(action, targetContext, customAction, socket, uuid):
-    # app_data_dir= r"Elgato\StreamDeck\Plugins\com.arkyasmal.windowActions.sdPlugin"
-    # result = get_monitor_names(app_data_dir)
     result = get_monitor_names()
     newEvent = {
         "action": action,
@@ -48,6 +45,7 @@ def on_get_monitor_info(action, targetContext, customAction, socket, uuid):
             "targetContext": uuid
         }
     }
+    print(newEvent, 'monitor names')
     socket.send(json.dumps(newEvent))
 def parse_event(evt):
     evtObj = evt.get("data", evt)
