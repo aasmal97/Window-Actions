@@ -64,7 +64,6 @@ def move_window_to_monitor(hwnd: str, num: int):
     window_height = abs(window_to_move[1] - window_to_move[3])
     new_window_width = monitor_width if window_width > monitor_width else window_width
     new_window_height = monitor_height if window_height > monitor_height else window_height
-    print(monitor_height, monitor_height, window_height, window_height, new_window_height, new_window_height, 'calc')
     #prevent moving window bugs, where window disappears 
     #and becomes transparent
     prev_placement = determine_placement(hwnd)
@@ -113,5 +112,3 @@ def unfreeze_windows_topmost(win_id_type, win_id):
     matching_windows = get_matching_windows_list(win_id_type, win_id)
     result = [unfreeze_single_window(i['hWnd']) for i in matching_windows]
     return result
-if __name__ == '__main__':
-    move_windows_to_new_monitor(0, 'win_ititle', 'Stream Deck')
