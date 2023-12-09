@@ -6,11 +6,9 @@
   "scripts": {
     "start": "node .\\Sources\\com.arkyasmal.windowActions.sdPlugin\\app\\index.js",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev:window": "node ./Sources/com.arkyasmal.windowActions.sdPlugin/app/index.js",
-    "dev:parse": "node ./Sources/com.arkyasmal.windowActions.sdPlugin/app/scripts/parseCSVToJSON.js",
-    "build": ".\\Sources\\com.arkyasmal.windowActions.sdPlugin\\app\\batFiles\\build.bat",
-    "build:python": ".\\Sources\\com.arkyasmal.windowActions.sdPlugin\\app\\batFiles\\buildPython.bat",
-    "install": ".\\Sources\\com.arkyasmal.windowActions.sdPlugin\\app\\batFiles\\runPy.bat & .\\app\\batFiles\\buildPython"
+    "virtual": "py .\\buildFiles\\runPy.bat",
+    "build": "py .\\buildFiles\\build.py",
+    "install": "py .\\buildFiles\\install.py"
   },
   "keywords": [
     "window",
