@@ -58,7 +58,7 @@ As an added bonus, it also means users don't need to write any code to configure
 
 ### Populating Active Window Dropdown
 
-To automatically populate a dropdown list of active/opened windows, we use python's powerful [`win32gui`](https://pypi.org/project/win32gui/#description) package. This allows us to attain all the necessary data in our `JSON` file. This is then passed to the [property inspector](#configuring-the-property-inspector), for user selection.
+To automatically populate a dropdown list of active/opened windows, we use pywin32's [`win32gui`](https://pypi.org/project/win32gui/#description) module. The result is then passed to the [property inspector](#configuring-the-property-inspector), for user selection.
 
 # Window Identifiers
 
