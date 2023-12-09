@@ -1,6 +1,6 @@
 # Window Actions Elgato Plugin
 
-This plugin allows a user to perform window-specific actions on window, with a tap of a button or through a multi-action sequence, while using an [Elgato Stream Deck](https://www.elgato.com/en/stream-deck)
+This plugin allows a user to manipulate windows on Windows 10+, with a tap of a button or through a multi-action sequence, while using an [Elgato Stream Deck](https://www.elgato.com/en/stream-deck)
 
 # Quickstart
 
