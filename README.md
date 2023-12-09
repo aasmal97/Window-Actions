@@ -4,7 +4,7 @@ This plugin allows a user to perform window-specific actions on window, with a t
 
 # Quickstart
 
-Download the following [setup file](https://github.com/aasmal97/Window-Actions/releases/tag/v3.0.0.0)
+Download the following [setup file](https://github.com/aasmal97/Window-Actions/releases/tag/v4.0.0)
 
 ### Pre-requisites
 
