@@ -8,9 +8,23 @@ from utilities import one_indexed
 import websocket
 dataDirectory = os.environ['APPDATA']
 filePath = os.path.join(dataDirectory, r"Elgato\StreamDeck\logs\com.arkyasmal.windowActions\error.txt")
+def create_file_with_directories(path):
+    try:
+        os.makedirs(os.path.dirname(path), exist_ok=True)
+        file = open(path, "w")
+        file.close()
+        print("File created successfully!")
+    except Exception as e:
+        print(str(e))
+def write_to_file(message):
+     with open(filePath, "a+") as file:
+            file.write(message + "\n")
 def err_log(message):
-    with open(filePath, "a+") as file:
-        file.write(message + "\n")
+    try:
+        write_to_file(message)
+    except FileNotFoundError as e:
+        create_file_with_directories(filePath)
+        write_to_file(message)
 def log_event(payload, socket, filePath):
     json_data = {
         "event": "logMessage",
