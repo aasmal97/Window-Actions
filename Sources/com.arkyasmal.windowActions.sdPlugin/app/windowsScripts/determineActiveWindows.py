@@ -4,7 +4,7 @@ import win32gui
 import win32process
 import os
 import csv
-import json
+# import json
 import ctypes
 from pathlib import Path
 enumWindows = ctypes.windll.user32.EnumWindows
@@ -47,24 +47,9 @@ def get_window_class_names(active_win_data, filter_dup=False):
     else: 
         new_data = win_class_names
     return new_data
-def create_json_file(active_win_data, app_data_directory):
-    new_data_json = json.dumps(active_win_data)
-    directory_path = Path(f'{os.getenv("APPDATA")}\\{app_data_directory}')
-    if not directory_path.exists():
-        os.makedirs(directory_path)
-    path_to_file = directory_path / 'activeWindows.json'
-    path_to_file = path_to_file.resolve()
-    try:
-        f = open(path_to_file, "x")
-        f.write(new_data_json)
-        return new_data_json
-    except FileExistsError:
-        f = open(path_to_file, "w")
-        f.write(new_data_json)
-        return new_data_json
-    except: 
-        print("An error occured")
-def get_active_windows(app_data_directory, filter_dup = False):
+def get_active_windows(
+        filter_dup = False
+    ):
     all_process = get_all_process()
     #generate map using PID as key
     process_map = {}
@@ -88,5 +73,4 @@ def get_active_windows(app_data_directory, filter_dup = False):
                 new_data[i]["program_name"] = process_map[str(p)]["Name"]
                 break
     new_data = get_window_class_names(new_data, filter_dup)
-    create_json_file(new_data, app_data_directory)
     return new_data

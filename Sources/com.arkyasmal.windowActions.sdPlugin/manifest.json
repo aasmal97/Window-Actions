@@ -161,7 +161,7 @@
   "Icon": "images/window-restore-solid",
   "Category": "Window Actions",
   "CategoryIcon": "images/window-restore-solid",
-  "CodePath": "run.exe",
+  "CodePath": "dist/connection.exe",
   "Description": "Minimize, maximize, focus, close, move, resize, and force windows to stay on top, according to a window id (i.e title, filename, class names, etc). Supported on multiple monitors and through virtual desktops. \n For heavy users, you can also manage, navigate and create virtual desktops",
   "Name": "Window Actions",
   "URL": "https://github.com/aasmal97/Window-Actions",

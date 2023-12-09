@@ -24,14 +24,12 @@ def move_virtual_desktop(num: int):
     check_desktops(num + 1, False)
     app_instance.GoToDesktopNumber(num)
     return "Moved to this virtual desktop"
-
 def create_new_virtual_desktop(desktopsToCreate: int, move_to_original: bool = True):
     curr_desktop = app_instance.GetCurrentDesktopNumber()
     for x in range(desktopsToCreate):
         create_new_desktop()
     if move_to_original: 
         move_virtual_desktop(curr_desktop)
-
 def check_desktops(num: int, move_to_original: bool = True):
     desktop_available = app_instance.GetDesktopCount()
     print(desktop_available, num, move_to_original)
@@ -39,7 +37,6 @@ def check_desktops(num: int, move_to_original: bool = True):
         diff = num - desktop_available
         create_new_virtual_desktop(diff, move_to_original)
     return f'successfully moved to desktop {num}'
-
 def toggle_through_virtual_desktops(curr: -1 or 1):
     curr_desktop_num = app_instance.GetCurrentDesktopNumber()
     if curr == -1 and curr_desktop_num <= 1:
