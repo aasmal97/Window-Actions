@@ -64,11 +64,16 @@ def move_window_to_monitor(hwnd: str, num: int):
     window_height = abs(window_to_move[1] - window_to_move[3])
     new_window_width = monitor_width if window_width > monitor_width else window_width
     new_window_height = monitor_height if window_height > monitor_height else window_height
+    print(monitor_height, monitor_height, window_height, window_height, new_window_height, new_window_height, 'calc')
     #prevent moving window bugs, where window disappears 
     #and becomes transparent
     prev_placement = determine_placement(hwnd)
     ShowWindow(hwnd, win32con.SW_NORMAL)
+    #we use this in case set window pos doesn't include this action in the future
+    #and to cause a repaint
     MoveWindow(hwnd, monitor_selected[0], monitor_selected[1], new_window_width, new_window_height, True)
+    #this fixes resizing bug that occurs in windows 11, when using move window, that makes the window LARGER everytime it is moved
+    resize_single_window(hwnd, monitor_selected[0], monitor_selected[1], new_window_width, new_window_height, False)
     #after movement we restore the previous window state (min, max or normal)
     ShowWindow(hwnd, prev_placement)
     return f'successfully moved to monitor {num}'
@@ -108,3 +113,5 @@ def unfreeze_windows_topmost(win_id_type, win_id):
     matching_windows = get_matching_windows_list(win_id_type, win_id)
     result = [unfreeze_single_window(i['hWnd']) for i in matching_windows]
     return result
+if __name__ == '__main__':
+    move_windows_to_new_monitor(0, 'win_ititle', 'Stream Deck')
