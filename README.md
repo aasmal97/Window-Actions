@@ -15,7 +15,7 @@ Download the following [setup file](https://github.com/aasmal97/Window-Actions/r
 
 The Elgato Stream Deck natively supports a [open system action](https://help.elgato.com/hc/en-us/articles/360028234471-Elgato-Stream-Deck-System-Actions-Hotkey-Open-Website-Multimedia-#h_01G93K00TJB5BHV93JTTJ0YV80), which can be used to open any application you need. However, it lacks the ability to perform window actions of the windows that this action creates. When setting up a multi-action workflow, streaming, or recording, these actions are almost essential to have, since multiple applications need to be hidden or focused in.
 
-This app allows users to use an Elgato Stream Deck to minimize, close, maximize, resize or move windows a Windows 10+ machine. It also supports Virtual Desktops and allows for their creation and navigation
+This app allows users to use an Elgato Stream Deck to minimize, close, maximize, resize, focus or move windows on a Windows 10+ machine. It also supports Virtual Desktops and allows for their creation and navigation
 
 # Alternative Workaround
 
