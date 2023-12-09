@@ -52,7 +52,7 @@ We integrate our app with the [Elgato Stream Deck Architecture](https://docs.elg
 
 ### Configuring the Property Inspector
 
-This is where most of the magic happens. Using Elgato's Property Inspector, we can create a simple and initutive HTML form, that accepts the required [windowIdentifier](#window-identifiers), and passes it into our plugin, to execute. The quickest way to set this up, is by using pre-populated dropdowns, that can be selected. This prevents typos, and incorrect mappings, which commonly occur when writing directly to `.bat` files.
+This is where most of the magic happens. Using Elgato's Property Inspector, we can create a simple and initutive HTML form, that accepts the required [window Identifier](#window-identifiers), and passes it into our plugin, to execute. The quickest way to set this up, is by using pre-populated dropdowns, that can be selected. This prevents typos, and incorrect mappings, which commonly occur when writing directly to `.bat` files.
 
 As an added bonus, it also means users don't need to write any code to configure their actions.
 
