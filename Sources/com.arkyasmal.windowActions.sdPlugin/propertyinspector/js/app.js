@@ -102,6 +102,9 @@ const respondToEvents = (evt) => {
       break;
     case "com.arkyasmal.windowActions.getmonitorinfo":
       modifyMonitorInputs(result, settings?.value?.newMonitor);
+    case "com.arkyasmal.windowactions.togglefullscreen":
+      console.log(evt, 'event logged')
+      break;
     default:
       return;
   }
@@ -246,6 +249,9 @@ const determineContainerStyles = (action) => {
       break;
     case "com.arkyasmal.windowactions.movevirtualdesktopright":
       break;
+    case 'com.arkyasmal.windowactions.togglefullscreen':
+      const toggleFullscreenInfo = document.getElementById("toggle_fullscreen_window_info")
+      toggleFullscreenInfo.style = "";
     default:
       wrapper.style = "";
       break;
@@ -281,7 +287,6 @@ const onConnection = (jsn) => {
 
   console.log("connected");
   addDynamicStyles($SD.applicationInfo.colors, "connectSocket");
-  console.log();
   /**
    * Current settings are passed in the JSON node
    * {actionInfo: {

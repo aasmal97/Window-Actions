@@ -158,12 +158,15 @@
     },
     {
       "UUID": "com.arkyasmal.windowactions.togglefullscreen",
-      "Icon": "images/",
+      "Icon": "images/toggle-fullscreen-on",
       "Name": "Toggle Fullscreen on Windows",
       "PropertyInspectorPath": "./propertyinspector/index.html",
       "States": [
         {
-          "Image": "images/toggle-fullscreen"
+          "Image": "images/toggle-fullscreen-on"
+        },
+        {
+          "Image": "images/toggle-fullscreen-off"
         }
       ],
       "SupportedInMultiActions": true
@@ -177,7 +180,7 @@
   "Description": "Minimize, maximize, focus, close, move, resize, and force windows to stay on top, according to a window id (i.e title, filename, class names, etc). Supported on multiple monitors and through virtual desktops. \n For heavy users, you can also manage, navigate and create virtual desktops",
   "Name": "Window Actions",
   "URL": "https://github.com/aasmal97/Window-Actions",
-  "Version": "4.0.0",
+  "Version": "4.1.0",
   "SDKVersion": 2,
   "OS": [{ "Platform": "windows", "MinimumVersion": "10" }],
   "Software": {
