@@ -1,10 +1,11 @@
 #pywintypes import is required or else .exe won't build properly
 import pywintypes
 import win32con
-from win32process import GetWindowThreadProcessId, AttachThreadInput
-from win32api import EnumDisplayMonitors, GetMonitorInfo, GetCurrentThreadId, GetWindowLong, SetWindowLong
-from win32gui import MoveWindow, GetWindowRect, GetWindowPlacement,SetWindowPos, ShowWindow, PostMessage, SetForegroundWindow, GetForegroundWindow, SetActiveWindow
+from win32api import EnumDisplayMonitors, GetMonitorInfo, GetWindowLong, SetWindowLong
+from win32gui import MoveWindow, GetWindowRect, GetWindowPlacement,SetWindowPos, ShowWindow, PostMessage
 from getMatchingWindowList import get_matching_windows_list
+from toggleFullScreen import toggle_fullscreen
+from focusWindow import focus_single_window
 import os
 dataDirectory = os.environ['APPDATA']
 filePath = os.path.join(dataDirectory, "Elgato\\StreamDeck\\logs\\com.arkyasmal.windowActions.txt")
@@ -18,20 +19,6 @@ def unfreeze_single_window(hwnd):
     SetWindowPos(hwnd, win32con.HWND_NOTOPMOST, 0, 0, 0, 0, win32con.SWP_NOMOVE | win32con.SWP_NOSIZE)
     #send to bottom layer
     SetWindowPos(hwnd, win32con.HWND_BOTTOM, 0, 0, 0, 0, win32con.SWP_NOMOVE | win32con.SWP_NOSIZE | win32con.SWP_NOACTIVATE)
-
-def focus_single_window(hwnd: str):    
-    foregroundWindowHandle = GetForegroundWindow()
-    if foregroundWindowHandle == hwnd: 
-        return
-    currentThreadId = GetCurrentThreadId()
-    foregroundThreadId = GetWindowThreadProcessId(foregroundWindowHandle)[0]
-    AttachThreadInput(currentThreadId, foregroundThreadId, True)
-    SetWindowPos(hwnd, win32con.HWND_TOPMOST, 0, 0, 0, 0, win32con.SWP_NOSIZE | win32con.SWP_NOMOVE)
-    SetWindowPos(hwnd, win32con.HWND_NOTOPMOST, 0, 0, 0, 0, win32con.SWP_SHOWWINDOW | win32con.SWP_NOSIZE | win32con.SWP_NOMOVE)
-    SetActiveWindow(hwnd)
-    SetForegroundWindow(hwnd)
-    AttachThreadInput(currentThreadId, foregroundThreadId, False)
-    ShowWindow(hwnd, win32con.SW_RESTORE)
 def resize_single_window(hwnd: str, x, y, width, height, focus: bool):
     focus_param = win32con.SWP_NOACTIVATE
     if focus: 
@@ -111,4 +98,8 @@ def freeze_windows_topmost(win_id_type, win_id):
 def unfreeze_windows_topmost(win_id_type, win_id):
     matching_windows = get_matching_windows_list(win_id_type, win_id)
     result = [unfreeze_single_window(i['hWnd']) for i in matching_windows]
+    return result
+def toggle_fullscreen_windows(win_id_type: str, win_id: str):
+    matching_windows = get_matching_windows_list(win_id_type, win_id)
+    result = [toggle_fullscreen(i['hWnd']) for i in matching_windows]
     return result
