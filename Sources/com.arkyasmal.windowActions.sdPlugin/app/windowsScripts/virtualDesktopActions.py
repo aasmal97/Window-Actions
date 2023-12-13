@@ -32,7 +32,6 @@ def create_new_virtual_desktop(desktopsToCreate: int, move_to_original: bool = T
         move_virtual_desktop(curr_desktop)
 def check_desktops(num: int, move_to_original: bool = True):
     desktop_available = app_instance.GetDesktopCount()
-    print(desktop_available, num, move_to_original)
     if num > desktop_available:
         diff = num - desktop_available
         create_new_virtual_desktop(diff, move_to_original)

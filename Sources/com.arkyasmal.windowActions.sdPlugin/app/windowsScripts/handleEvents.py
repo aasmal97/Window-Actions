@@ -2,7 +2,7 @@ import json
 import os
 from determineActiveWindows import get_active_windows
 from getMonitorNames import get_monitor_names
-from windowActions import move_windows_to_new_monitor, maximize_window, minimize_window, close_window, resize_window, freeze_windows_topmost, unfreeze_windows_topmost, focus_windows
+from windowActions import move_windows_to_new_monitor, maximize_window, minimize_window, close_window, resize_window, freeze_windows_topmost, unfreeze_windows_topmost, focus_windows, toggle_fullscreen_windows
 from virtualDesktopActions import create_new_virtual_desktop, move_windows_to_new_desktop, move_virtual_desktop, toggle_through_virtual_desktops
 from utilities import one_indexed
 import websocket
@@ -13,7 +13,6 @@ def create_file_with_directories(path):
         os.makedirs(os.path.dirname(path), exist_ok=True)
         file = open(path, "w")
         file.close()
-        print("File created successfully!")
     except Exception as e:
         print(str(e))
 def write_to_file(message):
@@ -46,7 +45,6 @@ def on_active_windows(action, targetContext, customAction, socket: websocket.Web
             "targetContext": uuid
         }
     }
-    print(newEvent, 'active windows')
     socket.send(json.dumps(newEvent))
 def on_get_monitor_info(action, targetContext, customAction, socket: websocket.WebSocket, uuid):
     result = get_monitor_names()
@@ -60,7 +58,6 @@ def on_get_monitor_info(action, targetContext, customAction, socket: websocket.W
             "targetContext": uuid
         }
     }
-    print(newEvent, 'monitor names')
     socket.send(json.dumps(newEvent))
 def parse_event(evt):
     evtObj = evt.get("data", evt)
@@ -148,6 +145,8 @@ def respond_to_key_events(evt, socket: websocket.WebSocket):
             toggle_through_virtual_desktops(1)
         case "com.arkyasmal.windowactions.movevirtualdesktopleft":
             toggle_through_virtual_desktops(-1)
+        case "com.arkyasmal.windowactions.togglefullscreen": 
+            toggle_fullscreen_windows(type, win_id)
         case _:
             log_event("Button press event does not match", socket, filePath)
             log_event(evt_obj, socket, filePath)

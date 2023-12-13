@@ -155,6 +155,18 @@
         }
       ],
       "SupportedInMultiActions": true
+    },
+    {
+      "UUID": "com.arkyasmal.windowactions.togglefullscreen",
+      "Icon": "images/",
+      "Name": "Toggle Fullscreen on Windows",
+      "PropertyInspectorPath": "./propertyinspector/index.html",
+      "States": [
+        {
+          "Image": "images/toggle-fullscreen"
+        }
+      ],
+      "SupportedInMultiActions": true
     }
   ],
   "Author": "Arky Asmal",

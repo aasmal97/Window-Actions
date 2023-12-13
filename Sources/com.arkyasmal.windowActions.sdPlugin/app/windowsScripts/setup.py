@@ -14,7 +14,6 @@ include_files = [
       dll_path("VirtualDesktopAccessor-Win11v1.dll"),
       dll_path("VirtualDesktopAccessor.dll"),
 ]
-print(include_files)
 include_packages = [
       "argparse",
       "json",
