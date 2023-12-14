@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html>
-
 <head>
   <meta charset="utf-8" />
   <meta name="viewport"
@@ -12,9 +11,6 @@
 </head>
 
 <body>
-  <div id="toggle_fullscreen_window_info" style="display: none;">
-  
-  </div>
   <div id="window_specific_inputs" class="sdpi-wrapper" style="display: none;">
     <div class="sdpi-item" id="win_type">
       <div class="sdpi-item-label">Identifer Type</div>
@@ -29,9 +25,6 @@
         <option value="win_class">Window Class Name</option>
       </select>
     </div>
-    <details class="message" style="display: none" id="win_type_message">
-      <summary></summary>
-    </details>
     <div class="sdpi-item" id="win_id">
       <div class="sdpi-item-label" style="margin-top: 10px">Identifer</div>
       <div style="display: flex; flex-direction: column; width: 100%">
@@ -149,7 +142,22 @@
       </div>
     </div>
   </div>
-  </div>
+  <details id="toggle_fullscreen_window_info" style="display: none;" >
+    <summary>More Info</summary>
+    <div class="info" style="background-position: 6px 0; padding: 0 5px;">
+      <div style="padding-left: 25px;">
+        <p>
+        This action simulates the "F11" key to trigger changes inside an app's window, since multiple apps implement their own optimized version of this mode. 
+        Therefore, ensure that the app's window uses the "F11" key as a shortcut for triggering "Fullscreen". 
+        </p>
+        <p>
+        This action also resizes the entire window to fill the entire screen (including hiding the taskbar), similar to Chrome's implementation. 
+        This allows us to do a partial fullscreen on apps that don't have a native Fullscreen mode. Therefore, to exit fullscreen, you need to either 
+        close and re-open the window, or click/press your Stream Deck key again. 
+        </p>
+      </div>
+    </div>
+  </details>
   <div id="navigate_through_virtual_desktops_container" style="width: 100%; display: none">
     <div class="sdpi-item" style="
           display: flex;

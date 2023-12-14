@@ -159,7 +159,7 @@
     {
       "UUID": "com.arkyasmal.windowactions.togglefullscreen",
       "Icon": "images/toggle-fullscreen-on",
-      "Name": "Toggle Fullscreen on Windows",
+      "Name": "Toggle Fullscreen Mode on a Window",
       "PropertyInspectorPath": "./propertyinspector/index.html",
       "States": [
         {
