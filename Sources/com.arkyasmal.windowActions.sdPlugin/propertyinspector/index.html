@@ -11,7 +11,7 @@
 </head>
 
 <body>
-  <div id="window_specific_inputs" class="sdpi-wrapper" style="display: none;">
+  <div id="window_specific_inputs" class="sdpi-wrapper" >
     <div class="sdpi-item" id="win_type">
       <div class="sdpi-item-label">Identifer Type</div>
       <select class="sdpi-item-value select" style="width: 100%;margin:0;padding: 0;border: none;" id="select_win_type"
@@ -142,18 +142,18 @@
       </div>
     </div>
   </div>
-  <details id="toggle_fullscreen_window_info" style="display: none;" >
+  <details id="toggle_fullscreen_window_info"  class="sdpi-item" style="padding: 8px 0px 8px 0px;" >
     <summary>More Info</summary>
     <div class="info" style="background-position: 6px 0; padding: 0 5px;">
       <div style="padding-left: 25px;">
         <p>
         This action simulates the "F11" key to trigger changes inside an app's window, since multiple apps implement their own optimized version of this mode. 
-        Therefore, ensure that the app's window uses the "F11" key as a shortcut for triggering "Fullscreen". 
+        Therefore, ensure that the app maps the "F11" key as the shortcut for triggering "Fullscreen". 
         </p>
         <p>
-        This action also resizes the entire window to fill the entire screen (including hiding the taskbar), similar to Chrome's implementation. 
-        This allows us to do a partial fullscreen on apps that don't have a native Fullscreen mode. Therefore, to exit fullscreen, you need to either 
-        close and re-open the window, or click/press your Stream Deck key again. 
+        This action also resizes the entire window to fill the entire screen (including hiding the taskbar). 
+        This allows us to mimic fullscreen on apps that don't have a native Fullscreen mode. Therefore, to exit fullscreen, you must 
+        close and re-open the window anew, or click/press your Stream Deck key again.
         </p>
       </div>
     </div>
