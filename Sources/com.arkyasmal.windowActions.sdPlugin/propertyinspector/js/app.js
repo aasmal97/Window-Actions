@@ -103,7 +103,7 @@ const respondToEvents = (evt) => {
     case "com.arkyasmal.windowActions.getmonitorinfo":
       modifyMonitorInputs(result, settings?.value?.newMonitor);
     case "com.arkyasmal.windowactions.togglefullscreen":
-      console.log(evt, 'event logged')
+      console.log(evt, "event logged");
       break;
     default:
       return;
@@ -249,9 +249,11 @@ const determineContainerStyles = (action) => {
       break;
     case "com.arkyasmal.windowactions.movevirtualdesktopright":
       break;
-    case 'com.arkyasmal.windowactions.togglefullscreen':
-      const toggleFullscreenInfo = document.getElementById("toggle_fullscreen_window_info")
-      toggleFullscreenInfo.style = "";
+    case "com.arkyasmal.windowactions.togglefullscreen":
+      const toggleFullscreenInfo = document.getElementById(
+        "toggle_fullscreen_window_info"
+      );
+      toggleFullscreenInfo.style = "padding: 8px 0px 8px 0px;";
     default:
       wrapper.style = "";
       break;
