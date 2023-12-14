@@ -2,7 +2,11 @@ import json
 import os
 from determineActiveWindows import get_active_windows
 from getMonitorNames import get_monitor_names
-from windowActions import move_windows_to_new_monitor, maximize_window, minimize_window, close_window, resize_window, freeze_windows_topmost, unfreeze_windows_topmost, focus_windows, toggle_fullscreen_windows
+from monitorWindowActions import move_windows_to_new_monitor
+from freezeWindowActions import freeze_windows_topmost, unfreeze_windows_topmost
+from toggleFullscreenAction import toggle_fullscreen_windows
+from windowActions import maximize_window, minimize_window, close_window, resize_window
+from focusWindowAction import focus_windows
 from virtualDesktopActions import create_new_virtual_desktop, move_windows_to_new_desktop, move_virtual_desktop, toggle_through_virtual_desktops
 from utilities import one_indexed
 import websocket
