@@ -254,6 +254,8 @@ const determineContainerStyles = (action) => {
         "toggle_fullscreen_window_info"
       );
       toggleFullscreenInfo.style = "padding: 8px 0px 8px 0px;";
+      wrapper.style = "";
+      break;
     default:
       wrapper.style = "";
       break;

@@ -12,7 +12,8 @@ include_files = [
       dll_path("VirtualDesktopAccessor-Win10.dll"),
       dll_path("VirtualDesktopAccessor-Win11v2.dll"),
       dll_path("VirtualDesktopAccessor-Win11v1.dll"),
-      dll_path("VirtualDesktopAccessor.dll"),
+      dll_path("VirtualDesktopAccessor-Win11v3.dll"),
+      dll_path("VirtualDesktopAccessor-Win11latest.dll"),
 ]
 include_packages = [
       "argparse",
@@ -49,7 +50,7 @@ options = {
 
 setup(name="Window Actions",
       description="Window Actions",
-      version="4.0.0",
+      version="4.1.0",
       options={"build_exe": options},
       executables=[exe]
       )

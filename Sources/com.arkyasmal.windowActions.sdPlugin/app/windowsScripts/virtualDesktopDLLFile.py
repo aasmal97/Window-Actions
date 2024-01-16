@@ -29,25 +29,32 @@ def get_build_num():
     revision_num = int(rev_match.group(1))
     kernel_version = platform.sys.getwindowsversion()
     build_num = kernel_version.build
-    return [build_num, revision_num]
+    return [int(build_num), int(revision_num)]
 #since this binary is changing, and we need to provide support
 #for win 10 and up, we need to write logic that handles the 
 #correct use of the file as some binaries are not backwards compatiable
+def attempt_ddl_ver(ver1: str, ver2: str): 
+    try:
+        start_app_instance(ver1)
+        return ver1
+    except OSError: 
+        start_app_instance(ver2)
+        return ver2
+    except: 
+        start_app_instance(ver2)
+        return ver2
 def determine_ddl_file_used():
     [major, revision] = get_build_num()
     if(major < 22000):
         return f'VirtualDesktopAccessor-Win10.dll'
-    elif(revision < 2215):
-        return f'VirtualDesktopAccessor-Win11v1.dll'
-    else:
-        win11v2 = f'VirtualDesktopAccessor-Win11v2.dll'
-        win11Latest = f'VirtualDesktopAccessor.dll'
-        try:
-            start_app_instance(win11v2)
-            return win11v2
-        except OSError: 
-            start_app_instance(win11Latest)
-            return win11Latest
-        except: 
-            start_app_instance(win11Latest)
-            return win11Latest
+    elif(major < 22635):
+        if(revision < 2215):
+            return f'VirtualDesktopAccessor-Win11v1.dll'
+        else:
+            return attempt_ddl_ver(f'VirtualDesktopAccessor-Win11v2.dll', f'VirtualDesktopAccessor-Win11v3.dll')
+    # retain version of previous files
+    elif(major == 22635 and revision < 2915):
+        return attempt_ddl_ver(f'VirtualDesktopAccessor-Win11v2.dll', f'VirtualDesktopAccessor-Win11v3.dll')
+    # due to changes after 22635.2915, this needs an update
+    else: 
+        return attempt_ddl_ver(f'VirtualDesktopAccessor-Win11latest.dll', f'VirtualDesktopAccessor-Win11latest.dll')

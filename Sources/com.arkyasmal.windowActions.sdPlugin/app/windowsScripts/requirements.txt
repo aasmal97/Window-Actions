@@ -4,3 +4,4 @@ pynput
 wmi
 websocket-client
 rel
+requests
