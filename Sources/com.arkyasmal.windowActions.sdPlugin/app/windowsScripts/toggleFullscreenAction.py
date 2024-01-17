@@ -4,10 +4,11 @@ import win32con
 import os
 from pynput.keyboard import Key, Controller
 from win32api import GetMonitorInfo, SetWindowLong, MonitorFromWindow, GetWindowLong, SendMessage
-from win32gui import SetWindowPos, GetWindowRect, ShowWindow
+from win32gui import SetWindowPos, GetWindowRect
 from focusWindowAction import focus_single_window
 from getMatchingWindowList import get_matching_windows_list
 from determineActiveWindows import get_active_windows
+import time
 import json
 user32 = ctypes.windll.user32
 dataDirectory = os.environ['APPDATA']
@@ -79,14 +80,27 @@ def fullscreen_off(hwnd: str, currFullScreenWindows: dict):
     if is_maximized: 
         SendMessage(hwnd, win32con.WM_SYSCOMMAND, win32con.SC_MAXIMIZE, 0)
     # Indicate that fullscreen is off
-    currFullScreenWindows[hwnd]["fullscreen"] = False; 
-def toggle_fullscreen_with_keys(hwnd: str): 
-    prev_hwnd = focus_single_window(hwnd)
+    currFullScreenWindows[hwnd]["fullscreen"] = False
+def fullscreen_key_commands(): 
     keyboard = Controller()
     keyboard.press(Key.f11)
-    keyboard.release(Key.f11)
-    # return focus to previous window
-    focus_single_window(prev_hwnd)
+    keyboard.release(Key.f11) 
+def toggle_fullscreen_with_keys(hwnd: str):
+    #ensure synchronous execution
+    prev_hwnd = None
+    try:
+        prev_hwnd = focus_single_window(hwnd)
+        fullscreen_key_commands()
+    finally: 
+        if prev_hwnd:
+            #ensure app updates. This can be improved/optimized
+            #by re-factoring focus_single_window to recieve a message that 
+            #confirms the window has been re-painted
+            #but it is unneccessary for most modern machines, 
+            #as focusing a window usually occurs in less than
+            #1/3 of a second. For now, this is good enough
+            time.sleep(0.2)
+            focus_single_window(prev_hwnd)
 def toggle_fullscreen(hwnd: str, currFullScreenWindows: dict):
     # load data into dict
     hwnd = str(hwnd)
@@ -97,7 +111,7 @@ def toggle_fullscreen(hwnd: str, currFullScreenWindows: dict):
     else:
         #untoggle direct window size manipulation function
         fullscreen_off(hwnd, currFullScreenWindows)
-    # toggle_fullscreen_with_keys(hwnd)
+    toggle_fullscreen_with_keys(hwnd)
     return currFullScreenWindows[hwnd]
 def cleanup_windows(currFullScreenWindows: dict):
     active_windows = get_active_windows()
@@ -117,6 +131,3 @@ def toggle_fullscreen_windows(win_id_type: str, win_id: str):
     with open(filePath, "w") as file:
         json.dump(currFullScreenWindows, file)
     return result
-
-if __name__ == "__main__":
-    toggle_fullscreen_windows("win_ititle", "Spotify")
