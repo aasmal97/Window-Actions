@@ -63,7 +63,7 @@
     {
       "UUID": "com.arkyasmal.windowactions.lockwindowtopmost",
       "Icon": "images/window-lockwindowtopmost-regular",
-      "Name": "Lock Topmost Window(s)",
+      "Name": "Force Window(s) to Stay on Top",
       "PropertyInspectorPath": "./propertyinspector/index.html",
       "States": [
         {
@@ -75,7 +75,7 @@
     {
       "UUID": "com.arkyasmal.windowactions.unlockwindowtopmost",
       "Icon": "images/window-unlockwindowtopmost-regular",
-      "Name": "Unlock/Unfreeze Topmost Window(s)",
+      "Name": "Undo Force Window(s) to Stay on Top",
       "PropertyInspectorPath": "./propertyinspector/index.html",
       "States": [
         {
@@ -159,7 +159,7 @@
     {
       "UUID": "com.arkyasmal.windowactions.togglefullscreen",
       "Icon": "images/toggle-fullscreen-on",
-      "Name": "Toggle Fullscreen Mode on a Window",
+      "Name": "Toggle Fullscreen Mode on Window(s)",
       "PropertyInspectorPath": "./propertyinspector/index.html",
       "States": [
         {
@@ -177,7 +177,7 @@
   "Category": "Window Actions",
   "CategoryIcon": "images/window-restore-solid",
   "CodePath": "dist/connection.exe",
-  "Description": "Minimize, maximize, focus, close, move, resize, fullscreen, and force windows to stay on top, according to a window id (i.e title, filename, class names, etc). Supported on multiple monitors and through virtual desktops. \n For heavy users, you can also manage, navigate and create virtual desktops",
+  "Description": "Perform any window action with window ids. Window Ids can be a full or partial title, filename, class name, or hwnd. \n\nGeneral Window actions: \n- Minimize Windows\n- Maximize Windows\n- Focus Windows\n- Close Windows\n- Move Windows\n- Resize Windows\n- Toggle Fullscreen Mode on Windows\n- Force Windows to stay on top\n\nFor heavy users:\n- Navigate Virtual Desktops\n- Create Virtual Desktops \n- Move Windows across Virtual Desktops\n- Move Windows across Monitors",
   "Name": "Window Actions",
   "URL": "https://github.com/aasmal97/Window-Actions",
   "Version": "4.1.0",
