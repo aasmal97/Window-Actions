@@ -12,9 +12,8 @@ def find_package_json(directory):
 def create_virtual(): 
     curr_dir = os.path.dirname(os.path.abspath(__file__))
     root_dir = find_package_json(curr_dir)
-    app_path = os.path.normpath(os.path.abspath(os.path.join(root_dir,r'.\Sources\com.arkyasmal.windowactions.sdPlugin\app\windowsScripts')))
-    subprocess.run(['py', '-m', 'venv', 'virtual'], cwd=app_path)
-    bat_file_path = os.path.join(app_path, 'virtual', 'Scripts')
+    subprocess.run(['py', '-m', 'venv', '.venv'], cwd=root_dir)
+    bat_file_path = os.path.join(root_dir, '.venv', 'Scripts')
     subprocess.run(['activate.bat'], cwd=bat_file_path)
 if __name__ == '__main__':
     create_virtual()
