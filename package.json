@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node .\\Sources\\com.arkyasmal.windowActions.sdPlugin\\app\\index.js",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "virtual": "py .\\buildFiles\\runPy.bat",
+    "virtual": "py .\\buildFiles\\virtual.py",
     "build": "py .\\buildFiles\\build.py",
     "install": "py .\\buildFiles\\install.py"
   },

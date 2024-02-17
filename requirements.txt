@@ -1,0 +1,6 @@
+cx_Freeze
+pywin32
+pynput
+wmi
+websocket-client
+rel

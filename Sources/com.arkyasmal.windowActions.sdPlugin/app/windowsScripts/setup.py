@@ -41,10 +41,6 @@ include_packages = [
 ]
 options = {
     'packages': include_packages,
-    # 'zip_exclude': zip_exclude,
-    # "include_files": [
-
-    # ],
     "include_files": include_files
 }
 

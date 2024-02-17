@@ -3,7 +3,6 @@ import subprocess
 import shutil
 from install import install_requirements
 from exclusion import files_to_ignore
-
 def create_dist_directory(curr_dir: str):
     new_dist_path = os.path.normpath(os.path.abspath(os.path.join(curr_dir,r'..\Sources\com.arkyasmal.windowactions.sdPlugin\dist')))
     old_dist_path = os.path.normpath(os.path.abspath(os.path.join(curr_dir,r'..\Sources\com.arkyasmal.windowactions.sdPlugin\app\windowsScripts\dist')))

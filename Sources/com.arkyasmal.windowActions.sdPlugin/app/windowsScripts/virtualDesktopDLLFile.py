@@ -50,8 +50,10 @@ def determine_ddl_file_used():
     elif(major < 22635):
         if(major < 22621 or (major == 22621 and revision < 2215)):
             return f'VirtualDesktopAccessor-Win11v1.dll'
-        else:
+        elif(major == 22621 and revision < 3155):
             return attempt_ddl_ver(f'VirtualDesktopAccessor-Win11v2.dll', f'VirtualDesktopAccessor-Win11v3.dll')
+        else:
+            return attempt_ddl_ver(f'VirtualDesktopAccessor-Win11latest.dll', f'VirtualDesktopAccessor-Win11latest.dll')
     # retain version of previous files
     elif(major == 22635 and revision < 2915):
         return attempt_ddl_ver(f'VirtualDesktopAccessor-Win11v2.dll', f'VirtualDesktopAccessor-Win11v3.dll')
