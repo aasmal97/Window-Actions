@@ -1,7 +1,7 @@
 # *Important!!!*
 For Windows 10 users, updating to a version after [KB5034203](https://support.microsoft.com/en-us/topic/january-23-2024-kb5034203-os-build-19045-3996-preview-d9540687-af96-46ba-9192-88fe44833561), will cause the plugin to crash. This issue is outlined [here](https://github.com/aasmal97/Window-Actions/issues/13). 
 
-To continue using the plugin:
+To continue using the plugin, do **ONE** of the following:
 1. Try to revert your Windows 10 version to [KB5034203](https://support.microsoft.com/en-us/topic/january-23-2024-kb5034203-os-build-19045-3996-preview-d9540687-af96-46ba-9192-88fe44833561)
 2. Update to [Windows 11](https://www.microsoft.com/software-download/windows11)
 
