@@ -52,7 +52,7 @@ options = {
 
 setup(name="Window Actions",
       description="Window Actions",
-      version="4.1.1",
+      version="4.2.0",
       options={"build_exe": options},
       executables=[exe]
       )
