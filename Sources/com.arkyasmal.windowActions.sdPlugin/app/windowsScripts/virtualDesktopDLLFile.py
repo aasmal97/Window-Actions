@@ -4,7 +4,16 @@ import platform
 from getMatchingWindowList import test_regex
 import ctypes
 import pathlib
+from typing import Callable, Any
+
 ctypes.windll.kernel32.SetDllDirectoryW(None)
+
+
+def run_app_instance_command(app_instance, func: Callable[..., Any], *args, **kwargs):
+    if app_instance is not None:
+        return func(app_instance=app_instance, *args, **kwargs)
+    else:
+        print(f'Error: No virtual desktop app instance running')
 
 
 def start_app_instance(file_version):
@@ -19,8 +28,12 @@ def start_app_instance(file_version):
 
 
 def initialize_app_view():
-    file_used = determine_ddl_file_used()
-    app_instance = start_app_instance(file_used)
+    app_instance = None
+    try:
+        file_used = determine_ddl_file_used()
+        app_instance = start_app_instance(file_used)
+    except Exception as e:
+        print(f'Error: {e}')
     return app_instance
 
 
