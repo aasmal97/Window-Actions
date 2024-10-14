@@ -42,6 +42,8 @@ def move_virtual_desktop(num: int):
 
 
 def create_new_virtual_desktop(desktopsToCreate: int, move_to_original: bool = True):
+    if app_instance is None:
+        return print('Instance is not initialized')
     curr_desktop = app_instance.GetCurrentDesktopNumber()
     for x in range(desktopsToCreate):
         create_new_desktop()
@@ -50,6 +52,8 @@ def create_new_virtual_desktop(desktopsToCreate: int, move_to_original: bool = T
 
 
 def check_desktops(num: int, move_to_original: bool = True):
+    if app_instance is None:
+        return print('Instance is not initialized')
     desktop_available = app_instance.GetDesktopCount()
     if num > desktop_available:
         diff = num - desktop_available
