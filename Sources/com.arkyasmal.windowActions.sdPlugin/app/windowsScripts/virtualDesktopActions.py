@@ -5,11 +5,10 @@ from typing import Literal
 
 app_instance = initialize_app_view()
 
-
 def create_new_desktop():
     [build, _] = get_build_num()
     if (build > 22000):
-        return run_app_instance_command(app_instance=app_instance, func=lambda app_instance: app_instance.CreateDesktop)
+        return run_app_instance_command(app_instance=app_instance, func=lambda app_instance: app_instance.CreateDesktop())
     keyboard = Controller()
     keyboard.press(Key.cmd)
     keyboard.press(Key.ctrl)
@@ -58,7 +57,7 @@ def check_desktops(num: int, move_to_original: bool = True):
     if num > desktop_available:
         diff = num - desktop_available
         create_new_virtual_desktop(diff, move_to_original)
-    return f'successfully moved to desktop {num}'
+    return f'Successfully moved to desktop {num}'
 
 
 def toggle_through_virtual_desktops(curr: Literal[-1, 1]):
