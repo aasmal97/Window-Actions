@@ -7,7 +7,7 @@ This plugin allows a user to manipulate windows on Windows 10+, with the tap of 
 
 # Quickstart
 
-Download the following [setup file](https://github.com/aasmal97/Window-Actions/releases/tag/v4.0.0)
+Download the following [setup file](https://github.com/aasmal97/Window-Actions/releases/tag/v4.2.0)
 
 ### Pre-requisites
 
