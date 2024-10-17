@@ -1,5 +1,5 @@
 # *Important!!!*
-For Windows 10 users, updating to a version after [KB5034203](https://support.microsoft.com/en-us/topic/january-23-2024-kb5034203-os-build-19045-3996-preview-d9540687-af96-46ba-9192-88fe44833561), may cause virtual desktop actions to no longer function. Other parts actions will be functional> Ensure you use the plugin ver 4.2.0 or higher
+For Windows 10 users, updating to a version after [KB5034203](https://support.microsoft.com/en-us/topic/january-23-2024-kb5034203-os-build-19045-3996-preview-d9540687-af96-46ba-9192-88fe44833561), may cause virtual desktop actions to no longer function. Other parts actions will still functional. Ensure you use the plugin ver 4.2.0 or higher
 
 # Window Actions Elgato Plugin
 
