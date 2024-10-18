@@ -19,11 +19,13 @@ def run_app_instance_command(app_instance, func: Callable[..., Any], *args, **kw
 def start_app_instance(file_version):
     curr_dir = os.path.dirname(os.path.abspath(__file__))
     file = fr"..\..\{file_version}"
+    # file = fr"..\dll\{file_version}"
     file_path = os.path.normpath(os.path.abspath(os.path.join(curr_dir, file)))
     command = pathlib.Path(file_path).as_posix()
     vda = ctypes.WinDLL(command)
     curr_desktop = vda.GetCurrentDesktopNumber()
-    print(f'Virtual Desktop App Instance started on {curr_desktop}')
+    curr_desktop_count = vda.GetDesktopCount()
+    print(f'Virtual Desktop App Instance started on {curr_desktop}, with {curr_desktop_count} ct')
     return vda
 
 
@@ -74,7 +76,7 @@ def determine_ddl_file_used():
             return f'VirtualDesktopAccessor-Win10.dll'
         # requires newest dll version similar to windows 11
         elif (major >= 19045):
-            return f'VirtualDesktopAccessor-Win11latest.dll'
+            return f'VirtualDesktopAccessor-Win10.dll'
     elif (major < 22635):
         if (major < 22621 or (major == 22621 and revision < 2215)):
             return f'VirtualDesktopAccessor-Win11v1.dll'

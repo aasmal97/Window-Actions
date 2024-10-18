@@ -9,25 +9,11 @@ from windowActions import maximize_window, minimize_window, close_window, resize
 from focusWindowAction import focus_windows
 from virtualDesktopActions import create_new_virtual_desktop, move_windows_to_new_desktop, move_virtual_desktop, toggle_through_virtual_desktops
 from utilities import one_indexed
+from handleErrs import err_log
 import websocket
 dataDirectory = os.environ['APPDATA']
 filePath = os.path.join(dataDirectory, r"Elgato\StreamDeck\logs\com.arkyasmal.windowActions\error.txt")
-def create_file_with_directories(path):
-    try:
-        os.makedirs(os.path.dirname(path), exist_ok=True)
-        file = open(path, "w")
-        file.close()
-    except Exception as e:
-        print(str(e))
-def write_to_file(message):
-     with open(filePath, "a+") as file:
-            file.write(message + "\n")
-def err_log(message):
-    try:
-        write_to_file(message)
-    except FileNotFoundError as e:
-        create_file_with_directories(filePath)
-        write_to_file(message)
+
 def log_event(payload, socket, filePath):
     json_data = {
         "event": "logMessage",

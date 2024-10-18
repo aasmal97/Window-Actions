@@ -2,7 +2,8 @@ from argparse import ArgumentParser
 import json
 import websocket
 import rel
-from handleEvents import respond_to_events, err_log
+from handleEvents import respond_to_events
+from handleErrs import err_log
 socket = None
 uuid = None
 def register_socket(inRegisterEvent):
