@@ -44,31 +44,10 @@ include_packages = [
     "json",
     "argparse",
     "rel",
-    "wmi"
+    "wmi",
+    "psutil"
 ]
-# include_packages = [
-#     "argparse",
-#     "json",
-#     "os",
-#     "sys",
-#     "json",
-#     "websocket",
-#     "rel",
-#     "pywintypes",
-#     "win32gui",
-#     "win32con",
-#     "csv",
-#     "ctypes",
-#     "win32process",
-#     "win32api",
-#     "win32com",
-#     "functools",
-#     "difflib",
-#     "pynput",
-#     "wmi",
-#     "re",
-#     "pathlib"
-# ]
+
 options = {
     'packages': include_packages,
     "include_files": include_files,

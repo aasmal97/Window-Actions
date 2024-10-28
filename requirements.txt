@@ -4,3 +4,4 @@ pynput == 1.7.6
 wmi == 1.5.1
 websocket-client == 1.7.0
 rel == 0.4.9.6
+psutil == 6.1.0

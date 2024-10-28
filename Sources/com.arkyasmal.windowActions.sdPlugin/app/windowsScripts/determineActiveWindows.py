@@ -2,15 +2,10 @@
 import pywintypes
 import win32gui
 import win32process
-import os
-import csv
 # import json
 import ctypes
 from pathlib import Path
-enumWindows = ctypes.windll.user32.EnumWindows
-enumWindowsProc = ctypes.WINFUNCTYPE(
-    ctypes.c_bool, ctypes.c_int, ctypes.POINTER(ctypes.c_int))
-isWindowVisible = ctypes.windll.user32.IsWindowVisible
+import psutil
 
 
 def get_window_info(hwnd):
@@ -25,6 +20,10 @@ def get_all_windows():
     """Returns a list of Window objects for all visible windows.
     """
     windowObjs = []
+    enumWindows = ctypes.windll.user32.EnumWindows
+    enumWindowsProc = ctypes.WINFUNCTYPE(
+        ctypes.c_bool, ctypes.c_int, ctypes.POINTER(ctypes.c_int))
+    isWindowVisible = ctypes.windll.user32.IsWindowVisible
 
     def foreach_window(hWnd, lParam):
         if isWindowVisible(hWnd) != 0:
@@ -36,14 +35,8 @@ def get_all_windows():
 
 
 def get_all_process():
-    all_processes = os.popen(
-        "wmic process get name, processid /format:csv").read()
-    all_processes_split = all_processes.split("\n")
-    all_processes_split = list(filter(lambda x: x != '', all_processes_split))
-    reader = csv.DictReader(all_processes_split, delimiter=',')
-    all_processes_list = list(reader)
-    return all_processes_list
-
+    processes = [{'ProcessId': proc.pid} for proc in psutil.process_iter(['name', 'pid'])]
+    return processes
 
 def get_window_class_names(active_win_data, filter_dup=False):
     win_class_names = [
