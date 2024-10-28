@@ -39,7 +39,7 @@
     {
       "UUID": "com.arkyasmal.windowactions.resizewindows",
       "Icon": "images/window-resize-regular",
-      "Name": "Resize Windows",
+      "Name": "Resize/Move Windows",
       "PropertyInspectorPath": "./propertyinspector/index.html",
       "States": [
         {
@@ -129,7 +129,7 @@
   "Description": "Minimize, maximize, close, move, or resize windows according to a window id (i.e title, filename, class names, etc). Supported on multiple monitors and through virtual desktops. \n Also, manage, navigate and create virtual desktops",
   "Name": "Window Actions",
   "URL": "https://github.com/aasmal97/Window-Actions",
-  "Version": "3.0.0",
+  "Version": "4.2.1",
   "SDKVersion": 2,
   "OS": [{ "Platform": "windows", "MinimumVersion": "10" }],
   "Software": {
