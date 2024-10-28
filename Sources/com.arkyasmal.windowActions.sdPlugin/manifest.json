@@ -49,6 +49,42 @@
       "SupportedInMultiActions": true
     },
     {
+      "UUID": "com.arkyasmal.windowactions.focuswindow",
+      "Icon": "images/windows-focuswindow-regular",
+      "Name": "Focus Window",
+      "PropertyInspectorPath": "./propertyinspector/index.html",
+      "States": [
+        {
+          "Image": "images/windows-focuswindow-regular"
+        }
+      ],
+      "SupportedInMultiActions": true
+    },
+    {
+      "UUID": "com.arkyasmal.windowactions.lockwindowtopmost",
+      "Icon": "images/window-lockwindowtopmost-regular",
+      "Name": "Force Window(s) to Stay on Top",
+      "PropertyInspectorPath": "./propertyinspector/index.html",
+      "States": [
+        {
+          "Image": "images/window-lockwindowtopmost-regular"
+        }
+      ],
+      "SupportedInMultiActions": true
+    },
+    {
+      "UUID": "com.arkyasmal.windowactions.unlockwindowtopmost",
+      "Icon": "images/window-unlockwindowtopmost-regular",
+      "Name": "Undo Force Window(s) to Stay on Top",
+      "PropertyInspectorPath": "./propertyinspector/index.html",
+      "States": [
+        {
+          "Image": "images/window-unlockwindowtopmost-regular"
+        }
+      ],
+      "SupportedInMultiActions": true
+    },
+    {
       "UUID": "com.arkyasmal.windowactions.movewindowsvirtual",
       "Icon": "images/windows-move-window-to-virtual",
       "Name": "Move Window to Virtual Desktop",
@@ -83,7 +119,7 @@
         }
       ],
       "SupportedInMultiActions": true
-    }, 
+    },
     {
       "UUID": "com.arkyasmal.windowactions.movewindowstomonitor",
       "Icon": "images/window-move-to-new-monitor",
@@ -119,14 +155,29 @@
         }
       ],
       "SupportedInMultiActions": true
+    },
+    {
+      "UUID": "com.arkyasmal.windowactions.togglefullscreen",
+      "Icon": "images/toggle-fullscreen-on",
+      "Name": "Toggle Fullscreen Mode on Window(s)",
+      "PropertyInspectorPath": "./propertyinspector/index.html",
+      "States": [
+        {
+          "Image": "images/toggle-fullscreen-on"
+        },
+        {
+          "Image": "images/toggle-fullscreen-off"
+        }
+      ],
+      "SupportedInMultiActions": true
     }
   ],
   "Author": "Arky Asmal",
   "Icon": "images/window-restore-solid",
   "Category": "Window Actions",
   "CategoryIcon": "images/window-restore-solid",
-  "CodePath": "run.exe",
-  "Description": "Minimize, maximize, close, move, or resize windows according to a window id (i.e title, filename, class names, etc). Supported on multiple monitors and through virtual desktops. \n Also, manage, navigate and create virtual desktops",
+  "CodePath": "dist/connection.exe",
+  "Description": "Perform any window action with window ids. Window Ids can be a full or partial title, filename, class name, or hwnd. \n\nGeneral Window actions: \n- Minimize Windows\n- Maximize Windows\n- Focus Windows\n- Close Windows\n- Move Windows\n- Resize Windows\n- Toggle Fullscreen Mode on Windows\n- Force Windows to stay on top\n\nFor heavy users:\n- Navigate Virtual Desktops\n- Create Virtual Desktops \n- Move Windows across Virtual Desktops\n- Move Windows across Monitors",
   "Name": "Window Actions",
   "URL": "https://github.com/aasmal97/Window-Actions",
   "Version": "4.2.1",

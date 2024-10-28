@@ -92,7 +92,7 @@ hr2 {
   margin-right: 16px;
 }
 .sdpi-item {
-  display: flex !important;
+  display: flex;
   flex-direction: column !important;
   justify-content: start;
   width: 100%;

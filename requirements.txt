@@ -1,0 +1,6 @@
+cx_Freeze == 7.2.3
+pywin32 == 306
+pynput == 1.7.6
+wmi == 1.5.1
+websocket-client == 1.7.0
+rel == 0.4.9.6

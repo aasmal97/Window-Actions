@@ -1,7 +1,0 @@
-pyinstaller
-pyautogui
-pywin32
-pynput
-wmi
-websocket-client
-rel
