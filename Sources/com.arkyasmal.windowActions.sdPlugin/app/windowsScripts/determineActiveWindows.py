@@ -63,7 +63,7 @@ def get_active_windows(
     # generate map using PID as key
     process_map = {}
     for x in all_process:
-        pid = x["ProcessId"]
+        pid = str(x["ProcessId"])
         process_map[pid] = x
     # get all active windows
     windows = get_all_windows()
@@ -75,6 +75,7 @@ def get_active_windows(
         for x in windows
     ]
     new_data = list(filter(lambda x: len(x["title"]) > 0, windows_data))
+
     for i in range(0, len(new_data)):
         data_pid = new_data[i]["pid"]
         for p in data_pid:
