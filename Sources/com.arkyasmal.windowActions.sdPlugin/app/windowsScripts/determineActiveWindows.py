@@ -60,7 +60,6 @@ def get_active_windows(
     filter_dup=False
 ):
     all_process = get_all_process()
-    print(all_process)
     # generate map using PID as key
     process_map = {}
     for x in all_process:
@@ -75,7 +74,6 @@ def get_active_windows(
         }
         for x in windows
     ]
-    # print(windows_data)
     new_data = list(filter(lambda x: len(x["title"]) > 0, windows_data))
     for i in range(0, len(new_data)):
         data_pid = new_data[i]["pid"]
@@ -85,7 +83,3 @@ def get_active_windows(
                 break
     new_data = get_window_class_names(new_data, filter_dup)
     return new_data
-
-
-get_active_windows()
-# print(get_active_windows())
