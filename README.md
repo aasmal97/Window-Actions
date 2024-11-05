@@ -2,6 +2,9 @@
 
 This plugin allows a user to manipulate windows on Windows 10+, with the tap of a button or through a multi-action sequence, while using an [Elgato Stream Deck](https://www.elgato.com/en/stream-deck)
 
+<br/>
+<a href="https://www.buymeacoffee.com/arkyasmal" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/default-orange.png" alt="Buy Me A Coffee" height="41" width="174"></a>
+
 # Quickstart
 
 Download the following [setup file](https://github.com/aasmal97/Window-Actions/releases/tag/v4.2.0)
