@@ -8,7 +8,7 @@ from pathlib import Path
 import psutil
 
 
-def get_window_info(hwnd):
+def get_window_info(hwnd: int):
     window_text = win32gui.GetWindowText(hwnd)
     if window_text:
         return {'_hWnd': hwnd, 'title': window_text}
@@ -25,9 +25,9 @@ def get_all_windows():
         ctypes.c_bool, ctypes.c_int, ctypes.POINTER(ctypes.c_int))
     isWindowVisible = ctypes.windll.user32.IsWindowVisible
 
-    def foreach_window(hWnd, lParam):
+    def foreach_window(hWnd: str | int, lParam):
         if isWindowVisible(hWnd) != 0:
-            windowInfo = get_window_info(hWnd)
+            windowInfo = get_window_info(int(hWnd))
             if windowInfo != None:
                 windowObjs.append(windowInfo)
     enumWindows(enumWindowsProc(foreach_window), 0)
@@ -69,7 +69,7 @@ def get_active_windows(
     windows = get_all_windows()
     windows_data = [
         {
-            "hWnd": x["_hWnd"], "title": x['title'],
+            "hWnd": int(x["_hWnd"]), "title": x['title'],
             "pid": win32process.GetWindowThreadProcessId(x["_hWnd"])
         }
         for x in windows

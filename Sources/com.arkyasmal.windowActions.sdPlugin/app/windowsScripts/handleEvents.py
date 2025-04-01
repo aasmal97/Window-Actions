@@ -12,7 +12,9 @@ from utilities import one_indexed
 from handleErrs import err_log
 import websocket
 dataDirectory = os.environ['APPDATA']
-filePath = os.path.join(dataDirectory, r"Elgato\StreamDeck\logs\com.arkyasmal.windowActions\error.txt")
+filePath = os.path.join(
+    dataDirectory, r"Elgato\StreamDeck\logs\com.arkyasmal.windowActions\error.txt")
+
 
 def log_event(payload, socket, filePath):
     json_data = {
@@ -23,6 +25,8 @@ def log_event(payload, socket, filePath):
     with open(filePath, "a+") as file:
         file.write(new_payload)
     socket.send(new_payload)
+
+
 def on_active_windows(action, targetContext, customAction, socket: websocket.WebSocket, uuid):
     result = get_active_windows()
     newEvent = {
@@ -36,6 +40,8 @@ def on_active_windows(action, targetContext, customAction, socket: websocket.Web
         }
     }
     socket.send(json.dumps(newEvent))
+
+
 def on_get_monitor_info(action, targetContext, customAction, socket: websocket.WebSocket, uuid):
     result = get_monitor_names()
     newEvent = {
@@ -49,10 +55,12 @@ def on_get_monitor_info(action, targetContext, customAction, socket: websocket.W
         }
     }
     socket.send(json.dumps(newEvent))
+
+
 def parse_event(evt):
     evtObj = evt.get("data", evt)
     targetContext = evtObj.get("context", {})
-    payload = evtObj.get("payload", {}) 
+    payload = evtObj.get("payload", {})
     action = payload.get('action', '')
     settings = payload.get("settings", {})
     type = settings.get("type", '')
@@ -68,17 +76,23 @@ def parse_event(evt):
         "name": name,
         "evtObj": evtObj
     }
+
+
 def respond_to_sub_events(evt, socket: websocket.WebSocket, uuid):
     parsedEvent = parse_event(evt)
     action = parsedEvent["action"]
     evtObj = parsedEvent["evtObj"]
     targetContext = parsedEvent["targetContext"]
     if action == "com.arkyasmal.windowActions.onActiveWindows":
-        on_active_windows(evtObj["action"], targetContext, "com.arkyasmal.windowActions.activeWindows", socket, uuid)
+        on_active_windows(evtObj["action"], targetContext,
+                          "com.arkyasmal.windowActions.activeWindows", socket, uuid)
     elif action == "com.arkyasmal.windowActions.onGetMonitorInfo":
-        on_get_monitor_info(evtObj["action"], targetContext, "com.arkyasmal.windowActions.getmonitorinfo", socket, uuid)
+        on_get_monitor_info(evtObj["action"], targetContext,
+                            "com.arkyasmal.windowActions.getmonitorinfo", socket, uuid)
     else:
         log_event("Sub event does not match", socket, filePath)
+
+
 def respond_to_key_events(evt, socket: websocket.WebSocket):
     evt_dict = parse_event(evt)
     evt_obj, type, value, name = evt_dict["evtObj"], evt_dict["type"], evt_dict["value"], evt_dict["name"]
@@ -97,21 +111,24 @@ def respond_to_key_events(evt, socket: websocket.WebSocket):
                 close_window(type, win_id)
         case "com.arkyasmal.windowactions.resizewindows":
             if type and win_id and value:
-                    autofocus = value.get('autoFocus', None) if value.get('autoFocus', None) == False else True
-                    coordinates = [value['coordinates']['x'], value['coordinates']['y']] if value.get('coordinates', None) else [0,0] 
-                    size = [value['size']['width'], value['size']['height']] if value.get('size', None) else [0,0]
-                    resize_window(
-                        type,
-                        win_id,
-                        size,
-                        coordinates,
-                        autofocus
-                    )
+                autofocus = value.get('autoFocus', None) if value.get(
+                    'autoFocus', None) == False else True
+                coordinates = [value['coordinates']['x'], value['coordinates']['y']] if value.get(
+                    'coordinates', None) else [0, 0]
+                size = [value['size']['width'], value['size']
+                        ['height']] if value.get('size', None) else [0, 0]
+                resize_window(
+                    type,
+                    win_id,
+                    size,
+                    coordinates,
+                    autofocus
+                )
         case "com.arkyasmal.windowactions.focuswindow":
             if type and win_id:
                 focus_windows(type, win_id)
-        case "com.arkyasmal.windowactions.lockwindowtopmost": 
-            if type and win_id:        
+        case "com.arkyasmal.windowactions.lockwindowtopmost":
+            if type and win_id:
                 freeze_windows_topmost(type, win_id)
         case "com.arkyasmal.windowactions.unlockwindowtopmost":
             if type and win_id:
@@ -119,28 +136,31 @@ def respond_to_key_events(evt, socket: websocket.WebSocket):
         case "com.arkyasmal.windowactions.movewindowsvirtual":
             if type and value and win_id and value.get('newDesktop', 0):
                 desktop_num = one_indexed(value.get('newDesktop', 0))
-                move_windows_to_new_desktop(desktop_num,type, win_id)
+                move_windows_to_new_desktop(desktop_num, type, win_id)
         case "com.arkyasmal.windowactions.movevirtualdesktops":
             if value and value.get('newDesktop', 0):
                 desktop_num = one_indexed(value.get('newDesktop', 0))
                 move_virtual_desktop(desktop_num)
         case "com.arkyasmal.windowactions.createvirtualdesktops":
             if value and value.get('numOfDesktopsToCreate', 0):
-                create_new_virtual_desktop(int(value.get('numOfDesktopsToCreate', 0)))
+                create_new_virtual_desktop(
+                    int(value.get('numOfDesktopsToCreate', 0)))
         case "com.arkyasmal.windowactions.movewindowstomonitor":
             if type and value and win_id and value.get('newMonitor', 0):
                 monitor_num = one_indexed(value.get('newMonitor', 1))
-                move_windows_to_new_monitor(monitor_num,type, win_id)
+                move_windows_to_new_monitor(monitor_num, type, win_id)
         case "com.arkyasmal.windowactions.movevirtualdesktopright":
             toggle_through_virtual_desktops(1)
         case "com.arkyasmal.windowactions.movevirtualdesktopleft":
             toggle_through_virtual_desktops(-1)
-        case "com.arkyasmal.windowactions.togglefullscreen": 
+        case "com.arkyasmal.windowactions.togglefullscreen":
             toggle_fullscreen_windows(type, win_id)
         case _:
             log_event("Button press event does not match", socket, filePath)
             log_event(evt_obj, socket, filePath)
-def respond_to_events(evt, socket:websocket.WebSocket, uuid):
+
+
+def respond_to_events(evt, socket: websocket.WebSocket, uuid):
     evt_dict = json.loads(evt)
     try:
         evt_obj = parse_event(evt_dict)

@@ -5,6 +5,7 @@ from typing import Literal
 
 app_instance = initialize_app_view()
 
+
 def create_new_desktop():
     [build, _] = get_build_num()
     if (build > 22000):

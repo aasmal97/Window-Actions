@@ -11,7 +11,8 @@ import os
 
 user32 = ctypes.windll.user32
 
-def focus_single_window(hwnd: str):
+
+def focus_single_window(hwnd: int):
     foregroundWindowHandle = GetForegroundWindow()
     current_process_id = os.getpid()
     try:

@@ -12,6 +12,7 @@ def convert_unit16_to_str(arr):
     new_str = functools.reduce(lambda a, b: a+b, filtered_list)
     return new_str.rstrip('\x00')
 
+
 def extract_keys(obj, parent_key=''):
     keys = []
 
@@ -27,7 +28,7 @@ def extract_keys(obj, parent_key=''):
     return keys
 
 
-def get_monitor_name(monitor: dict["man_name": str, "code": str, "user_name": str | None, 'idx': str]):
+def get_monitor_name(monitor: dict[str, str | None]):
     name: str
     if monitor["user_name"] != None:
         name = convert_unit16_to_str(monitor["user_name"])

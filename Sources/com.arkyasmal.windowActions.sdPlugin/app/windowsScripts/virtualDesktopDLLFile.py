@@ -25,7 +25,8 @@ def start_app_instance(file_version):
     vda = ctypes.WinDLL(command)
     curr_desktop = vda.GetCurrentDesktopNumber()
     curr_desktop_count = vda.GetDesktopCount()
-    print(f'Virtual Desktop App Instance started on {curr_desktop}, with {curr_desktop_count} ct')
+    print(
+        f'Virtual Desktop App Instance started on {curr_desktop}, with {curr_desktop_count} ct')
     return vda
 
 
