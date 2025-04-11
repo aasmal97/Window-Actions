@@ -1,0 +1,242 @@
+{
+  "Name": "Window Actions",
+  "Version": "4.2.2",
+  "Author": "Arky Asmal",
+  "Actions": [
+    {
+      "Name": "Minimize Windows",
+      "UUID": "com.arkyasmal.windowactions.minimizewindows",
+      "Icon": "imgs/actions/minimize/window-minimize-solid",
+      "Tooltip": "Minimizes an open window based on the window id",
+      "Controllers": ["Keypad"],
+      "PropertyInspectorPath": "ui/minimizeWindows/index.html",
+      "States": [
+        {
+          "Image": "imgs/actions/minimize/window-minimize-solid",
+          "TitleAlignment": "middle"
+        }
+      ],
+      "SupportedInMultiActions": true
+    },
+    {
+      "UUID": "com.arkyasmal.windowactions.maximizewindows",
+      "Icon": "imgs/actions/maximize/window-maximize-regular",
+      "Name": "Maximize Windows",
+      "Tooltip": "Maximizes an open window based on the window id",
+      "Controllers": ["Keypad"],
+      "PropertyInspectorPath": "ui/maximizeWindows/index.html",
+      "States": [
+        {
+          "Image": "imgs/actions/maximize/window-maximize-regular",
+          "TitleAlignment": "middle"
+        }
+      ],
+      "SupportedInMultiActions": true
+    },
+    {
+      "UUID": "com.arkyasmal.windowactions.closewindows",
+      "Icon": "imgs/actions/close/xmark-solid",
+      "Name": "Close Windows",
+      "Tooltip": "Closes an open window based on the window id. This do not ALWAYS close the program. It depends on the program's implementation.",
+      "Controllers": ["Keypad"],
+      "PropertyInspectorPath": "ui/closeWindows/index.html",
+      "States": [
+        {
+          "Image": "imgs/actions/close/xmark-solid",
+          "TitleAlignment": "middle"
+        }
+      ],
+      "SupportedInMultiActions": true
+    },
+    {
+      "UUID": "com.arkyasmal.windowactions.resizewindows",
+      "Icon": "imgs/actions/resize/window-resize-regular",
+      "Name": "Resize/Move Windows",
+      "Tooltip": "Moves & Resizes an open window based on the window id and the ABSOLUTE X & Y coordinates. If you have multiple monitors, you may have to play around with coordinates to get your desired result.",
+      "Controllers": ["Keypad"],
+      "PropertyInspectorPath": "ui/resizeMoveWindows/index.html",
+      "States": [
+        {
+          "Image": "imgs/actions/resize/window-resize-regular",
+          "TitleAlignment": "middle"
+        }
+      ],
+      "SupportedInMultiActions": true
+    },
+    {
+      "UUID": "com.arkyasmal.windowactions.focuswindow",
+      "Icon": "imgs/actions/focus/windows-focuswindow-regular",
+      "Name": "Focus Windows",
+      "Tooltip": "Bring an open window to the front based on the window id",
+      "Controllers": ["Keypad"],
+      "PropertyInspectorPath": "ui/focusWindows/index.html",
+      "States": [
+        {
+          "Image": "imgs/actions/focus/windows-focuswindow-regular",
+          "TitleAlignment": "middle"
+        }
+      ],
+      "SupportedInMultiActions": true
+    },
+    {
+      "UUID": "com.arkyasmal.windowactions.lockwindowtopmost",
+      "Icon": "imgs/actions/lockToTop/window-lockwindowtopmost-regular",
+      "Name": "Force Window(s) to Stay on Top",
+      "Controllers": ["Keypad"],
+      "Tooltip": "Prevents the window from hidden under other windows. This is useful for applications that require the window to stay on top of other windows.",
+      "PropertyInspectorPath": "ui/forceWindowsToStayOnTop/index.html",
+      "States": [
+        {
+          "Image": "imgs/actions/lockToTop/window-lockwindowtopmost-regular",
+          "TitleAlignment": "middle"
+        }
+      ],
+      "SupportedInMultiActions": true
+    },
+    {
+      "UUID": "com.arkyasmal.windowactions.unlockwindowtopmost",
+      "Icon": "imgs/actions/unlockToTop/window-unlockwindowtopmost-regular",
+      "Name": "Undo Force Window(s) to Stay on Top",
+      "Controllers": ["Keypad"],
+      "Tooltip": "Allows the window to be hidden under other windows. This is useful for applications that require the window to stay on top of other windows.",
+      "PropertyInspectorPath": "ui/undoForceWindowsToStayOnTop/index.html",
+      "States": [
+        {
+          "Image": "imgs/actions/unlockToTop/window-unlockwindowtopmost-regular",
+          "TitleAlignment": "middle"
+        }
+      ],
+      "SupportedInMultiActions": true
+    },
+    {
+      "UUID": "com.arkyasmal.windowactions.movewindowsvirtual",
+      "Icon": "imgs/actions/move/windows-move-window-to-virtual",
+      "Name": "Move Window to Virtual Desktop",
+      "Controllers": ["Keypad"],
+      "Tooltip": "Moves the window to a specific virtual desktop based on the window id",
+      "PropertyInspectorPath": "ui/moveWindowToVirtualDesktop/index.html",
+      "States": [
+        {
+          "Image": "imgs/actions/move/windows-move-window-to-virtual",
+          "TitleAlignment": "middle"
+        }
+      ],
+      "SupportedInMultiActions": true
+    },
+    {
+      "UUID": "com.arkyasmal.windowactions.movevirtualdesktops",
+      "Icon": "imgs/actions/navigateVirtualDesktop/window-navigate-virtual",
+      "Name": "Go To Virtual Desktop",
+      "PropertyInspectorPath": "ui/goToVirtualDesktop/index.html",
+      "Controllers": ["Keypad"],
+      "Tooltip": "Moves the user to a specific virtual desktop",
+      "States": [
+        {
+          "Image": "imgs/actions/navigateVirtualDesktop/window-navigate-virtual",
+          "TitleAlignment": "middle"
+        }
+      ],
+      "SupportedInMultiActions": true
+    },
+    {
+      "UUID": "com.arkyasmal.windowactions.createvirtualdesktops",
+      "Icon": "imgs/actions/createVirtualDesktop/window-create-virtual",
+      "Name": "Create Virtual Desktops",
+      "Controllers": ["Keypad"],
+      "Tooltip": "Creates a new virtual desktop",
+      "PropertyInspectorPath": "ui/createVirtualDesktops/index.html",
+      "States": [
+        {
+          "Image": "imgs/actions/createVirtualDesktop/window-create-virtual",
+          "TitleAlignment": "middle"
+        }
+      ],
+      "SupportedInMultiActions": true
+    },
+    {
+      "UUID": "com.arkyasmal.windowactions.movewindowstomonitor",
+      "Icon": "imgs/actions/moveToMonitor/window-move-to-new-monitor",
+      "Name": "Move Window To New Monitor/Screen",
+      "Controllers": ["Keypad"],
+      "Tooltip": "Moves the window to a specific monitor/screen based on the window id",
+      "PropertyInspectorPath": "ui/moveWindowToNewMonitorScreen/index.html",
+      "States": [
+        {
+          "Image": "imgs/actions/moveToMonitor/window-move-to-new-monitor",
+          "TitleAlignment": "middle"
+        }
+      ],
+      "SupportedInMultiActions": true
+    },
+    {
+      "UUID": "com.arkyasmal.windowactions.movevirtualdesktopright",
+      "Icon": "imgs/actions/navigateVirtualRight/window-move-virtual-desktop-right",
+      "Name": "Move To Next Virtual Desktop",
+      "Controllers": ["Keypad"],
+      "Tooltip": "Move user to the next virtual desktop (right)",
+      "PropertyInspectorPath": "ui/moveToNextVirtualDesktop/index.html",
+      "States": [
+        {
+          "Image": "imgs/actions/navigateVirtualRight/window-move-virtual-desktop-right",
+          "TitleAlignment": "middle"
+        }
+      ],
+      "SupportedInMultiActions": true
+    },
+    {
+      "UUID": "com.arkyasmal.windowactions.movevirtualdesktopleft",
+      "Icon": "imgs/actions/navigateVirtualLeft/window-move-virtual-desktop-left",
+      "Name": "Move To Previous Virtual Desktop",
+      "PropertyInspectorPath": "ui/moveToPreviousVirtualDesktop/index.html",
+      "Controllers": ["Keypad"],
+      "Tooltip": "Move user to the previous virtual desktop (left)",
+      "States": [
+        {
+          "Image": "imgs/actions/navigateVirtualLeft/window-move-virtual-desktop-left",
+          "TitleAlignment": "middle"
+        }
+      ],
+      "SupportedInMultiActions": true
+    },
+    {
+      "UUID": "com.arkyasmal.windowactions.togglefullscreen",
+      "Icon": "imgs/actions/toggleFullscreen/toggle-fullscreen-on",
+      "Name": "Toggle Fullscreen Mode on Window(s)",
+      "Controllers": ["Keypad"],
+      "Tooltip": "Toggle fullscreen mode on a window based on the window id",
+      "PropertyInspectorPath": "ui/toggleFullscreenModeOnWindows/index.html",
+      "States": [
+        {
+          "Image": "imgs/actions/toggleFullscreen/toggle-fullscreen-on",
+          "TitleAlignment": "middle"
+        },
+        {
+          "Image": "imgs/actions/toggleFullscreen/toggle-fullscreen-off",
+          "TitleAlignment": "middle"
+        }
+      ],
+      "SupportedInMultiActions": true
+    }
+  ],
+  "Category": "Window Actions",
+  "CategoryIcon": "imgs/plugin/window-restore-solid",
+  "CodePath": "bin/connection.exe",
+  "Description": "Perform any window action with window ids. Window Ids can be a full or partial title, filename, class name, or hwnd. \n\nGeneral Window actions: \n- Minimize Windows\n- Maximize Windows\n- Focus Windows\n- Close Windows\n- Move Windows\n- Resize Windows\n- Toggle Fullscreen Mode on Windows\n- Force Windows to stay on top\n\nFor heavy users:\n- Navigate Virtual Desktops\n- Create Virtual Desktops \n- Move Windows across Virtual Desktops\n- Move Windows across Monitors",
+  "Icon": "imgs/plugin/window-restore-solid",
+  "SDKVersion": 2,
+  "Software": {
+    "MinimumVersion": "5.0"
+  },
+  "URL": "https://github.com/aasmal97/Window-Actions",
+  "OS": [
+    {
+      "Platform": "windows",
+      "MinimumVersion": "10"
+    }
+  ],
+  "Nodejs": {
+    "Version": "20",
+    "Debug": "enabled"
+  },
+  "UUID": "com.arkyasmal.windowactions"
+}
