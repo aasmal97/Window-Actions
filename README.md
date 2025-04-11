@@ -78,7 +78,7 @@ The following are the valid identifier types that can be configured.
 
 When the plugin was initially concieved, it relied on reputable third-party executables to interact with the OS. However, after version 3, I made the decision to eliminate as many dependencies as possible, and rewrote the functions of these third-party executables, directly into the plugin code. This eliminated the need for these third parties, and reduced the size of the plugin. HOWEVER, this also potentially caused errors with updating the plugin.
 
-If you want to update the plugin to its most recent version (v4) PLEASE FOLLOW the video below :) !
+If you want to update the plugin to its most recent version (v4) PLEASE FOLLOW the video below to first uninstall. After you can download the plugin from the marketplace :) !
 
 https://github-production-user-asset-6210df.s3.amazonaws.com/74555081/380882151-1fc88f8e-4b40-4c17-99aa-24daa5bf083c.mp4?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAVCODYLSA53PQK4ZA%2F20250411%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20250411T134000Z&X-Amz-Expires=300&X-Amz-Signature=ea0c7f096ab18d798c0564d1c8b72b04909188113be46cca48ee53302ee95fb5&X-Amz-SignedHeaders=host
 
