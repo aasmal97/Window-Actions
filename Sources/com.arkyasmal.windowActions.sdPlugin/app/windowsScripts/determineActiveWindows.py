@@ -8,8 +8,8 @@ from pathlib import Path
 import psutil
 
 
-def get_window_info(hwnd: int):
-    window_text = win32gui.GetWindowText(hwnd)
+def get_window_info(hwnd: int | str):
+    window_text = win32gui.GetWindowText(int(hwnd))
     if window_text:
         return {'_hWnd': hwnd, 'title': window_text}
     else:

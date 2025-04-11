@@ -29,7 +29,8 @@ def load_fullscreen_windows_from_file():
         return {}
 
 
-def fullscreen_on(hwnd: int, currFullScreenWindows: dict):
+def fullscreen_on(hwnd: int | str, currFullScreenWindows: dict):
+    hwnd = int(hwnd)
     # store window styles and size
     is_maximized = user32.IsZoomed(int(hwnd))
     windowRect = GetWindowRect(hwnd)
@@ -69,7 +70,8 @@ def fullscreen_on(hwnd: int, currFullScreenWindows: dict):
     currFullScreenWindows[hwnd]["fullscreen"] = True
 
 
-def fullscreen_off(hwnd: int, currFullScreenWindows: dict):
+def fullscreen_off(hwnd: int | str , currFullScreenWindows: dict):
+    hwnd = int(hwnd)
     # Set the window styles
     windowStyles = currFullScreenWindows[hwnd]["windowStyles"]
     extendedWindowStyles = currFullScreenWindows[hwnd]["extendedWindowStyles"]
@@ -99,7 +101,8 @@ def fullscreen_key_commands():
     keyboard.release(Key.f11)
 
 
-def toggle_fullscreen_with_keys(hwnd: int):
+def toggle_fullscreen_with_keys(hwnd: int | str):
+    hwnd = int(hwnd)
     # ensure synchronous execution
     prev_hwnd = None
     try:
@@ -117,10 +120,8 @@ def toggle_fullscreen_with_keys(hwnd: int):
             focus_single_window(prev_hwnd)
 
 
-def toggle_fullscreen(hwnd: int, currFullScreenWindows: dict):
+def toggle_fullscreen(hwnd: int | str, currFullScreenWindows: dict):
     # load data into dict
-    # hwnd = str(hwnd)
-    str_hwnd = str(hwnd)
     fullscreen = currFullScreenWindows[hwnd]["fullscreen"] if hwnd in currFullScreenWindows else False
     if not fullscreen:
         # call direct window size manipulation function

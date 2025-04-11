@@ -6,8 +6,8 @@ from win32gui import MoveWindow, GetWindowRect, GetWindowPlacement, ShowWindow
 from getMatchingWindowList import get_matching_windows_list
 
 
-def determine_placement(hwnd: int):
-    placement = GetWindowPlacement(hwnd)
+def determine_placement(hwnd: int | str):
+    placement = GetWindowPlacement(int(hwnd))
     cmd_show = win32con.SW_NORMAL
     if placement[1] == win32con.SW_SHOWMAXIMIZED:
         cmd_show = win32con.SW_MAXIMIZE
@@ -18,7 +18,8 @@ def determine_placement(hwnd: int):
     return cmd_show
 
 
-def move_window_to_monitor(hwnd: int, num: int):
+def move_window_to_monitor(hwnd: int | str, num: int):
+    hwnd = int(hwnd)
     monitors = [GetMonitorInfo(x[0].handle)['Monitor'] for x in EnumDisplayMonitors()]
     monitor_selected = monitors[num]
     window_to_move = GetWindowRect(hwnd)

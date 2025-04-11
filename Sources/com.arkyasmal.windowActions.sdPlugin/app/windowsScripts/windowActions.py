@@ -6,7 +6,8 @@ from getMatchingWindowList import get_matching_windows_list
 from focusWindowAction import focus_single_window
 
 
-def resize_single_window(hwnd: int, x, y, width, height, focus: bool):
+def resize_single_window(hwnd: int | str, x, y, width, height, focus: bool):
+    hwnd = int(hwnd)
     focus_param = win32con.SWP_NOACTIVATE
     if focus:
         focus_param = win32con.SWP_SHOWWINDOW
