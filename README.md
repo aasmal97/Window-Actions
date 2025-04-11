@@ -74,7 +74,7 @@ The following are the valid identifier types that can be configured.
 - [window handle](https://learn.microsoft.com/en-us/windows/apps/develop/ui-input/retrieve-hwnd) (`hwnd`)
 - [window class name](https://learn.microsoft.com/en-us/windows/win32/winmsg/about-window-classes).
 
-For users still on Version 3 or below, on the plugin:
+# For users still on Version 3 or below, on the plugin:
 
 When the plugin was initially concieved, it relied on reputable third-party executables to interact with the OS. However, after version 3, I made the decision to eliminate as many dependencies as possible, and rewrote the functions of these third-party executables, directly into the plugin code. This eliminated the need for these third parties, and reduced the size of the plugin. HOWEVER, this also potentially caused errors with updating the plugin.
 
