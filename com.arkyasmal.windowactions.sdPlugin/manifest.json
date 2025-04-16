@@ -1,6 +1,6 @@
 {
   "Name": "Window Actions",
-  "Version": "4.2.2",
+  "Version": "4.2.3.0",
   "Author": "Arky Asmal",
   "Actions": [
     {
@@ -225,7 +225,7 @@
   "Icon": "imgs/plugin/window-restore-solid",
   "SDKVersion": 2,
   "Software": {
-    "MinimumVersion": "5.0"
+    "MinimumVersion": "6.4"
   },
   "URL": "https://github.com/aasmal97/Window-Actions",
   "OS": [

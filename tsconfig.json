@@ -1,17 +1,24 @@
 {
-	"extends": "@tsconfig/node20/tsconfig.json",
-	"compilerOptions": {
-		"customConditions": [
-			"node"
-		],
-		"module": "ES2022",
-		"moduleResolution": "Bundler",
-		"noImplicitOverride": true
-	},
-	"include": [
-		"src/**/*.ts"
-	],
-	"exclude": [
-		"node_modules"
-	]
+  "compilerOptions": {
+    "module": "commonjs",
+    "strict": true,
+    "moduleResolution": "node",
+    "esModuleInterop": true,
+    "allowJs": true,
+    "noUnusedParameters": false,
+    "noErrorTruncation": false,
+    "baseUrl": ".",
+    "target": "es6",
+    "outDir": "./dist",
+    "rootDir": ".",
+	"resolveJsonModule": true
+  },
+  "ts-node": {
+    "compilerOptions": {
+      "module": "commonjs",
+      "target": "es6"
+    }
+  },
+  "include": ["**/*.ts"],
+  "exclude": ["node_modules", "dist", "Build"]
 }

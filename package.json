@@ -1,12 +1,11 @@
 {
   "name": "window-actions",
-  "version": "4.2.2",
+  "version": "4.2.3",
   "description": "Elgato StreamDeck Plugin to control windows",
   "scripts": {
-    "start": "node .\\Sources\\com.arkyasmal.windowActions.sdPlugin\\app\\index.js",
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "py .\\buildFiles\\build.py",
-    "postinstall": "py .\\buildFiles\\install.py"
+    "dev": "set NODE_ENV=development && npx ts-node ./buildScripts/build.ts",
+    "build": "set NODE_ENV=production && npx ts-node ./buildScripts/build.ts",
+    "postinstall": "py install -r requirements.txt"
   },
   "keywords": [
     "window",
@@ -16,15 +15,14 @@
   "license": "ISC",
   "devDependencies": {
     "@elgato/cli": "^1.1.1",
-    "@rollup/plugin-commonjs": "^28.0.0",
-    "@rollup/plugin-node-resolve": "^15.2.2",
-    "@rollup/plugin-terser": "^0.4.4",
-    "@rollup/plugin-typescript": "^12.1.0",
     "@tsconfig/node20": "^20.1.2",
     "@types/node": "~20.15.0",
-    "rollup": "^4.0.2",
+    "copy-webpack-plugin": "^13.0.0",
+    "glob": "^11.0.1",
+    "ts-node": "^10.9.2",
     "tslib": "^2.6.2",
-    "typescript": "^5.2.2"
+    "typescript": "^5.2.2",
+    "webpack": "^5.99.5"
   },
   "dependencies": {
     "@elgato/streamdeck": "^1.0.0"
