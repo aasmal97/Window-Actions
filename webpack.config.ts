@@ -1,16 +1,14 @@
 import path from 'path';
 import { glob } from 'glob';
 import CopyWebpackPlugin from 'copy-webpack-plugin';
-import tsconfig from './tsconfig.json';
 import fs from 'fs';
+import { environment } from './constants/general.constants';
+import tsconfig from './tsconfig.json';
+import { Configuration } from 'webpack';
+
 const pluginName = 'com.arkyasmal.windowactions.sdPlugin' as const;
 // Get all the action directories
 const actionDirectories = glob.sync(`./${pluginName}/ui/*/`);
-const environment = (process.env.NODE_ENV || 'development').replace(
-  / /g,
-  ''
-) as 'development' | 'production';
-console.log(environment);
 const entries = actionDirectories.reduce(
   (entry: Record<string, string>, dir) => {
     const actionName = path.basename(dir);
@@ -22,15 +20,8 @@ const entries = actionDirectories.reduce(
   },
   {}
 );
-const watchOptions = {
-  watch: true,
-  watchOptions: {
-    ignored: tsconfig.exclude,
-    aggregateTimeout: 300,
-  },
-};
-export default {
-  ...(environment === 'development' ? watchOptions : {}),
+
+const config: Configuration = {
   mode: environment,
   entry: entries,
   output: {
@@ -45,7 +36,7 @@ export default {
       {
         test: /\.ts$/,
         use: 'ts-loader',
-        exclude: /node_modules/,
+        exclude: tsconfig.exclude.map((dir) => path.resolve(__dirname, dir)),
       },
     ],
   },
@@ -75,3 +66,4 @@ export default {
     }),
   ],
 };
+export default config;
