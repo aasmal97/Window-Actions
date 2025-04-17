@@ -1,11 +1,11 @@
 import fs from 'fs';
 import path from 'path';
-import child_process from 'child_process';
+import { execSync } from 'child_process';
 import webpack from 'webpack';
 import type { Configuration } from 'webpack';
 import webpackConfig from '../webpack.config';
 import tsconfig from '../tsconfig.json';
-import { environment } from '../constants/general.constants';
+import { environment, pluginName } from '../constants/general.constants';
 const compiler = webpack(webpackConfig);
 function findPackageJson(directory: string | null): string | null {
   if (!directory) {
@@ -24,12 +24,12 @@ function installRequirements(): void {
   const currentDir = __dirname;
   const rootPath = findPackageJson(currentDir);
   if (!rootPath) return;
-  child_process.execSync('pip install -r requirements.txt', {
+  execSync('pip install -r requirements.txt', {
     cwd: rootPath,
     stdio: 'inherit',
   });
 }
-const compileWebpackApp = () =>
+const compileWebpackApp = (rootPath: string ) =>
   //compile webpack app for production
   compiler.run((err, stats) => {
     if (err) {
@@ -43,6 +43,21 @@ const compileWebpackApp = () =>
         colors: true,
       })
     );
+    if (stats.hasErrors()) console.error('Compilation failed.');
+    // validate plugin
+    execSync(
+      `npx streamdeck validate ./dist/${pluginName}`,
+      {
+        cwd: rootPath,
+        stdio: 'inherit',
+      }
+    );
+    // pack plugin
+    execSync(`npx streamdeck pack ./dist/${pluginName} --output Release`, {
+      cwd: rootPath,
+      stdio: 'inherit',
+    });
+
   });
 const watchWebpackApp = () => {
   //watch if development mode
@@ -73,7 +88,7 @@ function compileApp(): void {
     path.join(rootPath, `buildScripts`, 'setup.py')
   );
   // compile python to executable
-  child_process.execSync(`py "${setupLocation}" build`, {
+  execSync(`py "${setupLocation}" build`, {
     cwd: rootPath,
     stdio: 'inherit',
   });
@@ -82,7 +97,8 @@ function compileApp(): void {
   if (environment === 'development') {
     watchWebpackApp();
   } else {
-    compileWebpackApp();
+    //compile webpack app for production
+    compileWebpackApp(rootPath);
   }
 }
 
