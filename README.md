@@ -82,3 +82,22 @@ If you want to update the plugin to its most recent version (v4) PLEASE FOLLOW t
 
 https://github-production-user-asset-6210df.s3.amazonaws.com/74555081/380882151-1fc88f8e-4b40-4c17-99aa-24daa5bf083c.mp4?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAVCODYLSA53PQK4ZA%2F20250411%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20250411T134000Z&X-Amz-Expires=300&X-Amz-Signature=ea0c7f096ab18d798c0564d1c8b72b04909188113be46cca48ee53302ee95fb5&X-Amz-SignedHeaders=host
 
+# Contributing!
+
+We happily welcome any contributions :) ! Simply open a pull request with changes, and why you'd like to implement them, and I'll try to review them in a timely manner.
+
+The codebase is written in:
+- **Python** (for the backend part of the app)
+- **Typescript** (for the frontend, and for build tooling)
+
+## Development Methodology
+
+We do not use the [Elgato StreamDeck SDK](https://docs.elgato.com/streamdeck/sdk/introduction/getting-started) because it does not support exectuables or Python natively, as it was built only for Javascript/Typescript end-to-end native plugins, which this plugin's backend cannot rely on.
+
+Interfacing with the OS, specifically with the C++ Win32 API, is a **better developer experience, and more stable** when using Python, since it has native & highly reputable open-source libraries that already expose this API, through Python functions.
+
+That said, we follow the SDK's directory structure & development patterns extremely closely, like hot-reloading, code-splitting by actions, using Elgato provided UI elements, etc.
+ 
+## Packaging & Release
+For packaging a custom packaging workflow is handled by [Webpack](https://webpack.js.org/) & [cx_Freeze](https://cx-freeze.readthedocs.io/en/stable/),
+and then we use Elgato's CLI tool for packaging & releasing our plugin.
