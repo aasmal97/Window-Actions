@@ -87,7 +87,14 @@ function compileApp(): void {
   const rootPath = findPackageJson(currentDir);
   if (!rootPath) return;
   const setupLocation = path.normalize(
-    path.join(rootPath, `buildScripts`, 'setup.py')
+    // path.join(rootPath, `buildScripts`, 'setup.py')
+    path.join(
+      rootPath,
+      pluginName,
+      'app',
+      'scripts',
+      'setup.py'
+    )
   );
   // compile python to executable
   execSync(`py "${setupLocation}" build`, {
@@ -108,24 +115,3 @@ function compileApp(): void {
   installRequirements();
   compileApp();
 })();
-
-// const appPath = path.join(
-//   os.homedir(),
-//   'AppData',
-//   'Roaming',
-//   'Elgato',
-//   'StreamDeck',
-//   'Plugins',
-//   pluginName
-// );
-
-// const buildPath = path.normalize(path.resolve(currentDir, '..\\Build'));
-// const releasePath = path.normalize(path.resolve(currentDir, '..\\Release'));
-// const buildPluginPath = path.join(buildPath, pluginName);
-// const sourcePluginPath = path.normalize(
-//   path.resolve(currentDir, '..\\Sources', pluginName)
-// );
-// const releasePluginPath = path.join(
-//   releasePath,
-//   `${shortPluginName}.streamDeckPlugin`
-// );

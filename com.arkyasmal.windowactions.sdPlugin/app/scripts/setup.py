@@ -1,3 +1,7 @@
+###
+# DO NOT MOVE SCRIPT FROM ROOT OF PYTHON APP. IT WILL BREAK
+# THE BUILD, AND RESULT IN IMPORT ERRORS!!
+###
 from cx_Freeze import setup, Executable
 import os
 import pathlib
