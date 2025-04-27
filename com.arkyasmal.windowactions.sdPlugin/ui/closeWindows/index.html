@@ -1,19 +1,46 @@
 <!DOCTYPE html>
 <html>
-
-<head lang="en">
+  <head lang="en">
     <title>Window Actions Plugin</title>
     <meta charset="utf-8" />
-    <script src="https://sdpi-components.dev/releases/v3/sdpi-components.js"></script>
-</head>
+    <script src="https://sdpi-components.dev/releases/v4/sdpi-components.js"></script>
+    <script src="./index.js"></script>
+  </head>
 
-<body>
+  <body>
     <!--
         Learn more about property inspector components at https://sdpi-components.dev/docs/components
     -->
-    <sdpi-item label="Increment By">
-        <sdpi-range setting="incrementBy" min="1" max="5" step="1" default="1" showlabels></sdpi-range>
+    <sdpi-item label="Identifer Type">
+      <sdpi-select setting="select_win_type" id="select_win_type">
+        <option value="program_name" selected>Program Name (.exe file)</option>
+        <option value="win_title">Exact Window Title</option>
+        <option value="win_ititle">Partial Window Title</option>
+        <option value="hWnd">Unique Active Window Id (hwnd)</option>
+        <option value="win_class">Window Class Name</option>
+      </sdpi-select>
     </sdpi-item>
-</body>
-
+    <sdpi-item label="Identifer">
+      <sdpi-radio setting="identifer_input_type" columns="2">
+        <option value="dropdown" id="identifer_dropdown_type">Dropdown</option>
+        <option value="text" id="identifer_text_type">Custom</option>
+      </sdpi-radio>
+      <br />
+      <sdpi-select
+        setting="identifer_dropdown"
+        id="identifer_dropdown"
+      >
+        <option value="" disabled selected>--Select Identifer--</option>
+      </sdpi-select>
+      <br />
+      <br />
+      <sdpi-textfield
+        setting="identifer_text"
+        id="identifer_text"
+        placeholder="Enter Window or Program Identifer/Name"
+        required
+      >
+      </sdpi-textfield>
+    </sdpi-item>
+  </body>
 </html>

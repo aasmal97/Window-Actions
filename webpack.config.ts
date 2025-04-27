@@ -12,7 +12,7 @@ const actionDirectories = glob.sync(`./${pluginName}/ui/*/`);
 const entries = actionDirectories.reduce(
   (entry: Record<string, string>, dir) => {
     const actionName = path.basename(dir);
-    const newPath = `${dir}/index.ts`;
+    const newPath = `./${dir}/index.ts`;
     const absolutePath = path.join(__dirname, newPath);
     if (!fs.existsSync(absolutePath)) return entry;
     entry[actionName] = newPath;
@@ -20,12 +20,13 @@ const entries = actionDirectories.reduce(
   },
   {}
 );
-
 const config: Configuration = {
   mode: environment,
   entry: entries,
+  devtool: 'inline-source-map',
   output: {
     filename: '[name]/index.js',
+
     path: path.resolve(__dirname, `dist/${pluginName}/ui`),
   },
   resolve: {

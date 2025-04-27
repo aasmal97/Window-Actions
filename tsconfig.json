@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "module": "commonjs",
+    "module": "es6",
     "strict": true,
     "moduleResolution": "node",
     "esModuleInterop": true,
@@ -8,10 +8,12 @@
     "noUnusedParameters": false,
     "noErrorTruncation": false,
     "baseUrl": ".",
-    "target": "es6",
+    "target": "es5",
     "outDir": "./dist",
     "rootDir": ".",
-	"resolveJsonModule": true
+    "resolveJsonModule": true,
+    "sourceMap": true,
+    "lib": ["DOM", "DOM.Iterable"]
   },
   "ts-node": {
     "compilerOptions": {
@@ -19,6 +21,6 @@
       "target": "es6"
     }
   },
-  "include": ["**/*.ts"],
+  "include": ["**/*.ts", "types.d.ts", "elgatoPI.lib.js"],
   "exclude": ["node_modules", "dist", "Build"]
 }

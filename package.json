@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "set NODE_ENV=development && npx ts-node ./buildScripts/build.ts",
     "build": "set NODE_ENV=production && npx ts-node ./buildScripts/build.ts",
-    "postinstall": "py install -r requirements.txt"
+    "postinstall": "pip install -r requirements.txt"
   },
   "keywords": [
     "window",
@@ -22,7 +22,8 @@
     "ts-node": "^10.9.2",
     "tslib": "^2.6.2",
     "typescript": "^5.2.2",
-    "webpack": "^5.99.5"
+    "webpack": "^5.99.5",
+    "ts-loader": "^9.5.2"
   },
   "dependencies": {
     "@elgato/streamdeck": "^1.0.0"

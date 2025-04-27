@@ -29,7 +29,7 @@ function installRequirements(): void {
     stdio: 'inherit',
   });
 }
-const compileWebpackApp = (rootPath: string ) =>
+const compileWebpackApp = (rootPath: string) =>
   //compile webpack app for production
   compiler.run((err, stats) => {
     if (err) {
@@ -45,26 +45,28 @@ const compileWebpackApp = (rootPath: string ) =>
     );
     if (stats.hasErrors()) console.error('Compilation failed.');
     // validate plugin
-    execSync(
-      `npx streamdeck validate ./dist/${pluginName}`,
-      {
-        cwd: rootPath,
-        stdio: 'inherit',
-      }
-    );
+    execSync(`npx streamdeck validate ./dist/${pluginName}`, {
+      cwd: rootPath,
+      stdio: 'inherit',
+    });
     // pack plugin
     execSync(`npx streamdeck pack ./dist/${pluginName} --output Release`, {
       cwd: rootPath,
       stdio: 'inherit',
     });
-
   });
-const watchWebpackApp = () => {
+const watchWebpackApp = (rootPath: string) => {
   //watch if development mode
   const watchOptions: Configuration['watchOptions'] = {
     ignored: tsconfig.exclude,
     aggregateTimeout: 300,
   };
+  console.log('Compiling...');
+  // link plugin to streamdeck folder
+  execSync(`npx streamdeck link ./dist/${pluginName}`, {
+    cwd: rootPath,
+    stdio: 'inherit',
+  });
   console.log('Watching for changes...');
   compiler.watch(watchOptions, (err, stats) => {
     if (err) {
@@ -95,7 +97,7 @@ function compileApp(): void {
 
   //watch if development mode
   if (environment === 'development') {
-    watchWebpackApp();
+    watchWebpackApp(rootPath);
   } else {
     //compile webpack app for production
     compileWebpackApp(rootPath);

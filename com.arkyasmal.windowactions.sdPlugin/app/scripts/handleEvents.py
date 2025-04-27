@@ -61,7 +61,7 @@ def parse_event(evt):
     evtObj = evt.get("data", evt)
     targetContext = evtObj.get("context", {})
     payload = evtObj.get("payload", {})
-    action = payload.get('action', '')
+    action = payload.get('action', '') or evtObj.get("action", '')
     settings = payload.get("settings", {})
     type = settings.get("type", '')
     name = settings.get("name", '')
@@ -169,5 +169,6 @@ def respond_to_events(evt, socket: websocket.WebSocket, uuid):
             respond_to_sub_events(evt_dict, socket, uuid)
         elif evt_obj.get('event', '') == "keyDown":
             respond_to_key_events(evt_dict, socket)
+        err_log(str(evt_obj))
     except Exception as e:
         err_log(str(e))
