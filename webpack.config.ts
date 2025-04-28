@@ -52,17 +52,21 @@ const config: Configuration = {
           from: path.resolve(__dirname, `${pluginName}/manifest.json`),
           to: path.resolve(__dirname, `dist/${pluginName}/manifest.json`),
         },
-        ...actionDirectories.map((dir) => {
-          return {
-            from: path.resolve(dir, 'index.html'),
-            to: path.resolve(
-              __dirname,
-              `dist/${pluginName}/ui`,
-              path.basename(dir),
-              'index.html'
-            ),
-          };
-        }),
+        ...actionDirectories
+          .filter((dir) => {
+            return fs.existsSync(path.resolve(dir, 'index.html'));
+          })
+          .map((dir) => {
+            return {
+              from: path.resolve(dir, 'index.html'),
+              to: path.resolve(
+                __dirname,
+                `dist/${pluginName}/ui`,
+                path.basename(dir),
+                'index.html'
+              ),
+            };
+          }),
       ],
     }),
   ],

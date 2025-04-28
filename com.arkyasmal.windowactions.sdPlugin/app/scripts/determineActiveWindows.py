@@ -3,9 +3,8 @@ import pywintypes
 import win32gui
 import win32process
 # import json
-import ctypes
-from pathlib import Path
 import psutil
+from handleErrs import err_log
 
 
 def get_window_info(hwnd: int | str):
@@ -17,20 +16,28 @@ def get_window_info(hwnd: int | str):
 
 
 def get_all_windows():
-    """Returns a list of Window objects for all visible windows.
-    """
+    # """Returns a list of Window objects for all visible windows.
+    # """
     windowObjs = []
-    enumWindows = ctypes.windll.user32.EnumWindows
-    enumWindowsProc = ctypes.WINFUNCTYPE(
-        ctypes.c_bool, ctypes.c_int, ctypes.POINTER(ctypes.c_int))
-    isWindowVisible = ctypes.windll.user32.IsWindowVisible
 
-    def foreach_window(hWnd: str | int, lParam):
-        if isWindowVisible(hWnd) != 0:
-            windowInfo = get_window_info(int(hWnd))
-            if windowInfo != None:
-                windowObjs.append(windowInfo)
-    enumWindows(enumWindowsProc(foreach_window), 0)
+    def enum_windows_callback(hwnd, _):
+        # """Callback function for EnumWindows."""
+        if win32gui.IsWindowVisible(hwnd) and win32gui.GetWindowText(hwnd):
+            try:
+                _, pid = win32process.GetWindowThreadProcessId(hwnd)
+                process = psutil.Process(pid)
+                windowObjs.append({
+                    "_hWnd": hwnd,
+                    "title": win32gui.GetWindowText(hwnd),
+                    "process_name": process.name(),
+                    "pid": pid
+                })
+            except psutil.NoSuchProcess:
+                pass
+        return True
+
+    win32gui.EnumWindows(enum_windows_callback, None)
+
     return windowObjs
 
 
@@ -84,3 +91,23 @@ def get_active_windows(
                 break
     new_data = get_window_class_names(new_data, filter_dup)
     return new_data
+
+# Grab windows, but failed in contained environment with cx_Freeze. Very unreliable
+    # enumWindows = ctypes.windll.user32.EnumWindows
+    # enumWindowsProc = ctypes.WINFUNCTYPE(
+    #     ctypes.c_bool, ctypes.c_int, ctypes.POINTER(ctypes.c_int))
+    # isWindowVisible = ctypes.windll.user32.IsWindowVisible
+
+    # def foreach_window(hWnd: str | int, lParam):
+    #     if isWindowVisible(hWnd) != 0:
+    #         windowInfo = get_window_info(int(hWnd))
+    #         if windowInfo != None:
+    #             windowObjs.append(windowInfo)
+    # enumWindows(enumWindowsProc(foreach_window), 0)
+
+    # err_log(str(windowObjs))
+    # err_log(str(enumWindows))
+    # err_log(str(
+    #     enumWindowsProc))
+    # err_log(str(isWindowVisible))
+    # err_log(str(windowObjs))
