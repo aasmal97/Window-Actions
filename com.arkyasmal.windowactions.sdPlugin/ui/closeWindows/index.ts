@@ -1,14 +1,14 @@
-import { configureActiveWindowDropdown } from "../utils/configureActiveWindows"
-import { listenToEvents } from "../utils/listenToEvents";
+import { configureActiveWindowDropdown } from '../utils/configureActiveWindows';
+import { listenToEvents } from '../utils/listenToEvents';
+import { windowDropdownId } from '../utils/constants';
 const streamDeckClient = SDPIComponents.streamDeckClient;
 
 /**
  * Configure all event listeners when DOM is loaded
  */
 document.addEventListener('DOMContentLoaded', async () => {
-  configureActiveWindowDropdown("identifer_dropdown")();
+  configureActiveWindowDropdown(windowDropdownId)();
 });
-
 
 /**
  * Recieve events from plugin

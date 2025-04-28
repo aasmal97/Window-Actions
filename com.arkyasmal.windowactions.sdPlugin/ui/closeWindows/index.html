@@ -12,7 +12,12 @@
         Learn more about property inspector components at https://sdpi-components.dev/docs/components
     -->
     <sdpi-item label="Identifer Type">
-      <sdpi-select setting="select_win_type" id="select_win_type">
+      <sdpi-select
+        setting="select_win_type"
+        id="select_win_type"
+        default="program_name"
+        value="string"
+      >
         <option value="program_name" selected>Program Name (.exe file)</option>
         <option value="win_title">Exact Window Title</option>
         <option value="win_ititle">Partial Window Title</option>
@@ -26,10 +31,7 @@
         <option value="text" id="identifer_text_type">Custom</option>
       </sdpi-radio>
       <br />
-      <sdpi-select
-        setting="identifer_dropdown"
-        id="identifer_dropdown"
-      >
+      <sdpi-select setting="identifer_dropdown" id="identifer_dropdown">
         <option value="" disabled selected>--Select Identifer--</option>
       </sdpi-select>
       <br />
