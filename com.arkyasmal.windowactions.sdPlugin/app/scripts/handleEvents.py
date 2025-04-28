@@ -169,6 +169,5 @@ def respond_to_events(evt, socket: websocket.WebSocket, uuid):
             respond_to_sub_events(evt_dict, socket, uuid)
         elif evt_obj.get('event', '') == "keyDown":
             respond_to_key_events(evt_dict, socket)
-        err_log(str(evt_obj))
     except Exception as e:
         err_log(str(e))

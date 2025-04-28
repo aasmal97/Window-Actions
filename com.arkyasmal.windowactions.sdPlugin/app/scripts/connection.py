@@ -20,12 +20,6 @@ def register_socket(inRegisterEvent):
 
 
 def connectElgatoStreamDeckSocket(inPort, inPluginUUID, inRegisterEvent, inInfo):
-    err_log(str({
-        "inPort": inPort, 
-        "inPluginUUID": inPluginUUID, 
-        "inRegisterEvent": inRegisterEvent, 
-        "inInfo": inInfo
-    }))
     try:
         def on_open(ws):
             register_socket(inRegisterEvent)
@@ -50,7 +44,6 @@ def connectElgatoStreamDeckSocket(inPort, inPluginUUID, inRegisterEvent, inInfo)
 
 # Main function to be called from the command line
 if __name__ == "__main__":
-    err_log(str("...starting"))
     try:
         parser = ArgumentParser()
         parser.add_argument("-port", "--port", help="Port number")
@@ -66,6 +59,5 @@ if __name__ == "__main__":
             args.registerEvent,
             args.info
         )
-        err_log(str("...connected"))
     except Exception as e:
         err_log(str(e))
