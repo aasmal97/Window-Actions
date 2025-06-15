@@ -4,6 +4,7 @@
     "strict": true,
     "moduleResolution": "node",
     "esModuleInterop": true,
+    "declaration": true,
     "allowJs": true,
     "noUnusedParameters": false,
     "noErrorTruncation": false,
@@ -13,7 +14,10 @@
     "rootDir": ".",
     "resolveJsonModule": true,
     "sourceMap": true,
-    "lib": ["DOM", "DOM.Iterable"]
+    "lib": ["DOM", "DOM.Iterable"],
+    "paths": {
+      "@/types/*": ["./com.arkyasmal.windowactions.sdPlugin/types/*"]
+    }
   },
   "ts-node": {
     "compilerOptions": {
@@ -21,6 +25,6 @@
       "target": "es6"
     }
   },
-  "include": ["**/*.ts", "types.d.ts", "elgatoPI.lib.js"],
+  "include": ["**/*.ts", "global.d.ts", "elgatoPI.lib.js"],
   "exclude": ["node_modules", "dist", "Build"]
 }

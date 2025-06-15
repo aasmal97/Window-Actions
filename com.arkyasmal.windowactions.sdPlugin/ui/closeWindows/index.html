@@ -4,7 +4,7 @@
     <title>Window Actions Plugin</title>
     <meta charset="utf-8" />
     <script src="https://sdpi-components.dev/releases/v4/sdpi-components.js"></script>
-    <script src="./index.js"></script>
+    <script type="module" src="./index.js"></script>
   </head>
 
   <body>
@@ -12,37 +12,42 @@
         Learn more about property inspector components at https://sdpi-components.dev/docs/components
     -->
     <sdpi-item label="Identifer Type">
-      <sdpi-select
-        setting="select_win_type"
+      <select
         id="select_win_type"
-        default="program_name"
-        value="string"
+        onchange="WindowActions.WindowIdType.onChange(event)"
       >
         <option value="program_name" selected>Program Name (.exe file)</option>
         <option value="win_title">Exact Window Title</option>
         <option value="win_ititle">Partial Window Title</option>
         <option value="hWnd">Unique Active Window Id (hwnd)</option>
         <option value="win_class">Window Class Name</option>
-      </sdpi-select>
+      </select>
     </sdpi-item>
     <sdpi-item label="Identifer">
-      <sdpi-radio setting="identifer_input_type" columns="2">
-        <option value="dropdown" id="identifer_dropdown_type">Dropdown</option>
-        <option value="text" id="identifer_text_type">Custom</option>
-      </sdpi-radio>
+      <div style="display: flex; ">
+        <input type="radio" name="identifer_input_type" value="dropdown" id="identifer_dropdown_type"
+        onchange="WindowActions.WindowIdUIType.onChange(event)"
+        >Dropdown</input>
+        <input type="radio" name="identifer_input_type" value="text" id="identifer_text_type">Custom</input>
+      </div>
       <br />
-      <sdpi-select setting="identifer_dropdown" id="identifer_dropdown">
+      <select
+        name="identifier_dropdown"
+        id="identifier_dropdown"
+        onchange="WindowActions.WindowSelectedTextValue.onChange(event)"
+        onload="WindowActions.WindowDropdownOptions.fetchActiveWindows(event)"
+      >
         <option value="" disabled selected>--Select Identifer--</option>
-      </sdpi-select>
+      </select>
       <br />
       <br />
-      <sdpi-textfield
-        setting="identifer_text"
+      <input
+        name="identifer_text"
         id="identifer_text"
         placeholder="Enter Window or Program Identifer/Name"
         required
-      >
-      </sdpi-textfield>
+        onchange="WindowActions.WindowSelectedTextValue.onChange(event)"
+      />
     </sdpi-item>
   </body>
 </html>

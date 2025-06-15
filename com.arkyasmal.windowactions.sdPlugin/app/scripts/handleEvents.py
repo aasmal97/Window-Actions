@@ -35,7 +35,9 @@ def on_active_windows(action, targetContext, customAction, socket: websocket.Web
         "context": targetContext,
         "payload": {
             "action": customAction,
-            "result": result,
+            "result": {
+                "windows": result
+            },
             "targetContext": uuid
         }
     }
@@ -50,7 +52,9 @@ def on_get_monitor_info(action, targetContext, customAction, socket: websocket.W
         "context": targetContext,
         "payload": {
             "action": customAction,
-            "result": result,
+            "result": {
+                "monitors": result
+            },
             "targetContext": uuid
         }
     }
@@ -83,6 +87,7 @@ def respond_to_sub_events(evt, socket: websocket.WebSocket, uuid):
     action = parsedEvent["action"]
     evtObj = parsedEvent["evtObj"]
     targetContext = parsedEvent["targetContext"]
+    log_event(parsedEvent, socket, filePath)
     if action == "com.arkyasmal.windowActions.onActiveWindows":
         on_active_windows(evtObj["action"], targetContext,
                           "com.arkyasmal.windowActions.activeWindows", socket, uuid)
@@ -165,6 +170,7 @@ def respond_to_events(evt, socket: websocket.WebSocket, uuid):
     try:
         evt_obj = parse_event(evt_dict)
         action, evt_obj = evt_obj["action"], evt_obj["evtObj"]
+        log_event(evt_dict, socket, filePath)
         if action:
             respond_to_sub_events(evt_dict, socket, uuid)
         elif evt_obj.get('event', '') == "keyDown":

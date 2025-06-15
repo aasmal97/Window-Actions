@@ -60,6 +60,7 @@ const watchWebpackApp = (rootPath: string) => {
   const watchOptions: Configuration['watchOptions'] = {
     ignored: tsconfig.exclude,
     aggregateTimeout: 300,
+    poll: 2000
   };
   console.log('Compiling...');
   // link plugin to streamdeck folder

@@ -5,6 +5,7 @@ import fs from 'fs';
 import { environment } from './constants/general.constants';
 import tsconfig from './tsconfig.json';
 import { Configuration } from 'webpack';
+import TsconfigPathsPlugin from 'tsconfig-paths-webpack-plugin';
 
 const pluginName = 'com.arkyasmal.windowactions.sdPlugin' as const;
 // Get all the action directories
@@ -26,11 +27,15 @@ const config: Configuration = {
   devtool: 'inline-source-map',
   output: {
     filename: '[name]/index.js',
-
     path: path.resolve(__dirname, `dist/${pluginName}/ui`),
+    library: {
+      name: 'WindowActions',
+      type: 'global',
+    },
   },
   resolve: {
     extensions: ['.ts', '.js'],
+    plugins: [new TsconfigPathsPlugin({})],
   },
   module: {
     rules: [

@@ -1,2 +1,3 @@
-export const windowDropdownId = 'identifier_id' as const;
-export const windowIdDropdownId = 'select_win_type' as const;
+export const windowDropdownElId = 'identifier_dropdown' as const;
+export const windowDropdownTypeElId = 'select_win_type' as const;
+export const windowTextInputElId = 'identifier_text' as const;

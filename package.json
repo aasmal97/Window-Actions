@@ -19,13 +19,14 @@
     "@types/node": "~20.15.0",
     "copy-webpack-plugin": "^13.0.0",
     "glob": "^11.0.1",
+    "ts-loader": "^9.5.2",
     "ts-node": "^10.9.2",
     "tslib": "^2.6.2",
     "typescript": "^5.2.2",
-    "webpack": "^5.99.5",
-    "ts-loader": "^9.5.2"
+    "webpack": "^5.99.5"
   },
   "dependencies": {
-    "@elgato/streamdeck": "^1.0.0"
+    "@elgato/streamdeck": "^1.0.0",
+    "tsconfig-paths-webpack-plugin": "^4.2.0"
   }
 }

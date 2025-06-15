@@ -11,3 +11,12 @@ export const createDefaultOption = (textContent: string) => {
   defaultOption.value = '';
   return defaultOption;
 };
+
+export const removeAllOptions = (el: HTMLSelectElement) => {
+  if (!el) return;
+  while (el.lastChild) {
+    if (!el.lastChild) break;
+    el.removeChild(el.lastChild);
+  }
+  return el;
+};
